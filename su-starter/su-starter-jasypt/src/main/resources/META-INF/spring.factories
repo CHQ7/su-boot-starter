@@ -1,3 +1,0 @@
-# Auto Configure
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-  com.yunqi.starter.jasypt.configuration.JasyptAutoConfiguration

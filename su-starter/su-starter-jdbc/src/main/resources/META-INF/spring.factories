@@ -1,6 +1,0 @@
-# Auto Configure
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-  com.yunqi.starter.jdbc.configuration.DruidDataSourceAutoConfigure,\
-  com.yunqi.starter.jdbc.configuration.DruidAdFilterConfigure,\
-  com.yunqi.starter.jdbc.configuration.DruidWebStatServletConfiguration,\
-  com.yunqi.starter.jdbc.configuration.DruidWebStatFilterConfiguration
