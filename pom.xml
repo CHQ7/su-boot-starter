@@ -20,6 +20,7 @@
         <module>su-starter-redis</module>
         <module>su-starter-log</module>
         <module>su-starter-security</module>
+        <module>su-starter-web</module>
     </modules>
 
     <!-- 打包类型 -->

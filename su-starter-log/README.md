@@ -22,6 +22,7 @@ su-starter-log
 | lombok |                   |
 | su-starter-common     | 公共类包组件            |
 | spring-boot-starter-aop    | spring-boot aop组件 |
+| su-starter-security   | 权限组件 |
 
 
 # 更新日志
