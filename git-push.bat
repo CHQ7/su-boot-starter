@@ -2,7 +2,7 @@
 chcp 65001 >nul
 
 rem 项目名称
-set project=Su-starter
+set project=su-starter
 
 rem 克隆项目远程地址
 set clonePath=git@gitee.com:umb
