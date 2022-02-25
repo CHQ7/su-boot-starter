@@ -1,6 +1,8 @@
 package com.yunqi.starter.common.lang;
 
 
+import java.io.UnsupportedEncodingException;
+
 /**
  * 字符串操作的帮助函数
  * Created by @author JsckChin on 2022/1/23
@@ -162,5 +164,38 @@ public class Strings {
      */
     public static String sNull(Object obj, String def) {
         return obj != null ? obj.toString() : def;
+    }
+
+
+    /**
+     * 使用 UTF-8 编码将字符串编码为 byte 序列，并将结果存储到新的 byte 数组
+     *
+     * @param cs
+     *            字符串
+     * @return UTF-8编码后的 byte 数组
+     */
+    public static byte[] getBytesUTF8(CharSequence cs) {
+        try {
+            return cs.toString().getBytes(Encoding.UTF8);
+        }
+        catch (UnsupportedEncodingException e) {
+            throw Lang.wrapThrow(e);
+        }
+    }
+
+    /**
+     * 复制字符
+     *
+     * @param c     字符
+     * @param num   数量
+     * @return      新字符串
+     */
+    public static String dup(char c, int num) {
+        if (c == 0 || num < 1)
+            return "";
+        StringBuilder sb = new StringBuilder(num);
+        for (int i = 0; i < num; i++)
+            sb.append(c);
+        return sb.toString();
     }
 }
