@@ -4,10 +4,7 @@ package com.yunqi.starter.common.lang;
 import com.yunqi.starter.common.lang.stream.StringOutputStream;
 import com.yunqi.starter.common.repo.Base64;
 
-import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
-import javax.crypto.IllegalBlockSizeException;
-import javax.crypto.NoSuchPaddingException;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.io.InputStream;
@@ -357,9 +354,6 @@ public abstract class Lang {
     /** ECB 加密模式 */
     private static final String ALGORITHM_RSA_ECB = "RSA/ECB/PKCS1Padding";
 
-    /** 签名模式 */
-    public static final String ALGORITHM_RSA_SIGN = "SHA256withRSA";
-
     /**
      * 生成密钥对
      * @return Map对象 (private=私钥, public=公钥)
@@ -372,8 +366,8 @@ public abstract class Lang {
         keyPairGen.initialize(KEY_SIZE);
         // 生成一个密钥对，保存在keyPair中
         KeyPair keyPair = keyPairGen.generateKeyPair();
-        RSAPublicKey publicKey = (RSAPublicKey)keyPair.getPrivate();
-        RSAPrivateKey privateKey =  (RSAPrivateKey)keyPair.getPublic();
+        Key privateKey = keyPair.getPrivate();
+        Key publicKey = keyPair.getPublic();
 
         HashMap<String, String> map = new HashMap<>(16);
         map.put("public", Base64.encode(publicKey.getEncoded()));
@@ -383,29 +377,73 @@ public abstract class Lang {
 
     /**
      * RSA公钥加密
-     * @param publicKeyString 公钥
+     * @param publicKeyString 公钥(BASE64编码)
      * @param content         内容
      * @return                加密后内容
      */
-/*    public static String rsaEncryptByPublic(String publicKeyString, String content) {
+    public static String rsaEncryptByPublic(String publicKeyString, String content) {
         try {
             // 获得公钥对象
             PublicKey publicKey =  publicKey(publicKeyString);
-
-            Cipher cipher = Cipher.getInstance(ALGORITHM_RSA_ECB);
-            cipher.init(Cipher.ENCRYPT_MODE, publicKey);
-            // 该密钥能够加密的最大字节长度
-            int splitLength = ((RSAPublicKey) publicKey).getModulus().bitLength() / 8 - 11;
-            byte[][] arrays = splitBytes(content.getBytes(), splitLength);
-            StringBuffer stringBuffer = new StringBuffer();
-            for (byte[] array : arrays) {
-                stringBuffer.append(fixedHexString(cipher.doFinal(array)));
-            }
-            return stringBuffer.toString();
+            // 加密数据长度 <= 模长-11,如果明文长度大于模长-11则要分组加密
+            int keyLen = ((RSAPublicKey) publicKey).getModulus().bitLength()  / 8 -11; // 模长
+            return Base64.encode(decipher(Cipher.ENCRYPT_MODE, publicKey ,content.getBytes(StandardCharsets.UTF_8) , keyLen));
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-    }*/
+    }
+
+    /**
+     * RSA私钥加密
+     * @param privateKeyString  私钥(BASE64编码)
+     * @param content           内容
+     * @return                  加密后内容
+     */
+    public static String rsaEncryptByPrivate(String privateKeyString, String content) {
+        try {
+            PrivateKey privateKey = privateKey(privateKeyString);
+            // 加密数据长度 <= 模长-11,如果明文长度大于模长-11则要分组加密
+            int splitLength = (((RSAPrivateKey) privateKey).getModulus().bitLength()  / 8) - 11;
+            return Base64.encode(decipher(Cipher.ENCRYPT_MODE, privateKey, content.getBytes(StandardCharsets.UTF_8), splitLength));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * RSA公钥解密
+     * @param publicKeyString   公钥(BASE64编码)
+     * @param content           已加密内容
+     * @return                  解密后内容
+     */
+    public static String rsaDecryptByPublic(String publicKeyString, String content) {
+        try {
+            PublicKey publicKey =  publicKey(publicKeyString);
+            // 该密钥能够加密的最大字节长度
+            int splitLength = ((RSAPublicKey) publicKey).getModulus().bitLength()  / 8;
+            return new String(decipher(Cipher.DECRYPT_MODE, publicKey, Base64.decode(content), splitLength));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
+    /**
+     * RSA私钥解密
+     * @param privateKeyString  公钥(BASE64编码)
+     * @param content           已加密内容
+     * @return                  解密后内容
+     */
+    public static String rsaDecryptByPrivate(String privateKeyString, String content) {
+        try {
+            PrivateKey privateKey = privateKey(privateKeyString);
+            // 该密钥能够加密的最大字节长度
+            int splitLength = ((RSAPrivateKey) privateKey).getModulus().bitLength() / 8;
+            return new String(decipher(Cipher.DECRYPT_MODE, privateKey, Base64.decode(content), splitLength));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
 
 
     // ---------- 获取*钥
@@ -435,7 +473,7 @@ public abstract class Lang {
      * @param keyLen    模唱
      * @return          加密或解密的字节数组
      */
-/*    private static byte[] decipher(int mode, Key key, byte[] data,int keyLen) {
+    private static byte[] decipher(int mode, Key key, byte[] data,int keyLen) {
         try {
             // 数据加密解密
             Cipher cipher = Cipher.getInstance(ALGORITHM_RSA_ECB);
@@ -447,22 +485,16 @@ public abstract class Lang {
             byte[] enBytes = null;
             for (int i = 0; i < data.length; i += keyLen) {
                 // 注意要使用2的倍数，否则会出现加密后的内容再解密时为乱码
-                byte[] doFinal = cipher.doFinal(ArrayUtils.subarray(data, i,i + keyLen));
-                enBytes = ArrayUtils.addAll(enBytes, doFinal);
+                byte[] doFinal = cipher.doFinal(Array.subarray(data, i,i + keyLen));
+                enBytes = Array.addAll(enBytes, doFinal);
             }
             return enBytes;
-        } catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException("不存在的解密算法");
-        } catch (NoSuchPaddingException e) {
-            throw new RuntimeException("无效的补位算法");
-        } catch (IllegalBlockSizeException e) {
-            throw new RuntimeException("无效的块大小");
-        } catch (BadPaddingException e) {
-            throw new RuntimeException("补位算法异常");
-        } catch (InvalidKeyException e) {
-            throw new RuntimeException("无效的私钥");
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
-    }*/
+    }
+
+
 
     // ----------------------- 非对称加密 RSA end -----------------------
 }
