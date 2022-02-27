@@ -3,6 +3,8 @@ package com.yunqi.starter.security.configuration;
 import cn.dev33.satoken.config.SaTokenConfig;
 import cn.dev33.satoken.interceptor.SaAnnotationInterceptor;
 import cn.dev33.satoken.spring.SaBeanRegister;
+import cn.dev33.satoken.strategy.SaStrategy;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
@@ -10,6 +12,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
+import org.springframework.core.annotation.AnnotatedElementUtils;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -47,13 +50,17 @@ public class SecurityAutoConfiguration implements WebMvcConfigurer {
         return config;
     }
 
-    /**
-     * 注册Sa-Token的注解拦截器，打开注解式鉴权功能
-     */
+    /** 注册Sa-Token的注解拦截器，打开注解式鉴权功能 */
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         // 注册注解拦截器，并排除不需要注解鉴权的接口地址 (与登录拦截器无关)
         registry.addInterceptor(new SaAnnotationInterceptor()).addPathPatterns("/**");
+    }
+
+    /** 重写Sa-Token的注解处理器，增加注解合并功能 */
+    @Autowired
+    public void rewriteSaStrategy() {
+        SaStrategy.me.getAnnotation = AnnotatedElementUtils::getMergedAnnotation;
     }
 
 }

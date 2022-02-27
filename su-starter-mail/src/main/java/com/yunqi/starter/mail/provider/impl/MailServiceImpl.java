@@ -1,10 +1,10 @@
-package com.yunqi.starter.mail.service.impl;
+package com.yunqi.starter.mail.provider.impl;
 
 import com.yunqi.starter.common.lang.Lang;
 import com.yunqi.starter.common.lang.Strings;
 import com.yunqi.starter.mail.configuration.MailProperties;
 import com.yunqi.starter.mail.entity.Email;
-import com.yunqi.starter.mail.service.IMailService;
+import com.yunqi.starter.mail.provider.IMailProvider;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
@@ -20,7 +20,7 @@ import java.util.Properties;
  * Created by @author JsckChin on 2022/1/29
  */
 @Slf4j
-public class MailServiceImpl implements IMailService {
+public class MailServiceImpl implements IMailProvider {
 
     private MailProperties properties;
 

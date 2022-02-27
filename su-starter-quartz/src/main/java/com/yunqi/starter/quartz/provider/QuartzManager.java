@@ -1,4 +1,4 @@
-package com.yunqi.starter.quartz.service;
+package com.yunqi.starter.quartz.provider;
 
 import com.yunqi.starter.quartz.entity.QuartzJob;
 import org.quartz.*;

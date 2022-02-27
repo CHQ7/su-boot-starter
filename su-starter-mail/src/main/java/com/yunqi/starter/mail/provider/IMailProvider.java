@@ -1,11 +1,11 @@
-package com.yunqi.starter.mail.service;
+package com.yunqi.starter.mail.provider;
 
 import com.yunqi.starter.mail.entity.Email;
 
 /**
  * Created by @author JsckChin on 2022/1/29
  */
-public interface IMailService {
+public interface IMailProvider {
 
     /**
      * 发送文本邮件

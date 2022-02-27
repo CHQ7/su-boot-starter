@@ -1,7 +1,7 @@
 package com.yunqi.starter.mail.configuration;
 
-import com.yunqi.starter.mail.service.IMailService;
-import com.yunqi.starter.mail.service.impl.MailServiceImpl;
+import com.yunqi.starter.mail.provider.IMailProvider;
+import com.yunqi.starter.mail.provider.impl.MailServiceImpl;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -18,7 +18,7 @@ import org.springframework.context.annotation.Configuration;
 public class MailAutoConfiguration {
 
     @Bean
-    public IMailService iMailService(MailProperties properties){
+    public IMailProvider iMailService(MailProperties properties){
         return new MailServiceImpl(properties);
     }
 }

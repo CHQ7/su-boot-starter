@@ -1,6 +1,7 @@
 package com.yunqi.starter.database.configuration;
 
 import com.yunqi.starter.jdbc.configuration.DruidDataSourceAutoConfigure;
+import lombok.extern.slf4j.Slf4j;
 import org.nutz.dao.Dao;
 import org.nutz.dao.DaoInterceptor;
 import org.nutz.dao.impl.DaoRunner;
@@ -25,6 +26,7 @@ import java.util.Map;
 /**
  * Created by @author JsckChin on 2022/1/29
  */
+@Slf4j
 @Configuration
 @ConditionalOnClass({Dao.class})
 @ConditionalOnExpression("${su.database.enabled:true}")

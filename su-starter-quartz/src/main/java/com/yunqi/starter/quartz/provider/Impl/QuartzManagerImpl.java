@@ -1,9 +1,9 @@
-package com.yunqi.starter.quartz.service.Impl;
+package com.yunqi.starter.quartz.provider.Impl;
 
 import com.yunqi.starter.common.lang.Lang;
 import com.yunqi.starter.common.lang.Strings;
 import com.yunqi.starter.quartz.entity.QuartzJob;
-import com.yunqi.starter.quartz.service.QuartzManager;
+import com.yunqi.starter.quartz.provider.QuartzManager;
 import com.yunqi.starter.quartz.utils.Quartzs;
 import org.nutz.json.Json;
 import org.nutz.lang.util.NutMap;

@@ -1,8 +1,8 @@
 package com.yunqi.starter.quartz.configuration;
 
 import com.yunqi.starter.jdbc.configuration.DruidDataSourceAutoConfigure;
-import com.yunqi.starter.quartz.service.Impl.QuartzManagerImpl;
-import com.yunqi.starter.quartz.service.QuartzManager;
+import com.yunqi.starter.quartz.provider.Impl.QuartzManagerImpl;
+import com.yunqi.starter.quartz.provider.QuartzManager;
 import lombok.extern.slf4j.Slf4j;
 import org.quartz.Scheduler;
 import org.quartz.spi.JobFactory;
