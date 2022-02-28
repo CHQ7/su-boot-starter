@@ -1,4 +1,4 @@
-package com.yunqi.starter.security.stp;
+package com.yunqi.starter.security.spi;
 
 /**
  * Sa-Token 权限认证工具类

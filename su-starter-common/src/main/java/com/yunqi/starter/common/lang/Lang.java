@@ -3,6 +3,8 @@ package com.yunqi.starter.common.lang;
 
 import com.yunqi.starter.common.lang.stream.StringOutputStream;
 import com.yunqi.starter.common.repo.Base64;
+import org.nutz.json.Json;
+import org.nutz.lang.util.NutMap;
 
 import javax.crypto.Cipher;
 import javax.servlet.http.HttpServletRequest;
@@ -17,9 +19,7 @@ import java.security.interfaces.RSAPublicKey;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Objects;
+import java.util.*;
 import java.util.regex.Pattern;
 
 /**
@@ -85,6 +85,46 @@ public abstract class Lang {
     }
 
     /**
+     * 根据格式化字符串，生成运行时异常
+     *
+     * @param format
+     *            格式
+     * @param args
+     *            参数
+     * @return 运行时异常
+     */
+    public static RuntimeException makeThrow(String format, Object... args) {
+        return new RuntimeException(String.format(format, args));
+    }
+
+
+    /**
+     * 判断一个对象是否为空。它支持如下对象类型：
+     * <ul>
+     * <li>null : 一定为空
+     * <li>数组
+     * <li>集合
+     * <li>Map
+     * <li>其他对象 : 一定不为空
+     * </ul>
+     *
+     * @param obj
+     *            任意对象
+     * @return 是否为空
+     */
+    public static boolean isEmpty(Object obj) {
+        if (obj == null)
+            return true;
+        if (obj.getClass().isArray())
+            return java.lang.reflect.Array.getLength(obj) == 0;
+        if (obj instanceof Collection<?>)
+            return ((Collection<?>) obj).isEmpty();
+        if (obj instanceof Map<?, ?>)
+            return ((Map<?, ?>) obj).isEmpty();
+        return false;
+    }
+
+    /**
      * 数组是否为非空
      *
      * @param <T>   数组元素类型
@@ -94,7 +134,6 @@ public abstract class Lang {
     public static <T> boolean isNotEmpty(T[] array) {
         return (null != array && array.length != 0);
     }
-
 
     /**
      * 获得访问者的IP地址, 反向代理过的也可以获得
@@ -158,6 +197,115 @@ public abstract class Lang {
             sb.append(Integer.toString((hashBytes[i] & 0xff) + 0x100, 16).substring(1));
         }
         return sb.toString();
+    }
+
+    /**
+     * 根据一段字符串，生成一个 Map 对象。
+     *
+     * @param str
+     *            参照 JSON 标准的字符串，但是可以没有前后的大括号
+     * @return Map 对象
+     */
+    public static NutMap map(String str) {
+        if (null == str)
+            return null;
+        str = Strings.trim(str);
+        if (!Strings.isEmpty(str)
+                && (Strings.isQuoteBy(str, '{', '}') || Strings.isQuoteBy(str, '(', ')'))) {
+            return Json.fromJson(NutMap.class, str);
+        }
+        return Json.fromJson(NutMap.class, "{" + str + "}");
+    }
+
+    /**
+     * 将一个数组转换成字符串
+     * <p>
+     * 每个元素之间，都会用一个给定的字符分隔
+     *
+     * @param c
+     *            分隔符
+     * @param objs
+     *            数组
+     * @return 拼合后的字符串
+     */
+    public static <T> StringBuilder concat(Object c, T[] objs) {
+        StringBuilder sb = new StringBuilder();
+        if (null == objs || 0 == objs.length)
+            return sb;
+
+        sb.append(objs[0]);
+        for (int i = 1; i < objs.length; i++)
+            sb.append(c).append(objs[i]);
+
+        return sb;
+    }
+
+    /**
+     * 将一个数组的部分元素转换成字符串
+     * <p>
+     * 每个元素之间，都会用一个给定的字符分隔
+     *
+     * @param offset
+     *            开始元素的下标
+     * @param len
+     *            元素数量
+     * @param c
+     *            分隔符
+     * @param objs
+     *            数组
+     * @return 拼合后的字符串
+     */
+    public static <T> StringBuilder concat(int offset, int len, Object c, T[] objs) {
+        StringBuilder sb = new StringBuilder();
+        if (null == objs || len < 0 || 0 == objs.length)
+            return sb;
+
+        if (offset < objs.length) {
+            sb.append(objs[offset]);
+            for (int i = 1; i < len && i + offset < objs.length; i++) {
+                sb.append(c).append(objs[i + offset]);
+            }
+        }
+        return sb;
+    }
+
+    /**
+     * 将一个迭代器转换成字符串
+     * <p>
+     * 每个元素之间，都会用一个给定的字符分隔
+     *
+     * @param c
+     *            分隔符
+     * @param it
+     *            集合
+     * @return 拼合后的字符串
+     */
+    public static <T> StringBuilder concat(Object c, Iterator<T> it) {
+        StringBuilder sb = new StringBuilder();
+        if (it == null || !it.hasNext())
+            return sb;
+        sb.append(it.next());
+        while (it.hasNext())
+            sb.append(c).append(it.next());
+        return sb;
+    }
+
+    /**
+     * 将一个集合转换成字符串
+     * <p>
+     * 每个元素之间，都会用一个给定的字符分隔
+     *
+     * @param c
+     *            分隔符
+     * @param coll
+     *            集合
+     * @return 拼合后的字符串
+     */
+    public static <T> StringBuilder concat(Object c, Collection<T> coll) {
+        StringBuilder sb = new StringBuilder();
+        if (null == coll || coll.isEmpty())
+            return sb;
+        return concat(c, coll.iterator());
     }
 
     // ----------------------- 摘要加密 start -----------------------

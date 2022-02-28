@@ -1,4 +1,4 @@
-package com.yunqi.starter.security.stp;
+package com.yunqi.starter.security.spi;
 
 import cn.dev33.satoken.SaManager;
 import cn.dev33.satoken.config.SaTokenConfig;
@@ -17,7 +17,7 @@ import java.util.List;
  * Created by @author JsckChin on @date 2022/1/5
  */
 @Component
-public class TokenUtil {
+public class Tokens {
 
     /**
      * 账号类型标识
