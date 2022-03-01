@@ -3,9 +3,9 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>starter</artifactId>
-        <groupId>com.yunqi</groupId>
-        <version>${revision}</version>
+        <artifactId>su-starter</artifactId>
+        <groupId>com.yunqi.starter</groupId>
+        <version>1.0.6-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
