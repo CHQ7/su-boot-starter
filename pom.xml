@@ -7,7 +7,7 @@
     <!-- GVA -->
     <groupId>com.yunqi</groupId>
     <artifactId>starter</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>${revision}</version>
 
     <modules>
         <module>su-starter-dependencies</module>
@@ -27,8 +27,12 @@
     <!-- 打包类型 -->
     <packaging>pom</packaging>
 
-    <!-- 公共依赖 -->
+    <!-- 公共属性 -->
     <properties>
+        <!-- 修订版本 -->
+        <revision>1.0.1-SNAPSHOT</revision>
+
+        <!-- utf-8 -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     </properties>
@@ -41,7 +45,7 @@
             <dependency>
                 <groupId>com.yunqi.starter</groupId>
                 <artifactId>su-starter-dependencies</artifactId>
-                <version>1.0.0-SNAPSHOT</version>
+                <version>${revision}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>

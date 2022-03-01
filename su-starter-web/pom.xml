@@ -5,14 +5,13 @@
     <parent>
         <artifactId>starter</artifactId>
         <groupId>com.yunqi</groupId>
-        <version>1.0.0-SNAPSHOT</version>
+        <version>${revision}</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <!-- GVA -->
     <groupId>com.yunqi.starter</groupId>
     <artifactId>su-starter-web</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
 
     <!-- ======================================== -->
     <!-- 项目依赖 -->

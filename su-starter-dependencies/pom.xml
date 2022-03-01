@@ -16,14 +16,18 @@
     <!-- GVA -->
     <groupId>com.yunqi.starter</groupId>
     <artifactId>su-starter-dependencies</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>${revision}</version>
 
     <!-- 打包类型 -->
     <packaging>pom</packaging>
 
     <!-- 公共依赖 -->
     <properties>
+        <!-- 修订版本 -->
+        <revision>1.0.1-SNAPSHOT</revision>
         <spring-boot.version>2.6.2</spring-boot.version>
+
+        <!-- utf-8 -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     </properties>
@@ -171,43 +175,43 @@
             <dependency>
                 <groupId>${project.groupId}</groupId>
                 <artifactId>su-starter-common</artifactId>
-                <version>1.0.0-SNAPSHOT</version>
+                <version>${revision}</version>
             </dependency>
             <!-- jasypt -->
             <dependency>
                 <groupId>${project.groupId}</groupId>
                 <artifactId>su-starter-jasypt</artifactId>
-                <version>1.0.0-SNAPSHOT</version>
+                <version>${revision}</version>
             </dependency>
             <!-- mail -->
             <dependency>
                 <groupId>${project.groupId}</groupId>
                 <artifactId>su-starter-mail</artifactId>
-                <version>1.0.0-SNAPSHOT</version>
+                <version>${revision}</version>
             </dependency>
             <!-- jdbc -->
             <dependency>
                 <groupId>${project.groupId}</groupId>
                 <artifactId>su-starter-jdbc</artifactId>
-                <version>1.0.0-SNAPSHOT</version>
+                <version>${revision}</version>
             </dependency>
             <!-- database -->
             <dependency>
                 <groupId>${project.groupId}</groupId>
                 <artifactId>su-starter-database</artifactId>
-                <version>1.0.0-SNAPSHOT</version>
+                <version>${revision}</version>
             </dependency>
             <!-- database -->
             <dependency>
                 <groupId>${project.groupId}</groupId>
                 <artifactId>su-starter-quartz</artifactId>
-                <version>1.0.0-SNAPSHOT</version>
+                <version>${revision}</version>
             </dependency>
             <!-- security -->
             <dependency>
                 <groupId>${project.groupId}</groupId>
                 <artifactId>su-starter-security</artifactId>
-                <version>1.0.0-SNAPSHOT</version>
+                <version>${revision}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
