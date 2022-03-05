@@ -14,7 +14,7 @@
     <!-- GVA -->
     <groupId>com.yunqi.starter</groupId>
     <artifactId>su-starter</artifactId>
-    <version>1.0.6-SNAPSHOT</version>
+    <version>1.0.7-SNAPSHOT</version>
 
     <packaging>pom</packaging>
 
@@ -43,6 +43,8 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     </properties>
+
+
 
     <!-- ======================================== -->
     <!-- 公共依赖 -->
@@ -260,21 +262,33 @@
         </plugins>
     </build>
 
+    <!-- 上传制品仓库 -->
+    <distributionManagement>
+        <repository>
+            <id>ssc-releases</id>
+            <url>http://47.109.83.142:8081/artifactory/rdc-release</url>
+        </repository>
+        <snapshotRepository>
+            <id>ssc-snapshot</id>
+            <url>http://47.109.83.142:8081/artifactory/rdc-snapshots</url>
+        </snapshotRepository>
+    </distributionManagement>
+
     <!-- maven仓库 -->
-    <repositories>
-        <!-- 阿里中央仓库 -->
+<!--    <repositories>
+        &lt;!&ndash; 阿里中央仓库 &ndash;&gt;
         <repository>
             <id>alimaven</id>
             <name>aliyun maven</name>
-            <url>https://maven.aliyun.com/nexus/content/groups/public/</url>
+            <url>https://maven.aliyun.com/repository/public</url>
         </repository>
-        <!-- maven.apache.org 中央仓库 -->
+        &lt;!&ndash; maven.apache.org 中央仓库 &ndash;&gt;
         <repository>
             <id>central-repos</id>
             <name>Central Repository</name>
             <url>https://repo.maven.apache.org/maven2</url>
         </repository>
-        <!-- nutz 中央仓库 -->
+        &lt;!&ndash; nutz 中央仓库 &ndash;&gt;
         <repository>
             <id>nutz-snapshots</id>
             <name>nutz Releases</name>
@@ -287,6 +301,6 @@
                 <enabled>false</enabled>
             </releases>
         </repository>
-    </repositories>
+    </repositories>-->
 
 </project>
