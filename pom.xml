@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="https://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="https://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="https://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <!-- 继承:父级项目坐标 -->
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -14,7 +13,8 @@
     <!-- GVA -->
     <groupId>com.yunqi.starter</groupId>
     <artifactId>su-starter</artifactId>
-    <version>1.0.7-SNAPSHOT</version>
+    <version>1.0.8</version>
+    <!--<version>1.0.8-SNAPSHOT</version>-->
 
     <packaging>pom</packaging>
 
@@ -43,8 +43,6 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     </properties>
-
-
 
     <!-- ======================================== -->
     <!-- 公共依赖 -->
@@ -164,7 +162,7 @@
             <dependency>
                 <groupId>org.nutz</groupId>
                 <artifactId>nutz</artifactId>
-                <version>1.r.69.20210929</version>
+                <version>1.r.69.v20220215</version>
             </dependency>
             <!-- druid  -->
             <dependency>
@@ -275,32 +273,11 @@
     </distributionManagement>
 
     <!-- maven仓库 -->
-<!--    <repositories>
-        &lt;!&ndash; 阿里中央仓库 &ndash;&gt;
+    <repositories>
+        <!-- 制品仓库 -->
         <repository>
-            <id>alimaven</id>
-            <name>aliyun maven</name>
-            <url>https://maven.aliyun.com/repository/public</url>
+            <id>ssc-repos</id>
+            <url>https://maven.wchin.cn/artifactory/ssc-release</url>
         </repository>
-        &lt;!&ndash; maven.apache.org 中央仓库 &ndash;&gt;
-        <repository>
-            <id>central-repos</id>
-            <name>Central Repository</name>
-            <url>https://repo.maven.apache.org/maven2</url>
-        </repository>
-        &lt;!&ndash; nutz 中央仓库 &ndash;&gt;
-        <repository>
-            <id>nutz-snapshots</id>
-            <name>nutz Releases</name>
-            <url>https://jfrog.nutz.cn/artifactory/snapshots</url>
-            <snapshots>
-                <enabled>true</enabled>
-                <updatePolicy>always</updatePolicy>
-            </snapshots>
-            <releases>
-                <enabled>false</enabled>
-            </releases>
-        </repository>
-    </repositories>-->
-
+    </repositories>
 </project>
