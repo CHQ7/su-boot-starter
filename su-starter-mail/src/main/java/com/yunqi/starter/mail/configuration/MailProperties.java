@@ -10,20 +10,21 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties(prefix = "su.mail")
 public class MailProperties {
 
+    /** 是否开启 */
     boolean enabled = true;
 
-    String hostName = "smtp.qiye.aliyun.com";
+    private String hostName = "smtp.qiye.aliyun.com";
 
-    String smtpPort = "465";
+    private String smtpPort = "465";
 
-    String userName = "notice@fir7.com";
+    private String userName = "notice@fir7.com";
 
-    String password = "Ng1259900";
+    private String password = "Ng1259900";
 
-    boolean ssl = true;
+    private boolean ssl = true;
 
-    String from = "notice@fir7.com";
+    private String from = "notice@fir7.com";
 
-    String charset = "UTF-8";
+    private String charset = "UTF-8";
 
 }

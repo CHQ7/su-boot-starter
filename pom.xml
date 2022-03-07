@@ -13,8 +13,8 @@
     <!-- GVA -->
     <groupId>com.yunqi.starter</groupId>
     <artifactId>su-starter</artifactId>
-    <version>1.0.8</version>
-    <!--<version>1.0.8-SNAPSHOT</version>-->
+    <version>1.0.9-SNAPSHOT</version>
+    <!--<version>1.0.9-SNAPSHOT</version>-->
 
     <packaging>pom</packaging>
 

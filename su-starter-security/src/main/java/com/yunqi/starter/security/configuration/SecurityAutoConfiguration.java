@@ -4,6 +4,7 @@ import cn.dev33.satoken.config.SaTokenConfig;
 import cn.dev33.satoken.interceptor.SaAnnotationInterceptor;
 import cn.dev33.satoken.spring.SaBeanRegister;
 import cn.dev33.satoken.strategy.SaStrategy;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
@@ -20,6 +21,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 /**
  * Created by @author JsckChin on 2022/2/16
  */
+@Slf4j
 @Configuration
 @ConditionalOnClass(SaTokenConfig.class)
 @ConditionalOnExpression("${su.security.enabled:true}")

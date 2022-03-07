@@ -59,5 +59,5 @@ public class SecurityProperties {
     private Boolean isPrint = false;
 
     /** 是否打印操作日志 */
-    private Boolean isLog = true;
+    private Boolean isLog = false;
 }

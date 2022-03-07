@@ -12,19 +12,14 @@ import java.util.Map;
 @Data
 @ConfigurationProperties(prefix = "su.quartz")
 public class QuartzProperties {
-    /**
-     * 是否开启
-     */
+
+    /** 是否开启 */
     boolean enabled = true;
 
-    /**
-     * 时区
-     */
-    String timeZone = "Asia/Shanghai";
+    /** 时区 */
+    private String timeZone = "Asia/Shanghai";
 
-    /**
-     * 外部配置
-     */
-    Map<String, String> properties = new HashMap<>();
+    /** 外部配置 */
+    private Map<String, String> properties = new HashMap<>();
 
 }

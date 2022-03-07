@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 /**
- * 权限认证工具类
+ * 前端权限认证工具类
  * Created by @author JsckChin on @date 2022/1/5
  */
 @Component
