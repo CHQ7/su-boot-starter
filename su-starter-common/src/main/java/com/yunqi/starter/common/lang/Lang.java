@@ -8,9 +8,7 @@ import org.nutz.lang.util.NutMap;
 
 import javax.crypto.Cipher;
 import javax.servlet.http.HttpServletRequest;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.PrintStream;
+import java.io.*;
 import java.lang.reflect.InvocationTargetException;
 import java.nio.charset.StandardCharsets;
 import java.security.*;
@@ -67,6 +65,24 @@ public abstract class Lang {
         e.printStackTrace(ps);
         ps.flush();
         return sbo.getStringBuilder().toString();
+    }
+
+    /**
+     * 生成一个未实现的运行时异常
+     *
+     * @return 一个未实现的运行时异常
+     */
+    public static RuntimeException noImplement() {
+        return new RuntimeException("Not implement yet!");
+    }
+
+    /**
+     * 生成一个不可能的运行时异常
+     *
+     * @return 一个不可能的运行时异常
+     */
+    public static RuntimeException impossible() {
+        return new RuntimeException("r u kidding me?! It is impossible!");
     }
 
     /**
@@ -306,6 +322,36 @@ public abstract class Lang {
         if (null == coll || coll.isEmpty())
             return sb;
         return concat(c, coll.iterator());
+    }
+
+    /**
+     * 从一个文本输入流读取所有内容，并将该流关闭
+     *
+     * @param reader
+     *            文本输入流
+     * @return 输入流所有内容
+     */
+    public static String readAll(Reader reader) {
+        if (!(reader instanceof BufferedReader))
+            reader = new BufferedReader(reader);
+        try {
+            StringBuilder sb = new StringBuilder();
+
+            char[] data = new char[64];
+            int len;
+            while (true) {
+                if ((len = reader.read(data)) == -1)
+                    break;
+                sb.append(data, 0, len);
+            }
+            return sb.toString();
+        }
+        catch (IOException e) {
+            throw org.nutz.lang.Lang.wrapThrow(e);
+        }
+        finally {
+            Streams.safeClose(reader);
+        }
     }
 
     // ----------------------- 摘要加密 start -----------------------
