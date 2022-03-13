@@ -3,10 +3,10 @@ package com.yunqi.starter.jdbc.configuration;
 import com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceAutoConfigure;
 import com.alibaba.druid.spring.boot.autoconfigure.properties.DruidStatProperties;
 import com.alibaba.druid.support.http.WebStatFilter;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,13 +14,14 @@ import org.springframework.context.annotation.Configuration;
 import java.util.Collections;
 
 /**
+ * Druid Web 网络统计及健康
  * Created by @author JsckChin on 2022/2/1
  */
+@Slf4j
 @Configuration
 @ConditionalOnWebApplication
+@ConditionalOnExpression("${su.druid.web-stat-filter.enabled:true}")
 @AutoConfigureAfter(DruidDataSourceAutoConfigure.class)
-@EnableConfigurationProperties({DruidStatProperties.class})
-@ConditionalOnProperty(name = "spring.datasource.druid.stat-view-servlet.enabled", havingValue = "true", matchIfMissing = true)
 public class DruidWebStatFilterConfiguration {
 
     /**

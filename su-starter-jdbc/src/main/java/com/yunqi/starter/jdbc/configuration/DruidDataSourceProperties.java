@@ -10,6 +10,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties(prefix = "su.druid")
 public class DruidDataSourceProperties {
 
+    /** 是否开启 */
     boolean enabled = true;
 
     /**
@@ -97,5 +98,44 @@ public class DruidDataSourceProperties {
      * 防御sql注入的filter:wall
      */
     private String filters = "stat,wall";
+
+
+    webStatFilter webStatFilter = new webStatFilter();
+
+    statViewServlet statViewServlet = new statViewServlet();
+
+
+    @Data
+    public static class webStatFilter {
+
+        /** 是否开启 */
+        boolean enabled = true;
+
+    }
+
+    @Data
+    public static class statViewServlet {
+
+        /** 是否开启 */
+        boolean enabled = true;
+
+        private String urlPattern;
+
+        /** IP白名单 (没有配置或者为空，则允许所有访问) 127.0.0.1 只允许本机访问  */
+        private String allow = "127.0.0.1";
+
+        /** IP黑名单 (存在共同时，deny优先于allow) */
+        private String deny;
+
+        /** 设置控制台登录的用户名 */
+        private String loginUsername = "root";
+
+        /** 设置控制台登录的密码 */
+        private String loginPassword = "root";
+
+        /** 是否能够重置数据 */
+        private String resetEnable = "false";
+
+    }
 
 }
