@@ -56,6 +56,9 @@ public class DruidDataSourceProperties {
     /** 配置一个连接在池中最小生存的时间，单位是毫秒 */
     private  Integer minEvictableIdleTimeMillis = 300000;
 
+    /** 配置一个连接在池中最大生存的时间，单位是毫秒 */
+    private  Integer maxEvictableIdleTimeMillis = 900000;
+
     /**
      * 用来检测连接是否有效的sql，要求是一个查询语句，常用select 'x'。
      * 如果validationQuery为null，testOnBorrow、testOnReturn、testWhileIdle都不会起作用。
