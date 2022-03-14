@@ -5,7 +5,7 @@
     <parent>
         <artifactId>su-starter</artifactId>
         <groupId>com.yunqi.starter</groupId>
-        <version>1.0.13</version>
+        <version>1.0.14</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -28,6 +28,21 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-pool2</artifactId>
+        </dependency>
+        <!-- jackson -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-jsr310</artifactId>
+            <optional>true</optional>
         </dependency>
         <!-- redis jedis客户端 -->
         <dependency>

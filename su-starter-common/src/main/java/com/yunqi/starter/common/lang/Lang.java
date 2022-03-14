@@ -52,9 +52,8 @@ public abstract class Lang {
     }
 
     /**
-     * <p>
-     *     将一个抛出对象的异常堆栈，显示成一个字符串
-     * </p>
+     * 将一个抛出对象的异常堆栈，显示成一个字符串
+     *
      * @param e 抛出对象
      * @return 异常堆栈文本
      */
@@ -691,4 +690,51 @@ public abstract class Lang {
 
 
     // ----------------------- 非对称加密 RSA end -----------------------
+
+    // ----------------------- 签名和验证 start -----------------------
+
+    /**
+     * 用私钥对信息生成数字签名
+     *
+     * @param privateKey 私钥(BASE64编码)
+     * @param data       加密字符串
+     * @param signAlg    [SHA256withRSA / SHA1withDSA / MD2withRSA /MD5withRSA /SHA1withRSA]
+     * @return           数字签名
+     */
+    public static String sign(String privateKey, String data, String signAlg){
+        try {
+            // 通过解码私钥(Base64编码)获取私钥
+            PrivateKey priKey = privateKey(privateKey);
+            // 用私钥对信息生成数字签名
+            Signature signature = Signature.getInstance(signAlg);
+            signature.initSign(priKey);
+            signature.update(data.getBytes(Encoding.CHARSET_UTF8));
+            return Base64.encode(signature.sign());
+        } catch (Exception  e) {
+            throw new RuntimeException("生成数字签名异常");
+        }
+    }
+
+    /**
+     * 校验数字签名
+     * @param publicKey 公钥(BASE64编码)
+     * @param sign      数字签名
+     * @param data      验签加密内容
+     * @param signAlg   [SHA256withRSA / SHA1withDSA / MD2withRSA /MD5withRSA /SHA1withRSA]
+     * @return Boolean  校验成功返回true 失败返回false
+     */
+    public static Boolean verifySign(String publicKey, String sign, String data, String signAlg){
+        try {
+            // 取公钥匙对象
+            PublicKey pubKey = publicKey(publicKey);
+            Signature signature = Signature.getInstance(signAlg);
+            signature.initVerify(pubKey);
+            signature.update(data.getBytes(Encoding.CHARSET_UTF8));
+            return signature.verify(Base64.decode(sign));
+        } catch (Exception e) {
+            throw new RuntimeException("校验数字签名异常");
+        }
+    }
+
+    // ----------------------- 签名和验证 end -----------------------
 }
