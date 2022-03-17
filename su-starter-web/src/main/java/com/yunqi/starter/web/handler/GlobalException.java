@@ -94,7 +94,7 @@ public class GlobalException {
     @ExceptionHandler(NotLoginException.class)
     public Object handlerNotLoginException(NotLoginException e) {
         // 打印堆栈信息
-        log.error(Lang.getStackTrace(e));
+        //log.error(Lang.getStackTrace(e));
         // 判断场景值，定制化异常信息
         IResultCode resultCode;
 
