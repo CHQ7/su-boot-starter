@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>su-starter-security</artifactId>
+    <artifactId>su-starter-dingtalk</artifactId>
 
     <!-- ======================================== -->
     <!-- 项目依赖 -->
@@ -35,11 +35,6 @@
             <groupId>${project.groupId}</groupId>
             <artifactId>su-starter-common</artifactId>
             <scope>provided</scope>
-        </dependency>
-        <!-- Sa-Token 权限认证 -->
-        <dependency>
-            <groupId>cn.dev33</groupId>
-            <artifactId>sa-token-spring-boot-starter</artifactId>
         </dependency>
     </dependencies>
 

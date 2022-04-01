@@ -1,14 +1,6 @@
-# 组件名称
-
-su-starter-quartz
-
-# 组件说明
+# su-starter-quartz
 
 任务组件
-
-# 作用域
-
-服务层
 
 # 使用说明
 

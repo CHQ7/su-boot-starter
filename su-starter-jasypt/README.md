@@ -1,14 +1,6 @@
-# 组件名称
-
-su-starter-jasypt
-
-# 组件说明
+# su-starter-jasypt
 
 Jasypt安全框架加密组件
-
-# 作用域
-
-所有项目
 
 # 使用说明
 

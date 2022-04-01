@@ -1,14 +1,6 @@
-# 组件名称
-
-su-starter-mail
-
-# 组件说明
+# su-starter-mail
 
 邮件发送组件
-
-# 作用域
-
-服务层
 
 # 使用说明
 

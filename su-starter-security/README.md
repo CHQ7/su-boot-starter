@@ -1,14 +1,6 @@
-# 组件名称
-
-su-starter-security
-
-# 组件说明
+# su-starter-security
 
 权限组件
-
-# 作用域
-
-控制层
 
 # 使用说明
 

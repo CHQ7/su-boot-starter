@@ -1,14 +1,6 @@
-# 组件名称
-
-su-starter-jdbc
-
-# 组件说明
+# su-starter-jdbc
 
 数据库连接组件
-
-# 作用域
-
-服务层
 
 # 使用说明
 

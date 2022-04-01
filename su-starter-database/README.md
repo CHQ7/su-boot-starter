@@ -1,14 +1,6 @@
-# 组件名称
-
-su-starter-database
-
-# 组件说明
+# su-starter-database
 
 数据库组件
-
-# 作用域
-
-服务层
 
 # 使用说明
 

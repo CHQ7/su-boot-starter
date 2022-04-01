@@ -1,14 +1,6 @@
-# 组件名称
-
-su-starter-common
-
-# 组件说明
+# su-starter-common
 
 公共类包
-
-# 作用域
-
-所有项目
 
 # 使用说明
 
