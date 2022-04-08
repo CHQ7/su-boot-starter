@@ -99,19 +99,6 @@ public class DingtalkUtil {
         return reqMap;
     }
 
-    /**
-     * 钉钉群 markdown类型
-     * @param chatId    钉钉群ID
-     * @param title     标题
-     * @param text      内容
-     * @return          Json字符串
-     */
-    public static String buildChatMarkdownData(String chatId, String title,String text) {
-        NutMap map = new NutMap();
-        map.addv("chatid", chatId);
-        map.addv("msg", buildMarkdown(title, text));
-        return Json.toJson(map);
-    }
 
 
 }
