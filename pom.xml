@@ -278,18 +278,6 @@
         </plugins>
     </build>
 
-    <!-- 上传制品仓库 -->
-    <distributionManagement>
-        <repository>
-            <id>ssc-releases</id>
-            <url>https://maven.wchin.cn/artifactory/rdc-release</url>
-        </repository>
-        <snapshotRepository>
-            <id>ssc-snapshot</id>
-            <url>https://maven.wchin.cn/artifactory/rdc-snapshots</url>
-        </snapshotRepository>
-    </distributionManagement>
-
     <!-- maven仓库 -->
     <repositories>
         <!-- 制品仓库 -->

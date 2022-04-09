@@ -2,33 +2,51 @@
 
 Jasypt安全框架加密组件
 
-# 使用说明
-
-Jasypt是一个加密库对配置文件进行加密
-
 # 依赖关系
 
 | 名称         | 技术       |
 |------------|----------|
-| lombok |      |
 | jasypt-spring-boot-starter     |   Jasypt安全框架加密组件  |
+
+
+## 设置配置文件
+
+```yaml
+su:
+  jasypt:
+    enabled: true
+    password: egsnhm
+    algorithm: PBEWithMD5AndDES
+    key-obtention-iterations: 1000
+    pool-size: 1
+    salt-generator-class-name: org.jasypt.salt.RandomSaltGenerator
+    string-output-type: base64
+```
+
+## 配置文件说明
+
+| 名称 | 默认值              | 备注 |
+| --- |------------------| --- |
+| enabled | true             | 是否开启组件 |
+| password | egsnhm           | 加密盐值,默认值:egsnhm 可自定义 |
+| algorithm | PBEWithMD5AndDES | 置加密算法的值,默认算法:PBEWithMD5AndDES |
+| keyObtentionIterations | 1000             | 设置用于获取加密密钥的散列迭代次数,默认值:1000 |
+| poolSize | 1                | 设置要创建的加密器池的大小,默认值:1 |
+| saltGeneratorClassName | org.jasypt.salt.RandomSaltGenerator              | 设置盐生成器,默认值:org.jasypt.salt.RandomSaltGenerator |
+| stringOutputType | base64           | 置字符串输出将被编码的形式,默认值:base64 |
 
 # 使用方式
 
 # 方式一：通过工具类调用
-```java
-public class test {
-    public static void main(String[] args) {
-        // 待加密字符串
-        String txt = "abcd";
-        // 加密
-        String ciphertext = JasyptUtil.encrypt(txt);
-        // 解密
-        String decrypttext = JasyptUtil.decrypt(ciphertext);
-        // 打印
-        System.out.printf("原文:%s%n密文:%s%n解密:%s%n", txt, ciphertext, decrypttext);
-    }
-}
+```
+// 待加密字符串
+String txt = "abcd";
+// 加密
+String ciphertext = Jasypts.encrypt(txt);
+// 解密
+String decrypttext = Jasypts.decrypt(ciphertext);
+// 打印
+System.out.printf("原文:%s%n密文:%s%n解密:%s%n", txt, ciphertext, decrypttext);
 ```
 
 # 方式二：服务调用
@@ -70,12 +88,5 @@ spring:
     username: ENC(x0jY0g478sC7qMnAMOmvgA==)
     password: ENC(5YfhKmsp4Ugsq70ookGQfw==)
 ```
-
-
-# 更新日志
-
-2022-02-16
-* 优化:设置默认StringEncryptor
-* 优化:优化注入方式
 
 

@@ -14,9 +14,9 @@ import org.springframework.context.annotation.Primary;
  * Created by @author JsckChin on 2022/1/29
  */
 @Configuration
-@ConditionalOnExpression("${su.jasypt.enabled:true}") // 默认启动组件
+@ConditionalOnExpression("${su.jasypt.enabled:true}")
 @AutoConfigureAfter({StringEncryptor.class})
-@EnableConfigurationProperties(JasyptProperties.class) //使配置文件生效
+@EnableConfigurationProperties(JasyptProperties.class)
 public class JasyptAutoConfiguration {
 
     @Bean("jasyptStringEncryptor")

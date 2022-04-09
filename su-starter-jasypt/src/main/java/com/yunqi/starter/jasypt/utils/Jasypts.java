@@ -7,7 +7,7 @@ import org.jasypt.encryption.pbe.config.SimpleStringPBEConfig;
  * Jasypt安全框架加密类工具包
  * Created by @author JsckChin on 2022/1/29
  */
-public class JasyptUtil {
+public class Jasypts {
 
     /** 默认加密盐值 */
     public static final String DEFAULT_JASYPT_SALT = "egsnhm";
