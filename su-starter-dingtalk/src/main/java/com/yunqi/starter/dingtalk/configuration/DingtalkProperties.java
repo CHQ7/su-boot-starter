@@ -4,7 +4,7 @@ import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
- * Created by @author JsckChin on 2022/4/1
+ * Created by @author CHQ on 2022/4/1
  */
 @Data
 @ConfigurationProperties(prefix = "su.dingtalk")

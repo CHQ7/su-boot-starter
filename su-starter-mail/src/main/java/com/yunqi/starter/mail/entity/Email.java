@@ -5,7 +5,7 @@ import lombok.Data;
 import java.io.Serializable;
 
 /**
- * Created by @author JsckChin on 2022/1/29
+ * Created by @author CHQ on 2022/1/29
  */
 @Data
 public class Email implements Serializable {

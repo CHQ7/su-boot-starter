@@ -5,7 +5,7 @@ import org.quartz.*;
 
 /**
  * Quartz管理器,统管Job的增删改查操作
- * Created by @author JsckChin on 2022/2/2
+ * Created by @author CHQ on 2022/2/2
  */
 public interface QuartzManager {
 

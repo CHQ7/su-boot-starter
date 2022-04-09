@@ -14,7 +14,7 @@ import java.util.regex.Pattern;
 
 /**
  * 资源定位
- * Created by @author JsckChin on 2022/1/29
+ * Created by @author CHQ on 2022/1/29
  */
 public class SpringResourceLoaction extends ResourceLocation implements ApplicationContextAware {
 

@@ -4,7 +4,7 @@ import org.nutz.lang.util.NutMap;
 
 /**
  * 全局参数配置
- * Created by @author JsckChin on 2022/2/24
+ * Created by @author CHQ on 2022/2/24
  */
 public class Globals {
 

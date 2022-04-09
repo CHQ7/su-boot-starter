@@ -7,7 +7,7 @@ import java.util.List;
 
 /**
  * 钉钉接口
- * Created by @author JsckChin on 2022/4/1
+ * Created by @author CHQ on 2022/4/1
  */
 public interface IDingtalkProvider {
 

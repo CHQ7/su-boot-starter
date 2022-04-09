@@ -7,7 +7,7 @@ import java.io.Serializable;
 
 /**
  * 系统日志
- * Created by @author JsckChin on 2021/12/19
+ * Created by @author CHQ on 2021/12/19
  */
 @Table("ims_sys_log")
 @Data

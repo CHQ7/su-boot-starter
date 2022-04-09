@@ -22,7 +22,7 @@ import java.util.regex.Pattern;
 
 /**
  * 这些帮助函数让 Java 的某些常用功能变得更简单
- * Created by @author JsckChin on 2022/1/22
+ * Created by @author CHQ on 2022/1/22
  */
 public abstract class Lang {
 

@@ -24,7 +24,7 @@ import java.util.Properties;
 import java.util.TimeZone;
 
 /**
- * Created by @author JsckChin on 2022/2/2
+ * Created by @author CHQ on 2022/2/2
  */
 @Slf4j
 @Configuration

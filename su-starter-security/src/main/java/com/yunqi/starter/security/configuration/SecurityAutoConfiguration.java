@@ -19,7 +19,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 
 /**
- * Created by @author JsckChin on 2022/2/16
+ * Created by @author CHQ on 2022/2/16
  */
 @Slf4j
 @Configuration

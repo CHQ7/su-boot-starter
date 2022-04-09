@@ -10,7 +10,7 @@ import java.lang.annotation.Target;
 
 /**
  * 登录认证：只有登录之后才能进入该方法
- * Created by @author JsckChin on 2022/2/27
+ * Created by @author CHQ on 2022/2/27
  */
 @SaCheckLogin(type = StpUtil.TYPE)
 @Retention(RetentionPolicy.RUNTIME)

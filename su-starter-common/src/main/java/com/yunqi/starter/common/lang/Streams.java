@@ -9,7 +9,7 @@ import java.io.*;
 
 /**
  * 提供了一组创建 Reader/Writer/InputStream/OutputStream 的便利函数
- * Created by @author JsckChin on 2022/2/25
+ * Created by @author CHQ on 2022/2/25
  */
 public abstract class Streams {
 

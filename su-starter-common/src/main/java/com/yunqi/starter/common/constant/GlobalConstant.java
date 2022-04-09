@@ -2,7 +2,7 @@ package com.yunqi.starter.common.constant;
 
 /**
  * 系统常量
- * Created by @author JsckChin on 2022/1/27
+ * Created by @author CHQ on 2022/1/27
  */
 public class GlobalConstant {
 

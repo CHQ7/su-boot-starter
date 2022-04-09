@@ -15,7 +15,7 @@ import java.util.Map;
 
 /**
  * Service接口
- * Created by @author JsckChin on 2022/1/29
+ * Created by @author CHQ on 2022/1/29
  */
 public interface BaseService<T>{
 

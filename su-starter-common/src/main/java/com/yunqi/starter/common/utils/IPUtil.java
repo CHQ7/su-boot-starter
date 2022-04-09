@@ -10,7 +10,7 @@ import org.nutz.mvc.Mvcs;
 
 /**
  * 获取IP归属地工具类
- * Created by @author JsckChin on 2022/1/22
+ * Created by @author CHQ on 2022/1/22
  */
 public class IPUtil {
 

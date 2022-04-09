@@ -20,7 +20,7 @@ import java.util.zip.ZipFile;
 
 /**
  * 文件操作的帮助函数
- * Created by @author JsckChin on 2022/3/7
+ * Created by @author CHQ on 2022/3/7
  */
 public class Files {
 

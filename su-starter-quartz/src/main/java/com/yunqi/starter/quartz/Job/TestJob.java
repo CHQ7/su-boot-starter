@@ -7,7 +7,7 @@ import org.quartz.JobExecutionException;
 
 /**
  * 测试任务类
- * Created by @author JsckChin on 2022/2/2
+ * Created by @author CHQ on 2022/2/2
  */
 @Slf4j
 public class TestJob implements Job {

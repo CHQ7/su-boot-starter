@@ -6,7 +6,7 @@ import lombok.Data;
  * 配置类 Model
  * <p>
  * 你可以通过yml、properties、java代码等形式配置本类参数
- * Created by @author JsckChin on 2022/4/1
+ * Created by @author CHQ on 2022/4/1
  */
 @Data
 public class DingtalkConfig {

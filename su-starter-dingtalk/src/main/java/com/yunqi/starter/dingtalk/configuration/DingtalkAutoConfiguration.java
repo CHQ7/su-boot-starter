@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Primary;
 
 /**
  * 自动装配
- * Created by @author JsckChin on 2022/4/1
+ * Created by @author CHQ on 2022/4/1
  */
 @Slf4j
 @Configuration

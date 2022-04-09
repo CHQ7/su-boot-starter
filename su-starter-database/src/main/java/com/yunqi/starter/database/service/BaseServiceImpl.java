@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by @author JsckChin on 2022/1/29
+ * Created by @author CHQ on 2022/1/29
  */
 public class BaseServiceImpl<T> extends EntityService<T> implements BaseService<T> {
 

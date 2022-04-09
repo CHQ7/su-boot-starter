@@ -11,7 +11,7 @@ import org.quartz.*;
 import java.io.Serializable;
 
 /**
- * Created by @author JsckChin on 2022/2/2
+ * Created by @author CHQ on 2022/2/2
  */
 @Data
 public class QuartzJob implements Serializable {

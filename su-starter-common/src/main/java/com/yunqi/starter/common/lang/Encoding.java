@@ -7,7 +7,7 @@ import java.nio.charset.Charset;
 
 /**
  * 编码
- * Created by @author JsckChin on 2022/1/27
+ * Created by @author CHQ on 2022/1/27
  */
 public final class Encoding {
 

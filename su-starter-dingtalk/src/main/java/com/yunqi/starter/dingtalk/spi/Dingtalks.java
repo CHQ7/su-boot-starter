@@ -13,7 +13,7 @@ import java.util.List;
 
 /**
  * 钉钉API工具类
- * Created by @author JsckChin on 2022/4/1
+ * Created by @author CHQ on 2022/4/1
  */
 @Slf4j
 public class Dingtalks {

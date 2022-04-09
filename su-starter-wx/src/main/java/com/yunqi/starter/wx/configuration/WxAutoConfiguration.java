@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * Created by @author JsckChin on 2022/2/28
+ * Created by @author CHQ on 2022/2/28
  */
 @Configuration
 @ConditionalOnExpression("${su.wx.enabled:true}")

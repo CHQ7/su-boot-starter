@@ -16,7 +16,7 @@ import javax.sql.DataSource;
 import java.sql.SQLException;
 
 /**
- * Created by @author JsckChin on 2022/2/1
+ * Created by @author CHQ on 2022/2/1
  */
 @Configuration
 @ConditionalOnClass(DruidDataSource.class)

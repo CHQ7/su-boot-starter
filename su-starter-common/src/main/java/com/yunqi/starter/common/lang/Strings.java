@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
 
 /**
  * 字符串操作的帮助函数
- * Created by @author JsckChin on 2022/1/23
+ * Created by @author CHQ on 2022/1/23
  */
 public class Strings {
 

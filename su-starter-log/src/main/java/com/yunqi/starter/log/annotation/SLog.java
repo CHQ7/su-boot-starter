@@ -6,7 +6,7 @@ import java.lang.annotation.*;
 
 /**
  * 注解日志系统
- * Created by @author JsckChin on 2022/2/16
+ * Created by @author CHQ on 2022/2/16
  */
 @Target({ ElementType.PARAMETER, ElementType.METHOD })
 @Retention(RetentionPolicy.RUNTIME)

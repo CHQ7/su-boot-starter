@@ -15,7 +15,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by @author JsckChin on 2022/2/1
+ * Created by @author CHQ on 2022/2/1
  */
 @Configuration
 @ConditionalOnWebApplication

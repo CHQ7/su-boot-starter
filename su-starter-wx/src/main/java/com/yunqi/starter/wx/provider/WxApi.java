@@ -3,7 +3,7 @@ package com.yunqi.starter.wx.provider;
 import org.nutz.lang.util.NutMap;
 
 /**
- * Created by @author JsckChin on 2022/2/28
+ * Created by @author CHQ on 2022/2/28
  */
 public interface WxApi {
 

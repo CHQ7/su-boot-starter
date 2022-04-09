@@ -12,7 +12,7 @@ import org.nutz.lang.util.NutMap;
 
 /**
  * 钉钉内部工具类
- * Created by @author JsckChin on 2022/4/1
+ * Created by @author CHQ on 2022/4/1
  */
 @Slf4j
 public class DingtalkUtil {

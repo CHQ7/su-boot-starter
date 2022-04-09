@@ -10,7 +10,7 @@ import java.sql.Connection;
 
 /**
  * 集成Nutz事务和拦截链
- * Created by @author JsckChin on 2022/1/29
+ * Created by @author CHQ on 2022/1/29
  */
 public class SpringDaoRunner extends NutDaoRunner {
 

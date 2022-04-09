@@ -6,7 +6,7 @@ import com.yunqi.starter.common.lang.Strings;
 
 /**
  * 安全认证工具类
- * Created by @author JsckChin on 2022/2/16
+ * Created by @author CHQ on 2022/2/16
  */
 public class SecurityUtil {
 

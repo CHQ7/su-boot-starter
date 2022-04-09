@@ -10,7 +10,7 @@ import javax.annotation.Resource;
 import java.util.List;
 
 /**
- * Created by @author JsckChin on 2022/2/16
+ * Created by @author CHQ on 2022/2/16
  */
 @Configuration
 @ConditionalOnClass(StpInterface.class)

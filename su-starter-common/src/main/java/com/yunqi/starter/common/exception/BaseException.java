@@ -2,7 +2,7 @@ package com.yunqi.starter.common.exception;
 
 /**
  * 异常基类
- * Created by @author JsckChin on 2022/1/28
+ * Created by @author CHQ on 2022/1/28
  */
 public class BaseException extends RuntimeException{
 

@@ -8,7 +8,7 @@ import java.util.Map;
 /**
  * 钉钉 accessToken
  * 单例设计模式 缓存
- * Created by @author JsckChin on 2022/4/1
+ * Created by @author CHQ on 2022/4/1
  */
 public class DingtalkToken {
 

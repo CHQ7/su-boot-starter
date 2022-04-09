@@ -5,7 +5,7 @@ import com.yunqi.starter.common.result.ResultCode;
 
 /**
  * 业务异常
- * Created by @author JsckChin on 2022/2/15
+ * Created by @author CHQ on 2022/2/15
  */
 public class BizException extends BaseException{
 

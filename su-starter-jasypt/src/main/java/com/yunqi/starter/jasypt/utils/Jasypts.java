@@ -5,7 +5,7 @@ import org.jasypt.encryption.pbe.config.SimpleStringPBEConfig;
 
 /**
  * Jasypt安全框架加密类工具包
- * Created by @author JsckChin on 2022/1/29
+ * Created by @author CHQ on 2022/1/29
  */
 public class Jasypts {
 

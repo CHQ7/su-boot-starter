@@ -2,7 +2,7 @@ package com.yunqi.starter.common.lang;
 
 /**
  * 关于数的一些帮助函数
- * Created by @author JsckChin on 2022/2/28
+ * Created by @author CHQ on 2022/2/28
  */
 public abstract class Nums {
 

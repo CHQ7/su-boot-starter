@@ -14,7 +14,7 @@ import java.lang.annotation.Target;
 /**
  * 角色认证：必须具有指定角色标识才能进入该方法
  * <p> 可标注在函数、类上（效果等同于标注在此类的所有方法上）
- * Created by @author JsckChin on 2022/2/27
+ * Created by @author CHQ on 2022/2/27
  */
 @SaCheckRole(type = StpUtil.TYPE)
 @Retention(RetentionPolicy.RUNTIME)

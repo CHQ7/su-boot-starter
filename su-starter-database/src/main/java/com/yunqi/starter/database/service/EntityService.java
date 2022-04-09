@@ -9,7 +9,7 @@ import javax.annotation.Resource;
 
 /**
  * 实体Service抽象类. 属于辅助类. 任何方法被调用前,必须确保Dao实例已经传入
- * Created by @author JsckChin on 2022/1/29
+ * Created by @author CHQ on 2022/1/29
  */
 public class EntityService <T> extends org.nutz.service.EntityService<T> {
 

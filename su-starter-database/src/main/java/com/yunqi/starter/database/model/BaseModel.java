@@ -13,7 +13,7 @@ import java.io.Serializable;
 
 /**
  * 基础模型
- * Created by @author JsckChin on 2022/1/28
+ * Created by @author CHQ on 2022/1/28
  */
 @Data
 public abstract class BaseModel implements Serializable {

@@ -3,7 +3,7 @@ package com.yunqi.starter.jasypt.configuration;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
- * Created by @author JsckChin on 2022/1/29
+ * Created by @author CHQ on 2022/1/29
  */
 @ConfigurationProperties(prefix = "su.jasypt")
 public class JasyptProperties {

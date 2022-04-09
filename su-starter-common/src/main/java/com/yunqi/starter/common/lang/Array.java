@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 /**
  * 数组操作的帮助函数
- * Created by @author JsckChin on 2022/2/26
+ * Created by @author CHQ on 2022/2/26
  */
 public class Array {
 

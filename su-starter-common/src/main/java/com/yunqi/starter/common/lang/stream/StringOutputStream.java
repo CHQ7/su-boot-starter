@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 
 /**
- * Created by @author JsckChin on 2022/1/27
+ * Created by @author CHQ on 2022/1/27
  */
 public class StringOutputStream extends OutputStream {
 

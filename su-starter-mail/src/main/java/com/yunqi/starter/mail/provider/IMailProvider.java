@@ -3,7 +3,7 @@ package com.yunqi.starter.mail.provider;
 import com.yunqi.starter.mail.entity.Email;
 
 /**
- * Created by @author JsckChin on 2022/1/29
+ * Created by @author CHQ on 2022/1/29
  */
 public interface IMailProvider {
 

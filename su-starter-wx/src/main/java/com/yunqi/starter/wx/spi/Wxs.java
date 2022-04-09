@@ -6,7 +6,7 @@ import org.nutz.lang.util.NutMap;
 
 /**
  * 微信平台基础支持对象
- * Created by @author JsckChin on 2022/2/28
+ * Created by @author CHQ on 2022/2/28
  */
 public class Wxs {
 

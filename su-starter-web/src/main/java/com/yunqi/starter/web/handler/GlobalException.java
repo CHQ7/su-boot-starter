@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 /**
  * 全局异常处理器
- * Created by @author JsckChin on 2022/2/17
+ * Created by @author CHQ on 2022/2/17
  */
 @Slf4j
 @RestControllerAdvice

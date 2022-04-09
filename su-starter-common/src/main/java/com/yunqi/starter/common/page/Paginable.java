@@ -2,7 +2,7 @@ package com.yunqi.starter.common.page;
 
 /**
  * 分页接口
- * Created by @author JsckChin on 2022/1/22
+ * Created by @author CHQ on 2022/1/22
  */
 public interface Paginable {
     /**

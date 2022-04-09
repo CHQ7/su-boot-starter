@@ -8,7 +8,7 @@ import java.util.Objects;
 
 /**
  * Mvc 相关帮助函数
- * Created by @author JsckChin on 2022/2/18
+ * Created by @author CHQ on 2022/2/18
  */
 public abstract class Mvcs {
 

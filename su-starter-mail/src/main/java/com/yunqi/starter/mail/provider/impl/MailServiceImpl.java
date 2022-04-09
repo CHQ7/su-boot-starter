@@ -17,7 +17,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.Properties;
 
 /**
- * Created by @author JsckChin on 2022/1/29
+ * Created by @author CHQ on 2022/1/29
  */
 @Slf4j
 public class MailServiceImpl implements IMailProvider {

@@ -2,7 +2,7 @@ package com.yunqi.starter.log.enums;
 
 /**
  * 日志类型
- * Created by @author JsckChin on 2022/2/16
+ * Created by @author CHQ on 2022/2/16
  */
 public enum LogType {
     OTHER("OTHER", "其它"),

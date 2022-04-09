@@ -73,7 +73,7 @@ import java.util.Arrays;
  *         Date: 2004-aug-02
  *         Time: 11:31:11
  *
- * Created by @author JsckChin on 2022/2/25
+ * Created by @author CHQ on 2022/2/25
  */
 public class Base64 {
 

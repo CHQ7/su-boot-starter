@@ -8,7 +8,7 @@ import org.springframework.scheduling.quartz.SpringBeanJobFactory;
 
 /**
  * 配置JobFactory,为quartz作业添加自动连接支持
- * Created by @author JsckChin on 2022/2/2
+ * Created by @author CHQ on 2022/2/2
  */
 public final class AutowiringSpringBeanJobFactory extends SpringBeanJobFactory implements ApplicationContextAware {
 

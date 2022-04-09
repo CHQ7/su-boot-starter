@@ -2,7 +2,7 @@ package com.yunqi.starter.common.utils;
 
 /**
  * 时间工具类
- * Created by @author JsckChin on 2022/1/28
+ * Created by @author CHQ on 2022/1/28
  */
 public class DateUtil extends cn.hutool.core.date.DateUtil {
 

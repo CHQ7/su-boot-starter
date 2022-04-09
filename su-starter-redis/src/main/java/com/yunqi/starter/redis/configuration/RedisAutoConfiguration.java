@@ -19,7 +19,7 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 /**
  * Redis (使用 jackson 序列化方式)
- * Created by @author JsckChin on 2022/2/2
+ * Created by @author CHQ on 2022/2/2
  */
 @Configuration
 @ConditionalOnExpression("${su.redis.enabled:true}")

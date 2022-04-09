@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * 注入所需要的Bean
- * Created by @author JsckChin on 2022/4/1
+ * Created by @author CHQ on 2022/4/1
  */
 public class DingtalkBeanInject {
 

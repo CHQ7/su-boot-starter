@@ -14,7 +14,7 @@ import javax.annotation.Resource;
 import java.util.Arrays;
 
 /**
- * Created by @author JsckChin on 2022/2/1
+ * Created by @author CHQ on 2022/2/1
  */
 @Configuration
 @ConditionalOnBean({Dao.class})

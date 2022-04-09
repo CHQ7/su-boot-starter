@@ -5,7 +5,7 @@ import org.quartz.*;
 import java.util.Date;
 
 /**
- * Created by @author JsckChin on 2022/2/2
+ * Created by @author CHQ on 2022/2/2
  */
 public class Quartzs {
 

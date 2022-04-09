@@ -3,7 +3,7 @@ package com.yunqi.starter.log.provider;
 import com.yunqi.starter.log.model.SysLog;
 
 /**
- * Created by @author JsckChin on 2022/2/18
+ * Created by @author CHQ on 2022/2/18
  */
 public interface ISysLogProvider {
 

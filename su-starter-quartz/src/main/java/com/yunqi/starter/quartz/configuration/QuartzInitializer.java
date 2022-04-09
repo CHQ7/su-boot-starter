@@ -17,7 +17,7 @@ import java.util.List;
 
 /**
  * 初始化
- * Created by @author JsckChin on 2022/2/2
+ * Created by @author CHQ on 2022/2/2
  */
 @Slf4j
 @Configuration

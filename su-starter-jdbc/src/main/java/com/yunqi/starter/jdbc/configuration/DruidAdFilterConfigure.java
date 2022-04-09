@@ -16,7 +16,7 @@ import java.io.IOException;
 
 /**
  * 移除Druid广告
- * Created by @author JsckChin on 2022/2/1
+ * Created by @author CHQ on 2022/2/1
  */
 @Configuration
 @ConditionalOnWebApplication

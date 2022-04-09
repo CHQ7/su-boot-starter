@@ -5,7 +5,7 @@ import lombok.Getter;
 
 /**
  * 返回状态码枚举类
- * Created by @author JsckChin on 2022/1/28
+ * Created by @author CHQ on 2022/1/28
  */
 @Getter
 @AllArgsConstructor

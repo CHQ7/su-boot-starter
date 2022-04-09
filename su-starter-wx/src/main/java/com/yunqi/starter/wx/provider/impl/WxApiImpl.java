@@ -8,7 +8,7 @@ import org.nutz.http.Http;
 import org.nutz.lang.util.NutMap;
 
 /**
- * Created by @author JsckChin on 2022/2/28
+ * Created by @author CHQ on 2022/2/28
  */
 @Slf4j
 public class WxApiImpl implements WxApi {

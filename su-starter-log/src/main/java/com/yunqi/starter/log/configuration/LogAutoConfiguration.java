@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * Created by @author JsckChin on 2022/2/17
+ * Created by @author CHQ on 2022/2/17
  */
 @Configuration
 @ConditionalOnExpression("${su.log.enabled:true}")
