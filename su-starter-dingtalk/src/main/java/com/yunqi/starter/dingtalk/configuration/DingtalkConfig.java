@@ -14,7 +14,10 @@ public class DingtalkConfig {
     private static final long serialVersionUID = 1L;
 
     /** API接口地址 */
-    private String domain = "";
+    private String domain = "https://oapi.dingtalk.com";
+
+    /** API接口地址 */
+    private String domain2 = "https://api.dingtalk.com";
 
     /** 应用的唯一标识key */
     private String appkey = "";

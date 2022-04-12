@@ -160,4 +160,161 @@ public class Dingtalks {
     }
 
 
+    /**
+     * 角色 -> 获取角色列表
+     * <br>
+     * <p> 调用本接口获取角色列表及是否存在下一页 </p>
+     * @param page      支持分页查询，与size参数同时设置时才生效，此参数代表偏移量，偏移量从0开始。
+     * @param pageSize  支持分页查询，与offset参数同时设置时才生效，此参数代表分页大小，默认值20，最大值200。
+     * @return          角色信息
+     */
+    public static NutMap roleList2(String page, String pageSize){
+        return iDingtalkProvider.roleList2(page, pageSize);
+    }
+
+    /**
+     * 角色 -> 获取角色列表
+     * <br>
+     * <p> 调用本接口获取角色列表 </p>
+     * @return          角色列表
+     */
+    public static List<Record> roleList(){
+        return iDingtalkProvider.roleList();
+    }
+
+    /**
+     * 角色 -> 获取角色列表
+     * <br>
+     * <p> 调用本接口获取角色列表 </p>
+     * @param page          支持分页查询，与size参数同时设置时才生效，此参数代表偏移量，偏移量从0开始。
+     * @param pageSize      支持分页查询，与offset参数同时设置时才生效，此参数代表分页大小，默认值20，最大值200。
+     * @return              角色列表
+     */
+    public static List<Record> roleList(String page, String pageSize){
+        return iDingtalkProvider.roleList(page, pageSize);
+    }
+
+
+    /**
+     * 角色 -> 获取角色组列表
+     * <br>
+     * <p> 调用本接口获取角色组信息 </p>
+     * @param groupId   角色组的ID
+     * @return          角色列表
+     */
+    public static NutMap roleGroup(String groupId){
+        return iDingtalkProvider.roleGroup(groupId);
+    }
+
+
+    /**
+     * 角色 -> 获取指定角色的员工列表
+     * <br>
+     * <p> 调用本接口获取指定角色的员工列表 </p>
+     * @param roleId    角色ID
+     * @param page      支持分页查询，与size参数同时设置时才生效，此参数代表偏移量，偏移量从0开始。
+     * @param pageSize  支持分页查询，与offset参数同时设置时才生效，此参数代表分页大小，默认值20，最大100。
+     * @return          用户列表
+     */
+    public static NutMap roleSimpleUserList(String roleId, String page, String pageSize){
+        return iDingtalkProvider.roleSimpleUserList(roleId, page, pageSize);
+    }
+
+    /**
+     * 角色 -> 获取角色详情
+     * <br>
+     * <p> 调用本接口根据角色ID获取指定角色详情 </p>
+     * @param roleId    角色ID
+     * @return          角色详情
+     */
+    public static NutMap roleByFetch(String roleId){
+        return iDingtalkProvider.roleByFetch(roleId);
+    }
+
+    /**
+     * 用户 -> 根据手机号查询用户
+     * <br>
+     * <p> 调用本接口根据手机号获取用户的userId </p>
+     * @param mobile    手机号
+     * @return          userId
+     */
+    public static String userByMobile(String mobile){
+        return iDingtalkProvider.userByMobile(mobile);
+    }
+
+    /**
+     * 用户 -> 查询用户详情
+     * <br>
+     * <p> 调用本接口获取指定用户的详细信息 </p>
+     * @param userId    用户ID
+     * @return          用户详情
+     */
+    public static NutMap userByFetch(String userId){
+        return iDingtalkProvider.userByFetch(userId);
+    }
+
+    /**
+     * 用户 -> 获取部门用户userid列表
+     * @param deptId    部门ID
+     * @return          用户ID列表
+     */
+    public static List<String> userListIds(String deptId){
+        return iDingtalkProvider.userListIds(deptId);
+    }
+
+    /**
+     * 用户 -> 获取部门用户基础信息
+     * @param deptId    部门ID
+     * @param page      分页查询的游标，最开始传0，后续传返回参数中的next_cursor值
+     * @param pageSize  分页长度，最大值100
+     * @return          简单用户信息
+     */
+    public static NutMap userDeptSimpleList(String deptId, String page, String pageSize){
+        return iDingtalkProvider.userDeptSimpleList(deptId, page, pageSize);
+    }
+
+    /**
+     * 用户 -> 获取部门用户基础信息
+     * @param deptId    部门ID
+     * @param page      分页查询的游标，最开始传0，后续传返回参数中的next_cursor值
+     * @param pageSize  分页长度，最大值100
+     * @param sort      部门成员的排序规则：entry_asc：代表按照进入部门的时间升序。entry_desc：代表按照进入部门的时间降序。modify_asc：代表按照部门信息修改时间升序。modify_desc：代表按照部门信息修改时间降序。custom：代表用户定义(未定义时按照拼音)排序。默认值：custom。
+     * @return          简单用户信息
+     */
+    public static NutMap userDeptSimpleList(String deptId, String page, String pageSize,String sort){
+        return iDingtalkProvider.userDeptSimpleList(deptId, page, pageSize, sort);
+    }
+
+    /**
+     * 用户 -> 获取部门用户详情
+     * @param deptId    部门ID
+     * @param page      分页查询的游标，最开始传0，后续传返回参数中的next_cursor值
+     * @param pageSize  分页大小
+     * @return          用户信息
+     */
+    public static NutMap userDeptList(String deptId, String page, String pageSize){
+        return iDingtalkProvider.userDeptList(deptId, page, pageSize);
+    }
+
+    /**
+     * 用户 -> 获取部门用户详情
+     * @param deptId    部门ID
+     * @param page      分页查询的游标，最开始传0，后续传返回参数中的next_cursor值
+     * @param pageSize  分页大小
+     * @param sort      部门成员的排序规则：entry_asc：代表按照进入部门的时间升序。entry_desc：代表按照进入部门的时间降序。modify_asc：代表按照部门信息修改时间升序。modify_desc：代表按照部门信息修改时间降序。custom：代表用户定义(未定义时按照拼音)排序。默认值：custom。
+     * @return          用户信息
+     */
+    public static NutMap userDeptList(String deptId, String page, String pageSize,String sort){
+        return iDingtalkProvider.userDeptList(deptId, page, pageSize, sort);
+    }
+
+    /**
+     * 钉工牌 - > 解码钉工牌电子码
+     * @param payCode   码值，解码接口仅支持钉钉侧生成的码值
+     * @return          解码信息
+     */
+    public static NutMap badgeDecode(String payCode){
+        return iDingtalkProvider.badgeDecode(payCode);
+    }
+
 }

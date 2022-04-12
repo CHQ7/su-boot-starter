@@ -27,6 +27,10 @@ public class DingtalkUtil {
         Request req = Request.create(Dingtalks.config.getDomain() + url, Request.METHOD.GET);
         // 设置Json请求格式
         req.getHeader().set("Content-Type", "application/json");
+
+        if(Dingtalks.config.getIsLog()){
+            log.info("打印[请求URL] ->\n{}", req.getUrl());
+        }
         return call(req);
     }
 
@@ -47,28 +51,88 @@ public class DingtalkUtil {
      * @return       map
      */
     public static NutMap post(String url, String data){
-        log.warn("url: {}", Dingtalks.config.getDomain() + url);
         // 发起网络请求
         Request req = Request.create(Dingtalks.config.getDomain() + url, Request.METHOD.POST);
 
         // 设置Json请求格式
         req.getHeader().set("Content-Type", "application/json");
+
+        if(Dingtalks.config.getIsLog()){
+            log.info("打印[请求URL] ->\n{}", req.getUrl());
+        }
         // 设置请求Json数据
         if(Strings.isNotBlank(data)){
             req.setData(data);
+
+            if(Dingtalks.config.getIsLog()){
+                log.info("打印[请求参数] ->\n{}", Json.toJson(Lang.map(data)));
+            }
         }
         return call(req);
+    }
+
+    /**
+     * POST请求
+     * @param url    请求地址
+     * @param data   请求数据
+     * @return       map
+     */
+    public static NutMap post2(String url, NutMap data){
+        return post2(url, Json.toJson(data));
+    }
+
+    /**
+     * POST请求
+     * @param url    请求地址
+     * @param data   请求数据
+     * @return       map
+     */
+    public static NutMap post2(String url, String data){
+        // 发起网络请求
+        Request req = Request.create(Dingtalks.config.getDomain2() + url, Request.METHOD.POST);
+
+        // 设置Json请求格式
+        req.getHeader().set("Content-Type", "application/json");
+        req.getHeader().set("x-acs-dingtalk-access-token", Dingtalks.getToken());
+
+        if(Dingtalks.config.getIsLog()){
+            log.info("打印[请求URL] ->\n{}", req.getUrl());
+        }
+        // 设置请求Json数据
+        if(Strings.isNotBlank(data)){
+            req.setData(data);
+
+            if(Dingtalks.config.getIsLog()){
+                log.info("打印[请求参数] ->\n{}", Json.toJson(Lang.map(data)));
+            }
+        }
+
+        // 获取请求数据
+        Response resp = Sender.create(req).send();
+        NutMap res = Lang.map(resp.getContent());
+        if(Dingtalks.config.getIsLog()){
+            log.info("打印[请求结果] ->\n{}", Json.toJson(res));
+        }
+
+        if (!resp.isOK()){
+            throw new RuntimeException("请求钉钉接口失败,异常代码:" + res.getString("code")+ ",原因:" + res.getString("message"));
+        }
+
+        return res;
     }
 
     public static NutMap call(Request req){
         // 获取请求数据
         Response resp = Sender.create(req).send();
+        NutMap res = Lang.map(resp.getContent());
+        if(Dingtalks.config.getIsLog()){
+            log.info("打印[请求结果] ->\n{}", Json.toJson(res));
+        }
+
         if (!resp.isOK()){
             throw new IllegalArgumentException("resp code=" + resp.getStatus());
         }
         // 拦截异常提示
-        NutMap res = Lang.map(resp.getContent());
-        log.warn("打印 {}", Json.toJson(res));
         if(res.getInt("errcode") != 0){
             throw new RuntimeException("请求钉钉接口失败,异常代码:" + res.getInt("errcode")+ ",原因:" + res.getString("errmsg"));
         }
