@@ -9,6 +9,9 @@ import org.nutz.dao.entity.Record;
 import org.nutz.json.Json;
 import org.nutz.lang.util.NutMap;
 
+import java.io.UnsupportedEncodingException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 /**
@@ -254,6 +257,17 @@ public class Dingtalks {
     }
 
     /**
+     * 用户 -> 根据unionid获取用户userid
+     * <br>
+     * <p> 调用本接口根据unionid获取用户的userid </p>
+     * @param unionid    用户ID
+     * @return          用户详情
+     */
+    public static NutMap userByUnionid(String unionid){
+        return iDingtalkProvider.userByUnionid(unionid);
+    }
+
+    /**
      * 用户 -> 获取部门用户userid列表
      * @param deptId    部门ID
      * @return          用户ID列表
@@ -306,6 +320,30 @@ public class Dingtalks {
      */
     public static NutMap userDeptList(String deptId, String page, String pageSize,String sort){
         return iDingtalkProvider.userDeptList(deptId, page, pageSize, sort);
+    }
+
+    /**
+     * 身份验证(免等) -> 通过免登码获取用户信息
+     * <br>
+     * <p> 在第三方企业应用免登和企业内部应用免登场景中，开发者需要使用本接口通过access_token和免登接口中获取的code来获取用户userid </p>
+     *
+     * @param code      免登授权码，获取方式。请参考小程序免登授权码、微应用免登授权码。此授权码五分钟内有效，且只能使用一次。
+     * @return          登录信息
+     */
+    public static NutMap auth(String code){
+        return iDingtalkProvider.auth(code);
+    }
+
+    /**
+     * 身份验证(免等) -> 根据sns临时授权码获取用户信息
+     * <br>
+     * <p> 调用本接口根据sns临时授权码获取用户信息 </p>
+     *
+     * @param code      免登授权码，获取方式。请参考小程序免登授权码、微应用免登授权码。此授权码五分钟内有效，且只能使用一次。
+     * @return          登录信息
+     */
+    public static NutMap authsns(String code) throws NoSuchAlgorithmException, UnsupportedEncodingException, InvalidKeyException{
+        return iDingtalkProvider.authsns(code);
     }
 
     /**

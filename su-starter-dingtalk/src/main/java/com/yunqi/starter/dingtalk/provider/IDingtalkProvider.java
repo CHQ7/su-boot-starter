@@ -3,6 +3,9 @@ package com.yunqi.starter.dingtalk.provider;
 import org.nutz.dao.entity.Record;
 import org.nutz.lang.util.NutMap;
 
+import java.io.UnsupportedEncodingException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 /**
@@ -206,6 +209,15 @@ public interface IDingtalkProvider {
     NutMap userByFetch(String userId);
 
     /**
+     * 用户 -> 根据unionid获取用户userid
+     * <br>
+     * <p> 调用本接口根据unionid获取用户的userid </p>
+     * @param unionid    用户ID
+     * @return          用户详情
+     */
+    NutMap userByUnionid(String unionid);
+
+    /**
      * 用户 -> 获取部门用户userid列表
      * @param deptId    部门ID
      * @return          用户ID列表
@@ -252,10 +264,35 @@ public interface IDingtalkProvider {
 
     // =================== 用户Api相关 end ===================
 
+    // =================== 身份验证(免等)Api相关 begin ===================
+
+    /**
+     * 身份验证(免等) -> 通过免登码获取用户信息
+     * <br>
+     * <p> 在第三方企业应用免登和企业内部应用免登场景中，开发者需要使用本接口通过access_token和免登接口中获取的code来获取用户userid </p>
+     *
+     * @param code      免登授权码，获取方式。请参考小程序免登授权码、微应用免登授权码。此授权码五分钟内有效，且只能使用一次。
+     * @return          登录信息
+     */
+    NutMap auth(String code);
+
+    /**
+     * 身份验证(免等) -> 根据sns临时授权码获取用户信息
+     * <br>
+     * <p> 调用本接口根据sns临时授权码获取用户信息 </p>
+     *
+     * @param code      免登授权码，获取方式。请参考小程序免登授权码、微应用免登授权码。此授权码五分钟内有效，且只能使用一次。
+     * @return          登录信息
+     */
+    NutMap authsns(String code) throws NoSuchAlgorithmException, UnsupportedEncodingException, InvalidKeyException;
+
+    // =================== 身份验证(免等)Api相关 end ===================
+
+
     // =================== 钉工牌Api相关 begin ===================
 
     /**
-     * 钉工牌 - > 解码钉工牌电子码
+     * 钉工牌 -> 解码钉工牌电子码
      * @param payCode   码值，解码接口仅支持钉钉侧生成的码值
      * @return          解码信息
      */

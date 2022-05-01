@@ -1,7 +1,9 @@
 package com.yunqi.starter.dingtalk.provider.impl;
 
 import com.yunqi.starter.common.lang.Lang;
+import com.yunqi.starter.common.repo.Base64;
 import com.yunqi.starter.dingtalk.provider.IDingtalkProvider;
+import com.yunqi.starter.dingtalk.spi.Dingtalks;
 import com.yunqi.starter.dingtalk.util.DingtalkUtil;
 import org.nutz.dao.entity.Record;
 import org.nutz.json.Json;
@@ -9,6 +11,12 @@ import org.nutz.lang.Strings;
 import org.nutz.lang.random.R;
 import org.nutz.lang.util.NutMap;
 
+import javax.crypto.Mac;
+import javax.crypto.spec.SecretKeySpec;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -194,6 +202,16 @@ public class DingtalkProviderImpl implements IDingtalkProvider {
     }
 
     @Override
+    public NutMap userByUnionid(String unionid) {
+        NutMap data = new NutMap();
+        if(Strings.isNotBlank(unionid)){
+            data.put("unionid", unionid);
+        }
+        NutMap res = DingtalkUtil.post("/topapi/user/getbyunionid" + DingtalkUtil.buildToken(), data);
+        return Lang.map(res.getString("result"));
+    }
+
+    @Override
     public List<String> userListIds(String deptId) {
         NutMap data = new NutMap();
         if(Strings.isNotBlank(deptId)){
@@ -249,6 +267,32 @@ public class DingtalkProviderImpl implements IDingtalkProvider {
         }
         NutMap res = DingtalkUtil.post("/topapi/v2/user/list" + DingtalkUtil.buildToken(), data);
         return Lang.map(res.getString("result"));
+    }
+
+    @Override
+    public NutMap auth(String code) {
+        NutMap data = new NutMap();
+        if(Strings.isNotBlank(code)){
+            data.put("code", code);
+        }
+        NutMap res = DingtalkUtil.post("/topapi/v2/user/getuserinfo" + DingtalkUtil.buildToken(), data);
+        return Lang.map(res.getString("result"));
+    }
+
+    @Override
+    public NutMap authsns(String code) throws NoSuchAlgorithmException, UnsupportedEncodingException, InvalidKeyException {
+        NutMap data = new NutMap();
+        if(Strings.isNotBlank(code)){
+            data.put("tmp_auth_code", code);
+        }
+        String timestamp = String.valueOf(System.currentTimeMillis());
+        Mac mac = Mac.getInstance("HmacSHA256");
+        mac.init(new SecretKeySpec(Dingtalks.config.getAppsecret().getBytes("UTF-8"), "HmacSHA256"));
+        byte[] signatureBytes = mac.doFinal(timestamp.getBytes("UTF-8"));
+        String signature = Base64.encode(signatureBytes);
+        String urlEncodeSignature = URLEncoder.encode(signature, "UTF-8").replace("+", "%20").replace("*", "%2A").replace("~", "%7E").replace("/", "%2F");
+        NutMap res = DingtalkUtil.post("/sns/getuserinfo_bycode" + String.format("?accessKey=%s&timestamp=%s&signature=%s", Dingtalks.config.getAppkey(), timestamp, urlEncodeSignature), data);
+        return Lang.map(res.getString("user_info"));
     }
 
     @Override

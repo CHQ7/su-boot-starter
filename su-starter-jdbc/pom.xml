@@ -5,7 +5,7 @@
     <parent>
         <artifactId>su-starter</artifactId>
         <groupId>com.yunqi.starter</groupId>
-        <version>1.0.18</version>
+        <version>1.0.19</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -32,8 +32,8 @@
         </dependency>
         <!-- servlet-api -->
         <dependency>
-            <groupId>jakarta.servlet</groupId>
-            <artifactId>jakarta.servlet-api</artifactId>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
             <scope>provided</scope>
         </dependency>
         <!-- druid  -->

@@ -13,7 +13,7 @@
     <!-- GVA -->
     <groupId>com.yunqi.starter</groupId>
     <artifactId>su-starter</artifactId>
-    <version>1.0.18</version>
+    <version>1.0.19</version>
     <!--<version>1.0.16-SNAPSHOT</version>-->
 
     <packaging>pom</packaging>
@@ -76,9 +76,9 @@
             </dependency>
             <!-- servlet-api -->
             <dependency>
-                <groupId>jakarta.servlet</groupId>
-                <artifactId>jakarta.servlet-api</artifactId>
-                <version>4.0.4</version>
+                <groupId>javax.servlet</groupId>
+                <artifactId>javax.servlet-api</artifactId>
+                <version>4.0.1</version>
             </dependency>
             <!-- mail 邮件 -->
             <dependency>
