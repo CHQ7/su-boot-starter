@@ -22,7 +22,6 @@ public class DingtalkAutoConfiguration {
     @Primary
     public DingtalkConfig getDingtalkConfig(DingtalkProperties properties) {
         DingtalkConfig config = new DingtalkConfig();
-        config.setDomain(properties.getDomain());
         config.setAppkey(properties.getAppkey());
         config.setAppsecret(properties.getAppsecret());
         config.setIsLog(properties.getLog());

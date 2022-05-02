@@ -1,8 +1,8 @@
 package com.yunqi.starter.database.configuration;
 
+import com.yunqi.starter.common.lang.Lang;
 import org.nutz.dao.ConnCallback;
 import org.nutz.dao.impl.sql.run.NutDaoRunner;
-import org.nutz.lang.Lang;
 import org.springframework.jdbc.datasource.DataSourceUtils;
 
 import javax.sql.DataSource;

@@ -1,7 +1,7 @@
 package com.yunqi.starter.dingtalk.provider;
 
+import com.yunqi.starter.common.lang.util.NutMap;
 import org.nutz.dao.entity.Record;
-import org.nutz.lang.util.NutMap;
 
 import java.io.UnsupportedEncodingException;
 import java.security.InvalidKeyException;
