@@ -2,17 +2,11 @@
 
 Jasypt安全框架加密组件
 
-# 依赖关系
-
-| 名称         | 技术       |
-|------------|----------|
-| jasypt-spring-boot-starter     |   Jasypt安全框架加密组件  |
-
-
 ## 设置配置文件
 
 ```yaml
 su:
+  # 默认配置，可以不加
   jasypt:
     enabled: true
     password: egsnhm
@@ -69,7 +63,7 @@ public class test {
 }
 ```
 
-# 配置文件加密
+# 配置文件使用加密
 
 * 首先通过上面方式加密的字符串，添加到配置文件中，那么我们程序Jasypt在启动的时候会自动解析出明文
 

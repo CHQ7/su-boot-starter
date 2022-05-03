@@ -13,13 +13,13 @@
     <!-- GVA -->
     <groupId>com.yunqi.starter</groupId>
     <artifactId>su-starter</artifactId>
-    <version>1.0.19</version>
+    <version>1.0.20</version>
     <!--<version>1.0.16-SNAPSHOT</version>-->
 
     <packaging>pom</packaging>
 
     <modules>
-        <module>su-starter-common</module>
+        <module>su-starter-core</module>
         <module>su-starter-jasypt</module>
         <module>su-starter-mail</module>
         <module>su-starter-jdbc</module>
@@ -197,7 +197,7 @@
             <!-- 公共模块 -->
             <dependency>
                 <groupId>${project.groupId}</groupId>
-                <artifactId>su-starter-common</artifactId>
+                <artifactId>su-starter-core</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <!-- jasypt -->
@@ -286,4 +286,5 @@
             <url>https://maven.wchin.cn/artifactory/ssc-release</url>
         </repository>
     </repositories>
+
 </project>
