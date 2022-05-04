@@ -1,11 +1,11 @@
 package com.yunqi.starter.mail.provider.impl;
 
-import com.yunqi.starter.common.lang.Lang;
 import com.yunqi.starter.common.lang.Strings;
 import com.yunqi.starter.mail.configuration.MailProperties;
 import com.yunqi.starter.mail.entity.Email;
 import com.yunqi.starter.mail.provider.IMailProvider;
 import lombok.extern.slf4j.Slf4j;
+import org.nutz.lang.Lang;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
