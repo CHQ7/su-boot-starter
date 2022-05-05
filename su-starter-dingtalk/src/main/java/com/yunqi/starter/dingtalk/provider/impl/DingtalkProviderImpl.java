@@ -1,6 +1,7 @@
 package com.yunqi.starter.dingtalk.provider.impl;
 
 import com.yunqi.starter.common.lang.Lang;
+import com.yunqi.starter.common.lang.Strings;
 import com.yunqi.starter.common.lang.util.NutMap;
 import com.yunqi.starter.common.repo.Base64;
 import com.yunqi.starter.dingtalk.provider.IDingtalkProvider;
@@ -8,7 +9,6 @@ import com.yunqi.starter.dingtalk.spi.Dingtalks;
 import com.yunqi.starter.dingtalk.util.DingtalkUtil;
 import org.nutz.dao.entity.Record;
 import org.nutz.json.Json;
-import org.nutz.lang.Strings;
 import org.nutz.lang.random.R;
 
 import javax.crypto.Mac;

@@ -1,13 +1,13 @@
 package com.yunqi.starter.dingtalk.spi;
 
+import com.yunqi.starter.common.json.Json;
+import com.yunqi.starter.common.lang.util.NutMap;
 import com.yunqi.starter.dingtalk.configuration.DingtalkConfig;
 import com.yunqi.starter.dingtalk.provider.IDingtalkProvider;
 import com.yunqi.starter.dingtalk.provider.impl.DingtalkProviderImpl;
 import com.yunqi.starter.dingtalk.util.DingtalkToken;
 import lombok.extern.slf4j.Slf4j;
 import org.nutz.dao.entity.Record;
-import org.nutz.json.Json;
-import org.nutz.lang.util.NutMap;
 
 import java.io.UnsupportedEncodingException;
 import java.security.InvalidKeyException;

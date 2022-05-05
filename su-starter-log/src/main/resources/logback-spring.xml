@@ -32,8 +32,11 @@
     <appender name="ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <!--只输出ERROR级别的日志-->
         <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <!-- 过滤的级别 -->
             <level>ERROR</level>
+            <!-- 匹配时的操作：接收（记录） -->
             <onMatch>ACCEPT</onMatch>
+            <!-- 不匹配时的操作：拒绝（不记录） -->
             <onMismatch>DENY</onMismatch>
         </filter>
         <!--设置文件日志格式-->
@@ -57,8 +60,11 @@
     <appender name="INFO" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <!-- 只输出INFO级别的日志 -->
         <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <!-- 过滤的级别 -->
             <level>INFO</level>
+            <!-- 匹配时的操作：接收（记录） -->
             <onMatch>ACCEPT</onMatch>
+            <!-- 不匹配时的操作：拒绝（不记录） -->
             <onMismatch>DENY</onMismatch>
         </filter>
         <!--设置文件日志格式-->
@@ -88,7 +94,7 @@
         <!-- 日志记录器的滚动策略，按日期，按大小记录 -->
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!--设置文件命名格式-->
-            <fileNamePattern>${LOG_PATH}/log-all-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <fileNamePattern>${LOG_PATH}/all/log-all-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
             <!--设置日志文件大小，超过就重新生成文件，默认10M-->
             <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
                 <maxFileSize>10MB</maxFileSize>
