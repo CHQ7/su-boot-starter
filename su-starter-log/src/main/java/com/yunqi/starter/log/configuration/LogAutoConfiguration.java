@@ -1,8 +1,6 @@
 package com.yunqi.starter.log.configuration;
 
 import com.yunqi.starter.log.aop.SLogAspect;
-import com.yunqi.starter.log.provider.ISysLogProvider;
-import com.yunqi.starter.log.provider.impl.SysLogProviderImpl;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -24,10 +22,6 @@ public class LogAutoConfiguration {
         return new SLogAspect(properties);
     }
 
-    @Bean
-    @ConditionalOnMissingBean
-    public ISysLogProvider iSysLogProvider(){
-        return new SysLogProviderImpl();
-    }
+
 
 }

@@ -3,6 +3,7 @@ package com.yunqi.starter.log.aop;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.http.useragent.UserAgent;
 import cn.hutool.http.useragent.UserAgentUtil;
+import com.yunqi.starter.common.json.Json;
 import com.yunqi.starter.common.lang.Lang;
 import com.yunqi.starter.common.lang.mvc.Mvcs;
 import com.yunqi.starter.common.utils.IPUtil;
@@ -10,6 +11,7 @@ import com.yunqi.starter.log.annotation.SLog;
 import com.yunqi.starter.log.configuration.LogProperties;
 import com.yunqi.starter.log.model.SysLog;
 import com.yunqi.starter.log.provider.ISysLogProvider;
+import com.yunqi.starter.log.provider.impl.SysLogProviderDefaultImpl;
 import com.yunqi.starter.security.utils.SecurityUtil;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.Signature;
@@ -18,10 +20,9 @@ import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
-import org.nutz.json.Json;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.Method;
 import java.util.HashMap;
@@ -36,7 +37,7 @@ public class SLogAspect {
 
     private final LogProperties properties;
 
-    @Resource
+    @Autowired(required = false)
     private ISysLogProvider iSysLogProvider;
 
     public SLogAspect(LogProperties properties) {
@@ -73,6 +74,11 @@ public class SLogAspect {
     }
 
     protected void handleLog(final JoinPoint joinPoint, final Exception ex, Object res){
+        // 如果为空或者默认实现，则不进行任何操作
+        if(iSysLogProvider == null  || iSysLogProvider instanceof SysLogProviderDefaultImpl){
+            return;
+        }
+
         // 是否开启
         if (properties != null && properties.isEnabled()) {
             // 获取注解
@@ -109,7 +115,6 @@ public class SLogAspect {
             // ========================================== 结束请求日志 ==========================================
             // 记录日志
             iSysLogProvider.saveLog(sysLog);
-
         }
     }
 
