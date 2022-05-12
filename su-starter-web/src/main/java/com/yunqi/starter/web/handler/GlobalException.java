@@ -3,7 +3,6 @@ package com.yunqi.starter.web.handler;
 import cn.dev33.satoken.exception.NotLoginException;
 import cn.dev33.satoken.exception.NotPermissionException;
 import com.yunqi.starter.common.exception.BizException;
-import com.yunqi.starter.common.lang.Lang;
 import com.yunqi.starter.common.lang.mvc.Mvcs;
 import com.yunqi.starter.common.result.IResultCode;
 import com.yunqi.starter.common.result.Result;
@@ -27,7 +26,7 @@ public class GlobalException {
      * 拦截未知的运行时异常
      */
     @ExceptionHandler(RuntimeException.class)
-    public Object handleRuntimeException(RuntimeException e) {
+    public Result handleRuntimeException(RuntimeException e) {
         log.error("请求地址'{}',发生未知异常.", Mvcs.getReq().getRequestURI(), e);
         return Result.error(e.getMessage());
     }
@@ -36,7 +35,7 @@ public class GlobalException {
      * 系统异常处理方法
      */
     @ExceptionHandler(Exception.class)
-    public Object handleException(Exception e) {
+    public Result handleException(Exception e) {
         log.error("请求地址'{}',发生系统异常.", Mvcs.getReq().getRequestURI(), e);
         return Result.error(e.getMessage());
     }
@@ -45,7 +44,7 @@ public class GlobalException {
      * 业务异常
      */
     @ExceptionHandler(BizException.class)
-    public Object handleBizException(BizException e) {
+    public Result handleBizException(BizException e) {
         return Result.error(ResultCode.FAILURE, e.getMessage());
     }
 
@@ -53,7 +52,7 @@ public class GlobalException {
      * 请求方式不支持
      */
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
-    public Object handleHttpRequestMethodNotSupported(HttpRequestMethodNotSupportedException e) {
+    public Result handleHttpRequestMethodNotSupported(HttpRequestMethodNotSupportedException e) {
         log.error("请求地址'{}',不支持'{}'请求", Mvcs.getReq().getRequestURI(), e.getMethod());
         return Result.error(e.getMessage());
     }
@@ -62,7 +61,7 @@ public class GlobalException {
      * 自定义验证异常
      */
     @ExceptionHandler(BindException.class)
-    public Object handleBindException(BindException e) {
+    public Result handleBindException(BindException e) {
         log.error("请求地址'{}',发生自定义验证异常.", Mvcs.getReq().getRequestURI(), e);
         String message = e.getAllErrors().get(0).getDefaultMessage();
         return Result.error(message);
@@ -72,7 +71,7 @@ public class GlobalException {
      * 自定义验证异常
      */
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public Object handleMethodArgumentNotValidException(MethodArgumentNotValidException e) {
+    public Result handleMethodArgumentNotValidException(MethodArgumentNotValidException e) {
         log.error("请求地址'{}',发生自定义验证异常.", Mvcs.getReq().getRequestURI(), e);
         String message = e.getBindingResult().getFieldError().getDefaultMessage();
         return Result.error(message);
@@ -83,7 +82,7 @@ public class GlobalException {
      * 无此权限
      */
     @ExceptionHandler(NotPermissionException.class)
-    public Object NotPermissionException(NotPermissionException e) {
+    public Result NotPermissionException(NotPermissionException e) {
         return Result.error(ResultCode.USER_NOT_PERMISSION);
     }
 
@@ -92,7 +91,7 @@ public class GlobalException {
      * 登录校验异常
      */
     @ExceptionHandler(NotLoginException.class)
-    public Object handlerNotLoginException(NotLoginException e) {
+    public Result handlerNotLoginException(NotLoginException e) {
         // 打印堆栈信息
         //log.error(Lang.getStackTrace(e));
         // 判断场景值，定制化异常信息

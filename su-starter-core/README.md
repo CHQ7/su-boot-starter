@@ -44,6 +44,20 @@ Json.fromJsonAsList(Class<T> klass, source/*来源参数*/)
 Json.fromJsonAsMap(Class<T> klass, source/*来源参数*/)
 ```
 
+# Base64编码
+```
+// 文本
+String text = "Sa-Token 一个轻量级java权限认证框架";
+
+// 使用Base64编码
+Base64.encode(text);
+
+
+// 使用Base64解码
+Base64.decode(base64Text);
+
+```
+
 # 字符串操作
 
 # 是否为空
