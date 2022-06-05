@@ -7,23 +7,25 @@
     <groupId>com.yunqi.starter</groupId>
     <artifactId>su-boot-starter-parent</artifactId>
     <version>1.0.25</version>
-    <!--<version>1.0.16-SNAPSHOT</version>-->
+    <!--<version>1.0.25-SNAPSHOT</version>-->
+
+    <description>Parent pom providing dependency and plugin management for applications built with Maven</description>
 
     <packaging>pom</packaging>
 
     <modules>
-        <module>su-starter-core</module>
-        <module>su-starter-jasypt</module>
-        <module>su-starter-mail</module>
-        <module>su-starter-jdbc</module>
-        <module>su-starter-database</module>
-        <module>su-starter-quartz</module>
-        <module>su-starter-redis</module>
-        <module>su-starter-log</module>
-        <module>su-starter-security</module>
-        <module>su-starter-web</module>
-        <module>su-starter-wx</module>
-        <module>su-starter-dingtalk</module>
+        <module>su-boot-starter-core</module>
+        <module>su-boot-starter-jasypt</module>
+        <module>su-boot-starter-mail</module>
+        <module>su-boot-starter-jdbc</module>
+        <module>su-boot-starter-database</module>
+        <module>su-boot-starter-quartz</module>
+        <module>su-boot-starter-redis</module>
+        <module>su-boot-starter-log</module>
+        <module>su-boot-starter-security</module>
+        <module>su-boot-starter-web</module>
+        <module>su-boot-starter-wx</module>
+        <module>su-boot-starter-dingtalk</module>
     </modules>
 
     <!-- ======================================== -->
@@ -42,7 +44,14 @@
         <jackson-bom.version>2.13.2</jackson-bom.version>
 
 
+        <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
+        <maven-jar-plugin.version>3.2.2</maven-jar-plugin.version>
+        <maven-source-plugin.version>3.2.1</maven-source-plugin.version>
+        <maven-deploy-plugin.version>2.8.2</maven-deploy-plugin.version>
         <!-- utf-8 -->
+        <java.version>1.8</java.version>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     </properties>
@@ -104,43 +113,43 @@
             <!-- 核心模块 -->
             <dependency>
                 <groupId>com.yunqi.starter</groupId>
-                <artifactId>su-starter-core</artifactId>
+                <artifactId>su-boot-starter-core</artifactId>
                 <version>${suboot.version}</version>
             </dependency>
             <!-- jasypt -->
             <dependency>
                 <groupId>com.yunqi.starter</groupId>
-                <artifactId>su-starter-jasypt</artifactId>
+                <artifactId>su-boot-starter-jasypt</artifactId>
                 <version>${suboot.version}</version>
             </dependency>
             <!-- mail -->
             <dependency>
                 <groupId>com.yunqi.starter</groupId>
-                <artifactId>su-starter-mail</artifactId>
+                <artifactId>su-boot-starter-mail</artifactId>
                 <version>${suboot.version}</version>
             </dependency>
             <!-- jdbc -->
             <dependency>
                 <groupId>com.yunqi.starter</groupId>
-                <artifactId>su-starter-jdbc</artifactId>
+                <artifactId>su-boot-starter-jdbc</artifactId>
                 <version>${suboot.version}</version>
             </dependency>
             <!-- database -->
             <dependency>
                 <groupId>com.yunqi.starter</groupId>
-                <artifactId>su-starter-database</artifactId>
+                <artifactId>su-boot-starter-database</artifactId>
                 <version>${suboot.version}</version>
             </dependency>
             <!-- database -->
             <dependency>
                 <groupId>com.yunqi.starter</groupId>
-                <artifactId>su-starter-quartz</artifactId>
+                <artifactId>su-boot-starter-quartz</artifactId>
                 <version>${suboot.version}</version>
             </dependency>
             <!-- security -->
             <dependency>
                 <groupId>com.yunqi.starter</groupId>
-                <artifactId>su-starter-security</artifactId>
+                <artifactId>su-boot-starter-security</artifactId>
                 <version>${suboot.version}</version>
             </dependency>
         </dependencies>
@@ -150,39 +159,79 @@
     <!-- 构建环境 -->
     <!-- ======================================== -->
     <build>
+        <!-- ======================================== -->
+        <!-- 构建依赖声明 -->
+        <!-- ======================================== -->
+        <pluginManagement>
+            <plugins>
+                <!-- 构建环境 -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>${maven-compiler-plugin.version}</version>
+                    <!-- 从用户属性[properties] -> java.version 获取jdk版本 -->
+                    <configuration>
+                        <parameters>true</parameters>
+                    </configuration>
+                </plugin>
+                <!-- 构建JAR -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-jar-plugin</artifactId>
+                    <version>${maven-jar-plugin.version}</version>
+                    <configuration>
+                        <archive>
+                            <manifest>
+                                <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+                            </manifest>
+                        </archive>
+                    </configuration>
+                </plugin>
+                <!-- 构建源码 -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-source-plugin</artifactId>
+                    <version>${maven-source-plugin.version}</version>
+                    <executions>
+                        <execution>
+                            <id>attach-sources</id>
+                            <goals>
+                                <goal>jar-no-fork</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+                <!-- 构建发布 -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-deploy-plugin</artifactId>
+                    <version>${maven-deploy-plugin.version}</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
         <plugins>
-            <!-- 编译环境 -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.9.0</version>
-                <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
-                </configuration>
-            </plugin>
-            <!-- 构建JAR -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <version>3.2.2</version>
-            </plugin>
             <!-- 构建源码 -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
-                <version>3.2.1</version>
-                <executions>
-                    <execution>
-                        <id>attach-sources</id>
-                        <goals>
-                            <goal>jar-no-fork</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
         </plugins>
     </build>
+
+    <!-- 定义maven 插件到阿里云仓库获取 -->
+    <pluginRepositories>
+        <pluginRepository>
+            <id>aliyun-plugin</id>
+            <url>https://maven.aliyun.com/repository/public</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </pluginRepository>
+    </pluginRepositories>
+
 
     <!-- maven仓库 -->
     <repositories>
