@@ -140,16 +140,46 @@
                 <artifactId>su-boot-starter-database</artifactId>
                 <version>${suboot.version}</version>
             </dependency>
-            <!-- database -->
+            <!-- security -->
+            <dependency>
+                <groupId>com.yunqi.starter</groupId>
+                <artifactId>su-boot-starter-security</artifactId>
+                <version>${suboot.version}</version>
+            </dependency>
+            <!-- log -->
+            <dependency>
+                <groupId>com.yunqi.starter</groupId>
+                <artifactId>su-boot-starter-log</artifactId>
+                <version>${suboot.version}</version>
+            </dependency>
+            <!-- quartz -->
             <dependency>
                 <groupId>com.yunqi.starter</groupId>
                 <artifactId>su-boot-starter-quartz</artifactId>
                 <version>${suboot.version}</version>
             </dependency>
-            <!-- security -->
+            <!-- redis -->
             <dependency>
                 <groupId>com.yunqi.starter</groupId>
-                <artifactId>su-boot-starter-security</artifactId>
+                <artifactId>su-boot-starter-redis</artifactId>
+                <version>${suboot.version}</version>
+            </dependency>
+            <!-- web -->
+            <dependency>
+                <groupId>com.yunqi.starter</groupId>
+                <artifactId>su-boot-starter-web</artifactId>
+                <version>${suboot.version}</version>
+            </dependency>
+            <!-- wx -->
+            <dependency>
+                <groupId>com.yunqi.starter</groupId>
+                <artifactId>su-boot-starter-wx</artifactId>
+                <version>${suboot.version}</version>
+            </dependency>
+            <!-- dingtalk -->
+            <dependency>
+                <groupId>com.yunqi.starter</groupId>
+                <artifactId>su-boot-starter-dingtalk</artifactId>
                 <version>${suboot.version}</version>
             </dependency>
         </dependencies>
@@ -159,9 +189,7 @@
     <!-- 构建环境 -->
     <!-- ======================================== -->
     <build>
-        <!-- ======================================== -->
         <!-- 构建依赖声明 -->
-        <!-- ======================================== -->
         <pluginManagement>
             <plugins>
                 <!-- 构建环境 -->
@@ -207,21 +235,29 @@
                     <artifactId>maven-deploy-plugin</artifactId>
                     <version>${maven-deploy-plugin.version}</version>
                 </plugin>
+                <!-- 构建spring-boot启动 -->
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                    <version>${spring-boot.version}</version>
+                    <executions>
+                        <execution>
+                            <id>repackage</id>
+                            <goals>
+                                <goal>repackage</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
             </plugins>
         </pluginManagement>
-        <plugins>
-            <!-- 构建源码 -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-source-plugin</artifactId>
-            </plugin>
-        </plugins>
     </build>
 
     <!-- 定义maven 插件到阿里云仓库获取 -->
     <pluginRepositories>
         <pluginRepository>
-            <id>aliyun-plugin</id>
+            <id>public</id>
+            <name>aliyun nexus</name>
             <url>https://maven.aliyun.com/repository/public</url>
             <releases>
                 <enabled>true</enabled>
