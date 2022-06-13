@@ -2,21 +2,6 @@
 
 - Jasypt安全框架加密组件
 
-## 配置文件
-
-```yaml
-su:
-  # 默认配置，可以不加
-  jasypt:
-    enabled: true
-    password: egsnhm
-    algorithm: PBEWithMD5AndDES
-    key-obtention-iterations: 1000
-    pool-size: 1
-    salt-generator-class-name: org.jasypt.salt.RandomSaltGenerator
-    string-output-type: base64
-```
-
 ## 配置说明
 
 | 名称 | 默认值              | 备注 |

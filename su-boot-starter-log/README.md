@@ -1,20 +1,12 @@
 # su-boot-starter-log
 
-日志组件
+- 日志组件
 
-# 使用说明
+## 配置说明
 
-日志组件
-
-# 依赖关系
-
-
-| 名称         | 技术                |
-|------------|-------------------|
-| lombok |                   |
-| su-starter-common     | 公共类包组件            |
-| spring-boot-starter-aop    | spring-boot aop组件 |
-| su-starter-security   | 权限组件 |
+| 名称 | 默认值              | 备注 |
+| --- |------------------| --- |
+| enabled | true             | 是否开启组件 |
 
 
 # 更新日志
