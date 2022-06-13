@@ -29,7 +29,7 @@ su:
 | saltGeneratorClassName | org.jasypt.salt.RandomSaltGenerator              | 设置盐生成器,默认值:org.jasypt.salt.RandomSaltGenerator |
 | stringOutputType | base64           | 置字符串输出将被编码的形式,默认值:base64 |
 
-# 使用方式
+## 使用方式
 
 -  方式一：通过工具类调用
 ```
@@ -63,7 +63,7 @@ public class test {
 }
 ```
 
-# 配置文件使用加密
+## 配置文件使用加密
 
 - 首先通过上面方式加密的字符串，添加到配置文件中，那么我们程序Jasypt在启动的时候会自动解析出明文
 application.yml
