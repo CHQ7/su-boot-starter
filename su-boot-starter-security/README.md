@@ -1,6 +1,6 @@
 # su-boot-starter-security
 
-权限组件
+- 权限组件
 
 # 使用说明
 

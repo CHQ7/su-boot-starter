@@ -1,8 +1,8 @@
 # su-boot-starter-jasypt
 
-Jasypt安全框架加密组件
+- Jasypt安全框架加密组件
 
-## 设置配置文件
+## 配置文件
 
 ```yaml
 su:
@@ -17,7 +17,7 @@ su:
     string-output-type: base64
 ```
 
-## 配置文件说明
+## 配置说明
 
 | 名称 | 默认值              | 备注 |
 | --- |------------------| --- |
@@ -31,7 +31,7 @@ su:
 
 # 使用方式
 
-# 方式一：通过工具类调用
+-  方式一：通过工具类调用
 ```
 // 待加密字符串
 String txt = "abcd";
@@ -43,7 +43,7 @@ String decrypttext = Jasypts.decrypt(ciphertext);
 System.out.printf("原文:%s%n密文:%s%n解密:%s%n", txt, ciphertext, decrypttext);
 ```
 
-# 方式二：服务调用
+- 方式二：服务调用
 ```java
 public class test {
     
@@ -65,11 +65,9 @@ public class test {
 
 # 配置文件使用加密
 
-* 首先通过上面方式加密的字符串，添加到配置文件中，那么我们程序Jasypt在启动的时候会自动解析出明文
-
-
+- 首先通过上面方式加密的字符串，添加到配置文件中，那么我们程序Jasypt在启动的时候会自动解析出明文
 application.yml
-```
+```yaml
 ##############################################
 # spring
 ##############################################
