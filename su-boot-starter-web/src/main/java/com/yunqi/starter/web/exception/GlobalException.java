@@ -1,10 +1,7 @@
-package com.yunqi.starter.web.handler;
+package com.yunqi.starter.web.exception;
 
-import cn.dev33.satoken.exception.NotLoginException;
-import cn.dev33.satoken.exception.NotPermissionException;
 import com.yunqi.starter.common.exception.BizException;
 import com.yunqi.starter.common.lang.mvc.Mvcs;
-import com.yunqi.starter.common.result.IResultCode;
 import com.yunqi.starter.common.result.Result;
 import com.yunqi.starter.common.result.ResultCode;
 import lombok.extern.slf4j.Slf4j;
@@ -75,49 +72,6 @@ public class GlobalException {
         log.error("请求地址'{}',发生自定义验证异常.", Mvcs.getReq().getRequestURI(), e);
         String message = e.getBindingResult().getFieldError().getDefaultMessage();
         return Result.error(message);
-    }
-
-
-    /**
-     * 无此权限
-     */
-    @ExceptionHandler(NotPermissionException.class)
-    public Result NotPermissionException(NotPermissionException e) {
-        return Result.error(ResultCode.USER_NOT_PERMISSION);
-    }
-
-
-    /**
-     * 登录校验异常
-     */
-    @ExceptionHandler(NotLoginException.class)
-    public Result handlerNotLoginException(NotLoginException e) {
-        // 打印堆栈信息
-        //log.error(Lang.getStackTrace(e));
-        // 判断场景值，定制化异常信息
-        IResultCode resultCode;
-
-        if(e.getType().equals(NotLoginException.NOT_TOKEN)) {
-            resultCode = ResultCode.USER_NOT_LOGIN;
-        }
-        else if(e.getType().equals(NotLoginException.INVALID_TOKEN)) {
-            resultCode = ResultCode.USER_LOGIN_INVALID;
-        }
-        else if(e.getType().equals(NotLoginException.TOKEN_TIMEOUT)) {
-            resultCode = ResultCode.USER_LOGIN_INVALID;
-        }
-        else if(e.getType().equals(NotLoginException.BE_REPLACED)) {
-            resultCode = ResultCode.USER_LOGIN_BE_REPLACED;
-        }
-        else if(e.getType().equals(NotLoginException.KICK_OUT)) {
-            resultCode = ResultCode.USER_LOGIN_BE_REPLACED;
-        }
-        else {
-            resultCode = ResultCode.USER_NOT_LOGIN;
-        }
-
-        // 返回给前端
-        return Result.error(resultCode);
     }
 
 }

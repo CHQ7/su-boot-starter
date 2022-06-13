@@ -233,6 +233,30 @@ public abstract class Lang {
     }
 
     /**
+     * 将对象转换成 Map
+     *
+     * @param obj
+     *            POJO 对象
+     * @return Map 对象
+     */
+    @SuppressWarnings("unchecked")
+    public static Map<String, Object> obj2map(Object obj) {
+        return org.nutz.lang.Lang.obj2map(obj, HashMap.class);
+    }
+
+    /**
+     * 将对象转为 Nutz 的标准 Map 封装
+     *
+     * @param obj
+     *            POJO du对象
+     * @return NutMap 对象
+     */
+    public static NutMap obj2nutmap(Object obj) {
+        return org.nutz.lang.Lang.obj2map(obj, NutMap.class);
+    }
+
+
+    /**
      * 将一个数组转换成字符串
      * <p>
      * 每个元素之间，都会用一个给定的字符分隔
