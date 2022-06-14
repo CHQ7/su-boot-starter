@@ -2,19 +2,18 @@
 
 - 权限组件
 
-# 使用说明
+## 配置说明
 
-权限组件
-
-# 依赖关系
-
-
-| 名称         | 技术     |
-|------------|--------|
-| lombok |        |
-| sa-token-spring-boot-starter   | Sa-Token 权限认证 |
-| su-starter-common     | 公共类包组件 |
-
+| 名称               | 默认值              | 备注 |
+|------------------|------------------| --- |
+| enabled          | true             | 是否开启组件 |
+| token-name       |     x-token       | token名称 (同时也是cookie名称) |
+| timeout          | 60 * 60 * 24 * 30 | token的长久有效期(单位:秒) 默认30天, -1代表永久 |
+| activity-timeout | -1             | token临时有效期 [指定时间内无操作就视为token过期] (单位: 秒), 默认-1 代表不限制 |
+| log              | false             | 是否打印操作日志 |
+| log              | false             | 是否打印操作日志 |
+| log              | false             | 是否打印操作日志 |
+| log              | false             | 是否打印操作日志 |
 
 # 更新日志
 

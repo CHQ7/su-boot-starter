@@ -21,7 +21,7 @@ public class WxAutoConfiguration {
     @ConditionalOnMissingBean
     public WxApi wx(WxProperties properties) {
         // 加载配置
-        Wxs.appid = properties.getAppid();
+        Wxs.appkey = properties.getAppkey();
         Wxs.appsecret = properties.getAppsecret();
         return new WxApiImpl();
     }

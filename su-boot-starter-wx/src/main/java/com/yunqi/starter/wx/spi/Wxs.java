@@ -12,12 +12,11 @@ public class Wxs {
 
     public static String domain = "https://api.weixin.qq.com";
 
-    /** 小程序ID */
-    public static String appid = "";
+    /** 应用的唯一标识key */
+    public static String appkey = "";
 
-    /** 小程序密钥 */
+    /** 应用的密钥 */
     public static String appsecret = "";
-
 
     /**
      * 底层的 WxApi 对象

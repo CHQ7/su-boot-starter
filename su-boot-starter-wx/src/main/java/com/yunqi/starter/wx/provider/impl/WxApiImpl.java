@@ -23,7 +23,7 @@ public class WxApiImpl implements WxApi {
                 + "&secret=%s"
                 + "&js_code=%s"
                 + "&grant_type=authorization_code";
-        String url = String.format(fmt, Wxs.domain, Wxs.appid, Wxs.appsecret, code);
+        String url = String.format(fmt, Wxs.domain, Wxs.appkey, Wxs.appsecret, code);
         String json = Http.get(url).getContent();
         return Lang.map(json);
     }

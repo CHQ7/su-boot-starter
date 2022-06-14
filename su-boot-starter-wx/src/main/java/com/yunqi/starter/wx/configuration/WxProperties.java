@@ -13,9 +13,9 @@ public class WxProperties {
     /** 是否开启 */
     boolean enabled = true;
 
-    /** 小程序ID */
-    private String appid;
+    /** 应用的唯一标识key */
+    private String appkey = "";
 
-    /** 小程序密钥 */
-    private String appsecret;
+    /** 应用的密钥 */
+    private String appsecret = "";
 }
