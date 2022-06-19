@@ -18,4 +18,7 @@ public class WxProperties {
 
     /** 应用的密钥 */
     private String appsecret = "";
+
+    /** 是否打印操作日志 */
+    private Boolean log = false;
 }
