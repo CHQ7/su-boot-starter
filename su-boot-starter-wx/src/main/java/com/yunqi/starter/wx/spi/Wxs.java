@@ -1,12 +1,12 @@
 package com.yunqi.starter.wx.spi;
 
 import com.yunqi.starter.common.json.Json;
+import com.yunqi.starter.common.lang.util.NutMap;
 import com.yunqi.starter.wx.configuration.WxConfig;
 import com.yunqi.starter.wx.provider.WxApi;
 import com.yunqi.starter.wx.provider.impl.WxApiImpl;
 import com.yunqi.starter.wx.util.WxToken;
 import lombok.extern.slf4j.Slf4j;
-import org.nutz.lang.util.NutMap;
 
 /**
  * 微信平台基础支持对象

@@ -20,8 +20,8 @@ public class WxApiImpl implements WxApi {
 
     @Override
     public NutMap getTicket() {
-        String fmt = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=%s&secret=%s";
-        String url = String.format(fmt, Wxs.config.getAppkey(), Wxs.config.getAppsecret());
+        String fmt = "%s/cgi-bin/token?grant_type=client_credential&appid=%s&secret=%s";
+        String url = String.format(fmt, Wxs.config.getDomain(), Wxs.config.getAppkey(), Wxs.config.getAppsecret());
         String json = Http.get(url).getContent();
         return Json.fromJson(NutMap.class, json);
     }
@@ -29,7 +29,7 @@ public class WxApiImpl implements WxApi {
     @Override
     public NutMap jscode2session(String code) {
         String fmt = "%s/sns/jscode2session?appid=%s&secret=%s&js_code=%s&grant_type=authorization_code";
-        String url = String.format(fmt, Wxs.config.getAppkey(), Wxs.config.getAppsecret(), Wxs.config.getAppsecret(), code);
+        String url = String.format(fmt, Wxs.config.getDomain(), Wxs.config.getAppkey(), Wxs.config.getAppsecret(), code);
         String json = Http.get(url).getContent();
         return Lang.map(json);
     }
