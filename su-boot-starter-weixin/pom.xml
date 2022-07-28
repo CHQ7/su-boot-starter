@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>su-boot-starter-dingtalk</artifactId>
+    <artifactId>su-boot-starter-weixin</artifactId>
 
     <!-- ======================================== -->
     <!-- 项目依赖 -->
