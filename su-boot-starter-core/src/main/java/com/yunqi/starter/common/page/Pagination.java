@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 分页
+ * 分页模型
  * Created by @author CHQ on 2022/1/27
  */
 @Slf4j

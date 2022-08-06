@@ -681,7 +681,7 @@ public interface BaseService<T>{
      * @param cnd       查询条件
      * @return          分页对象列表
      */
-    Pagination<T> listPage(Integer page, int pageSize, Condition cnd);
+    Pagination<T> listPage(int page, int pageSize, Condition cnd);
 
 
     /**
@@ -691,7 +691,7 @@ public interface BaseService<T>{
      * @param cnd       查询条件
      * @return          分页对象列表
      */
-    Pagination<T> listPage(Integer page, Condition cnd);
+    Pagination<T> listPage(int page, Condition cnd);
 
     /**
      * 分页查询
@@ -702,7 +702,7 @@ public interface BaseService<T>{
      * @param cnd           查询条件
      * @return              分页对象列表
      */
-    Pagination<Record> listPage(Integer page, int pageSize, String tableName, Condition cnd);
+    Pagination<Record> listPage(int page, int pageSize, String tableName, Condition cnd);
 
     /**
      * 分页关联查询
@@ -713,7 +713,7 @@ public interface BaseService<T>{
      * @param subCnd        子查询条件
      * @return              分页对象列表
      */
-    Pagination<T> listPageLinks(Integer page, int pageSize, Condition cnd, String linkName, Condition subCnd);
+    Pagination<T> listPageLinks(int page, int pageSize, Condition cnd, String linkName, Condition subCnd);
 
     /**
      * 分页关联查询
@@ -723,7 +723,7 @@ public interface BaseService<T>{
      * @param linkName      关联字段,支持通配符 ^(a|b)$
      * @return              分页对象列表
      */
-    Pagination<T> listPageLinks(Integer page, int pageSize, Condition cnd, String linkName);
+    Pagination<T> listPageLinks(int page, int pageSize, Condition cnd, String linkName);
 
     /**
      * 分页查询,获取部分字段
@@ -734,7 +734,7 @@ public interface BaseService<T>{
      * @param fieldName     查询字段,支持通配符 ^(a|b)$
      * @return              分页对象列表
      */
-    Pagination<T> listPage(Integer page, int pageSize, Condition cnd, String fieldName);
+    Pagination<T> listPage(int page, int pageSize, Condition cnd, String fieldName);
 
     /**
      * 分页查询(sql)
@@ -743,7 +743,7 @@ public interface BaseService<T>{
      * @param sql           待执行sql
      * @return              分页对象列表
      */
-    Pagination<Record> listPage(Integer page, int pageSize, Sql sql);
+    Pagination<Record> listPage(int page, int pageSize, Sql sql);
 
 
     /**
@@ -752,7 +752,7 @@ public interface BaseService<T>{
      * @param sql           待执行sql
      * @return              分页对象列表
      */
-    Pagination<Record> listPage(Integer page, Sql sql);
+    Pagination<Record> listPage(int page, Sql sql);
 
     /**
      * 分页查询(sql)
@@ -762,7 +762,7 @@ public interface BaseService<T>{
      * @param sql           待执行sql
      * @return              分页对象列表
      */
-    Pagination<Map>  listPageMap(Integer page, int pageSize, Sql sql);
+    Pagination<Map>  listPageMap(int page, int pageSize, Sql sql);
 
     /**
      * 分页查询(sql)
@@ -773,7 +773,7 @@ public interface BaseService<T>{
      * @param countSql      统计语句
      * @return              分页对象列表
      */
-    Pagination<Map> listPageMap(Integer page, int pageSize, Sql sql, Sql countSql);
+    Pagination<Map> listPageMap(int page, int pageSize, Sql sql, Sql countSql);
 
 
     /**
@@ -783,7 +783,7 @@ public interface BaseService<T>{
      * @param sql           待执行sql
      * @return              分页对象列表
      */
-    Pagination<Map>  listPageMap(Integer page,  Sql sql);
+    Pagination<Map>  listPageMap(int page,  Sql sql);
 
     /**
      * 分页查询(sql)
@@ -793,7 +793,7 @@ public interface BaseService<T>{
      * @param countSql      统计语句
      * @return              分页对象列表
      */
-    Pagination<Map> listPageMap(Integer page, Sql sql, Sql countSql);
+    Pagination<Map> listPageMap(int page, Sql sql, Sql countSql);
 
     /**
      * @param page       页码
@@ -802,7 +802,7 @@ public interface BaseService<T>{
      * @param countSql   统计语句
      * @return           分页对象列表
      */
-    Pagination<Record> listPage(Integer page, int pageSize, Sql sql, Sql countSql);
+    Pagination<Record> listPage(int page, int pageSize, Sql sql, Sql countSql);
 
     /**
      * @param page       页码
@@ -810,5 +810,5 @@ public interface BaseService<T>{
      * @param countSql   统计语句
      * @return           分页对象列表
      */
-    Pagination<Record> listPage(Integer page,  Sql sql, Sql countSql);
+    Pagination<Record> listPage(int page,  Sql sql, Sql countSql);
 }

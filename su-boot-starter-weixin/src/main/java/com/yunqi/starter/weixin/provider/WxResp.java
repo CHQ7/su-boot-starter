@@ -17,4 +17,5 @@ public class WxResp extends NutMap {
         return getString("errmsg");
     }
 
+
 }

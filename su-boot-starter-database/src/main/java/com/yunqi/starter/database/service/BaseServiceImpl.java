@@ -959,7 +959,7 @@ public class BaseServiceImpl<T> extends EntityService<T> implements BaseService<
      * @return          分页对象列表
      */
     @Override
-    public Pagination<T> listPage(Integer page, int pageSize, Condition cnd) {
+    public Pagination<T> listPage(int page, int pageSize, Condition cnd) {
         return Pagination.<T> build(page, pageSize)
                 .list(this.query(cnd, new Pagination<>(page, pageSize)))
                 .totalCount(this.count(cnd));
@@ -973,7 +973,7 @@ public class BaseServiceImpl<T> extends EntityService<T> implements BaseService<
      * @return          分页对象列表
      */
     @Override
-    public Pagination<T> listPage(Integer page, Condition cnd) {
+    public Pagination<T> listPage(int page, Condition cnd) {
         return listPage(page,  Pagination.DEFAULT_PAGE_SIZE, cnd);
     }
 
@@ -987,7 +987,7 @@ public class BaseServiceImpl<T> extends EntityService<T> implements BaseService<
      * @return              分页对象列表
      */
     @Override
-    public Pagination<Record> listPage(Integer page, int pageSize, String tableName, Condition cnd) {
+    public Pagination<Record> listPage(int page, int pageSize, String tableName, Condition cnd) {
         return Pagination.<Record> build(page, pageSize)
                 .list(this.query(tableName, cnd, new Pagination<>(page, pageSize)))
                 .totalCount(this.count(tableName, cnd));
@@ -1003,7 +1003,7 @@ public class BaseServiceImpl<T> extends EntityService<T> implements BaseService<
      * @param subCnd        子查询条件
      * @return              分页对象列表
      */
-    public Pagination<T> listPageLinks(Integer page, int pageSize, Condition cnd, String linkName, Condition subCnd) {
+    public Pagination<T> listPageLinks(int page, int pageSize, Condition cnd, String linkName, Condition subCnd) {
         List<T> list = this.query( cnd, new Pagination<>(page, pageSize));
         if (!Strings.isBlank(linkName)) {
             if (subCnd != null) {
@@ -1026,7 +1026,7 @@ public class BaseServiceImpl<T> extends EntityService<T> implements BaseService<
      * @return              分页对象列表
      */
     @Override
-    public Pagination<T> listPageLinks(Integer page, int pageSize, Condition cnd, String linkName) {
+    public Pagination<T> listPageLinks(int page, int pageSize, Condition cnd, String linkName) {
         List<T> list = this.query( cnd, new Pagination<>(page, pageSize));
         if (!Strings.isBlank(linkName)) {
             this.fetchLinks(list, linkName);
@@ -1047,7 +1047,7 @@ public class BaseServiceImpl<T> extends EntityService<T> implements BaseService<
      * @return              分页对象列表
      */
     @Override
-    public Pagination<T> listPage(Integer page, int pageSize, Condition cnd, String fieldName) {
+    public Pagination<T> listPage(int page, int pageSize, Condition cnd, String fieldName) {
         Pagination<T> pagination = new Pagination<>(page, pageSize);
         return Pagination.<T> build(page, pageSize)
                 .list(Daos.ext(dao(), FieldFilter.create(this.getEntityClass(), fieldName)).query(this.getEntityClass(), cnd, new Pager(pagination.getPage(), pagination.getPageSize())))
@@ -1063,7 +1063,7 @@ public class BaseServiceImpl<T> extends EntityService<T> implements BaseService<
      * @return              分页对象列表
      */
     @Override
-    public Pagination<Record> listPage(Integer page, int pageSize, Sql sql) {
+    public Pagination<Record> listPage(int page, int pageSize, Sql sql) {
         sql.setPager(new Pager(page, pageSize));
         sql.setCallback(Sqls.callback.records());
         this.execute(sql);
@@ -1079,7 +1079,7 @@ public class BaseServiceImpl<T> extends EntityService<T> implements BaseService<
      * @return              分页对象列表
      */
     @Override
-    public Pagination<Record> listPage(Integer page,  Sql sql) {
+    public Pagination<Record> listPage(int page,  Sql sql) {
         return listPage(page, Pagination.DEFAULT_PAGE_SIZE, sql);
     }
 
@@ -1093,7 +1093,7 @@ public class BaseServiceImpl<T> extends EntityService<T> implements BaseService<
      * @return              分页对象列表
      */
     @Override
-    public Pagination<Map> listPageMap(Integer page, int pageSize, Sql sql) {
+    public Pagination<Map> listPageMap(int page, int pageSize, Sql sql) {
         sql.setPager(new Pager(page, pageSize));
         sql.setCallback(Sqls.callback.maps());
         this.execute(sql);
@@ -1113,7 +1113,7 @@ public class BaseServiceImpl<T> extends EntityService<T> implements BaseService<
      * @return              分页对象列表
      */
     @Override
-    public Pagination<Map> listPageMap(Integer page, int pageSize, Sql sql, Sql countSql) {
+    public Pagination<Map> listPageMap(int page, int pageSize, Sql sql, Sql countSql) {
         countSql.setCallback(Sqls.callback.integer());
         this.execute(countSql);
         sql.setPager(new Pager(page, pageSize));
@@ -1132,7 +1132,7 @@ public class BaseServiceImpl<T> extends EntityService<T> implements BaseService<
      * @return              分页对象列表
      */
     @Override
-    public Pagination<Map> listPageMap(Integer page,  Sql sql) {
+    public Pagination<Map> listPageMap(int page,  Sql sql) {
         return listPageMap(page ,Pagination.DEFAULT_PAGE_SIZE, sql );
     }
 
@@ -1145,7 +1145,7 @@ public class BaseServiceImpl<T> extends EntityService<T> implements BaseService<
      * @return              分页对象列表
      */
     @Override
-    public Pagination<Map> listPageMap(Integer page,  Sql sql, Sql countSql) {
+    public Pagination<Map> listPageMap(int page,  Sql sql, Sql countSql) {
         return listPageMap(page ,Pagination.DEFAULT_PAGE_SIZE, sql, countSql);
     }
 
@@ -1157,7 +1157,7 @@ public class BaseServiceImpl<T> extends EntityService<T> implements BaseService<
      * @return           分页对象列表
      */
     @Override
-    public Pagination<Record> listPage(Integer page, int pageSize, Sql sql, Sql countSql) {
+    public Pagination<Record> listPage(int page, int pageSize, Sql sql, Sql countSql) {
         countSql.setCallback(Sqls.callback.integer());
         this.execute(countSql);
 
@@ -1176,7 +1176,7 @@ public class BaseServiceImpl<T> extends EntityService<T> implements BaseService<
      * @return           分页对象列表
      */
     @Override
-    public Pagination<Record> listPage(Integer page, Sql sql, Sql countSql) {
+    public Pagination<Record> listPage(int page, Sql sql, Sql countSql) {
         return listPage(page ,Pagination.DEFAULT_PAGE_SIZE, sql, countSql );
     }
 }
