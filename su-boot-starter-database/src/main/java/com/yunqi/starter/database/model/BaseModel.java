@@ -9,7 +9,6 @@ import org.nutz.dao.entity.annotation.*;
 import org.nutz.dao.interceptor.annotation.PrevInsert;
 import org.nutz.dao.interceptor.annotation.PrevUpdate;
 
-
 import java.io.Serializable;
 
 /**
@@ -101,30 +100,39 @@ public abstract class BaseModel implements Serializable {
         return getUserNickname(getUpdatedBy());
     }
 
+
     /**
-     * 获取操作员ID
+     * 获取操作用户ID
+     * @param uid       用户ID
+     * @return          用户ID
      */
     private String getUidString(String uid) {
-        if (Strings.isNotBlank(uid)) {
-            return uid;
-        }
+        // 获取Session中的用户ID
         try {
             return Strings.sNull(StpUtil.getLoginId());
-        } catch (Exception e) {
+        } catch (Exception ignored) {
+        }
+        // 如果Session中的用户ID不存在,则验证记录是否存在用户ID
+        if (Strings.isNotBlank(uid)) {
+            return uid;
         }
         return "";
     }
 
     /**
-     * 获取操作员姓名
+     * 获取操作用户名
+     * @param nickname  用户名
+     * @return          用户名
      */
     private String getUserNickname(String nickname) {
-        if (Strings.isNotBlank(nickname)) {
-            return nickname;
-        }
+        // 获取Session中的用户名
         try {
             return Strings.sNull(StpUtil.getSession(true).get("nickname"));
-        } catch (Exception e) {
+        } catch (Exception ignored) {
+        }
+        // 如果Session中的用户名不存在,则验证记录是否存在用户名
+        if (Strings.isNotBlank(nickname)) {
+            return nickname;
         }
         return "";
     }
