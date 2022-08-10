@@ -20,6 +20,7 @@ import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
+import org.nutz.json.JsonFormat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -74,6 +75,7 @@ public class SLogAspect {
     }
 
     protected void handleLog(final JoinPoint joinPoint, final Exception ex, Object res){
+
         // 如果为空或者默认实现，则不进行任何操作
         if(iSysLogProvider == null  || iSysLogProvider instanceof SysLogProviderDefaultImpl){
             return;
@@ -81,38 +83,53 @@ public class SLogAspect {
 
         // 是否开启
         if (properties != null && properties.isEnabled()) {
+
             // 获取注解
             SLog slog = getAnnotationLog(joinPoint);
             if(slog == null){
                 return;
             }
+
             // ========================================== 开始请求日志 ==========================================
             long beginTime = System.currentTimeMillis();
 
-            // *========数据库日志=========* //
+            // *========数据库日志=========*
+            // >> 设置操作模块
+            // >> 设置业务类型
+            // >> 获取请求方法
+            // >> 设置请求状态
+            // *=========================*
             SysLog sysLog = new SysLog();
-            // 设置操作模块
-            // 设置业务类型
-            // 获取请求方法
-            // 设置请求状态
             sysLog.setTag(slog.tag());
             sysLog.setMsg(slog.type().getLabel());
             sysLog.setSrc(joinPoint.getSignature().getDeclaringTypeName() + "#" + joinPoint.getSignature().getName());
             sysLog.setStatus(0);
+
             // 获取请求终端信息
-            terminal(sysLog, slog.param());
+            terminal(sysLog);
+
+            // 是否需要保存请求参数Body
+            if(slog.param()){
+                // 这里截取5000个字符
+                sysLog.setParam(StrUtil.sub(Json.toJson(joinPoint.getArgs(), JsonFormat.compact()), 0, 5000));
+            }
+
             // 是否需要保存请求结果
             if(slog.result()){
                 sysLog.setResult(Json.toJson(res));
             }
+
             // 记录异常消息
             if(ex != null){
                 sysLog.setStatus(1);
                 sysLog.setResult( StrUtil.sub(ex.getMessage(),0, 2000));
             }
+
             // 处理耗时(毫秒)
             sysLog.setExecuteTime(System.currentTimeMillis() - beginTime);
+
             // ========================================== 结束请求日志 ==========================================
+
             // 记录日志
             iSysLogProvider.saveLog(sysLog);
         }
@@ -151,9 +168,8 @@ public class SLogAspect {
     /**
      * 获取请求终端信息
      * @param sysLog  系统日志
-     * @param isParam 是否需要保存请求参数
      */
-    private void terminal(SysLog sysLog, boolean isParam){
+    private void terminal(SysLog sysLog){
         // 获取请求
         HttpServletRequest req  = Mvcs.getReq();
         // 获取终端信息
@@ -163,10 +179,7 @@ public class SLogAspect {
         sysLog.setMethod(req.getMethod());  // 获取请求方式
         sysLog.setBrowser(ua.getBrowser().getName() + "_" + ua.getVersion()); // 设置终端信息
         sysLog.setOs(ua.getPlatform().getName() + "_"  + ua.getOsVersion());
-        // 是否需要保存请求参数
-        if(isParam){
-            sysLog.setParam(convertMap(req.getParameterMap()));
-        }
+
         // 设置创建时间
         sysLog.setCreatedAt(System.currentTimeMillis());
         sysLog.setUpdatedAt(System.currentTimeMillis());
@@ -176,9 +189,9 @@ public class SLogAspect {
         sysLog.setUpdatedById(SecurityUtil.getUserId());
         sysLog.setUpdatedBy(SecurityUtil.getUserNickname());
         String ip = Lang.getIP(req);
-        // 获取IP
+        // 获取操作地址
         sysLog.setIp(ip);
-        // 获取IP归属地
+        // 获取操作地点
         sysLog.setLocation(IPUtil.getIPAddress(ip));
     }
 }
