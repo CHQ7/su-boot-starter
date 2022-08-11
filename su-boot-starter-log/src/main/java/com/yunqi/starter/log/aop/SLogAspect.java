@@ -5,6 +5,7 @@ import cn.hutool.http.useragent.UserAgent;
 import cn.hutool.http.useragent.UserAgentUtil;
 import com.yunqi.starter.common.json.Json;
 import com.yunqi.starter.common.lang.Lang;
+import com.yunqi.starter.common.lang.Strings;
 import com.yunqi.starter.common.lang.mvc.Mvcs;
 import com.yunqi.starter.common.utils.IPUtil;
 import com.yunqi.starter.log.annotation.SLog;
@@ -101,7 +102,7 @@ public class SLogAspect {
             // *=========================*
             SysLog sysLog = new SysLog();
             sysLog.setTag(slog.tag());
-            sysLog.setMsg(slog.type().getLabel());
+            sysLog.setMsg(Strings.isNotEmpty(slog.value())? slog.value() : slog.type().getLabel());
             sysLog.setSrc(joinPoint.getSignature().getDeclaringTypeName() + "#" + joinPoint.getSignature().getName());
             sysLog.setStatus(0);
 
@@ -111,7 +112,7 @@ public class SLogAspect {
             // 是否需要保存请求参数Body
             if(slog.param()){
                 // 这里截取5000个字符
-                sysLog.setParam(StrUtil.sub(Json.toJson(joinPoint.getArgs(), JsonFormat.compact()), 0, 5000));
+                sysLog.setParam(StrUtil.sub(Json.toJson(joinPoint.getArgs()[0], JsonFormat.compact()), 0, 5000));
             }
 
             // 是否需要保存请求结果
