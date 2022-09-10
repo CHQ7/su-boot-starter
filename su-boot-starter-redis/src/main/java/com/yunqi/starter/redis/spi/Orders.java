@@ -23,7 +23,7 @@ public class Orders {
         sb.append(date);
 
         // 获取Redis自增ID
-        String key = RedisConstant.ORDER + ":" + tab + ":" +  date;
+        String key = RedisConstant.ORDER + tab + ":" +  date;
         Long incr = RedisCaches.incr(key, 1);
 
         String incrStr = incr.toString();
