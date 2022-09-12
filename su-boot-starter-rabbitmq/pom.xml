@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>su-boot-starter-jdbc</artifactId>
+    <artifactId>su-boot-starter-rabbitmq</artifactId>
 
     <!-- ======================================== -->
     <!-- 项目依赖 -->
@@ -24,30 +24,24 @@
             <artifactId>spring-boot-configuration-processor</artifactId>
             <optional>true</optional>
         </dependency>
+        <!-- rabbitmq -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-amqp</artifactId>
+        </dependency>
         <!-- lombok -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <scope>provided</scope>
         </dependency>
-        <!-- servlet-api -->
+        <!-- 核心模块 -->
         <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
-            <scope>compile</scope>
-        </dependency>
-        <!-- druid  -->
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>druid-spring-boot-starter</artifactId>
-        </dependency>
-        <!-- jdbc -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-jdbc</artifactId>
+            <groupId>com.yunqi.starter</groupId>
+            <artifactId>su-boot-starter-core</artifactId>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
-
 
     <build>
         <plugins>
