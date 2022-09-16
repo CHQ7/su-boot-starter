@@ -1064,12 +1064,13 @@ public class BaseServiceImpl<T> extends EntityService<T> implements BaseService<
      */
     @Override
     public Pagination<Record> listPage(int page, int pageSize, Sql sql) {
+        int count = (int) Daos.queryCount(dao(), sql);
         sql.setPager(new Pager(page, pageSize));
         sql.setCallback(Sqls.callback.records());
         this.execute(sql);
         return Pagination.<Record> build(page, pageSize)
                 .list(sql.getList(Record.class))
-                .totalCount((int) Daos.queryCount(dao(), sql));
+                .totalCount(count);
     }
 
     /**
@@ -1094,13 +1095,14 @@ public class BaseServiceImpl<T> extends EntityService<T> implements BaseService<
      */
     @Override
     public Pagination<Map> listPageMap(int page, int pageSize, Sql sql) {
+        int count = (int) Daos.queryCount(dao(), sql);
         sql.setPager(new Pager(page, pageSize));
         sql.setCallback(Sqls.callback.maps());
         this.execute(sql);
 
         return Pagination.<Map> build(page, pageSize)
                 .list(sql.getList(Map.class))
-                .totalCount((int) Daos.queryCount(dao(), sql));
+                .totalCount(count);
     }
 
     /**
