@@ -1824,4 +1824,50 @@ public class Strings {
                         str.length() - 1)
                 .toString();
     }
+
+
+    /**
+     * 获取URL编码
+     *
+     * @param src  原始字符串
+     * @return     URL编码字符串
+     */
+    public static String getUrlEncode(String src) {
+        return Encoding.encodeURIComponent(src).replace("+", "%20");
+    }
+
+
+    /**
+     * 拼接URL请求字符串
+     *
+     * @param params  参数
+     * @param connStr 连接字符串
+     * @param encode  是否URL编码
+     * @param quotes  是否加引号
+     * @return        URL请求字符串
+     */
+    public static String createLinkString(Map<String, String> params, String connStr, boolean encode, boolean quotes) {
+        List<String> keys = new ArrayList<>(params.keySet());
+        Collections.sort(keys);
+        StringBuilder content = new StringBuilder();
+        for (int i = 0; i < keys.size(); i++) {
+            String key = keys.get(i);
+            String value = params.get(key);
+            // 不包括最后一个&字符
+            if (i == keys.size() - 1) {
+                if (quotes) {
+                    content.append(key).append("=").append('"').append(encode ? getUrlEncode(value) : value).append('"');
+                } else {
+                    content.append(key).append("=").append(encode ? getUrlEncode(value) : value);
+                }
+            } else {
+                if (quotes) {
+                    content.append(key).append("=").append('"').append(encode ? getUrlEncode(value) : value).append('"').append(connStr);
+                } else {
+                    content.append(key).append("=").append(encode ? getUrlEncode(value) : value).append(connStr);
+                }
+            }
+        }
+        return content.toString();
+    }
 }

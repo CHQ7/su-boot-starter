@@ -12,6 +12,7 @@ import java.io.*;
 import java.lang.reflect.InvocationTargetException;
 import java.nio.charset.StandardCharsets;
 import java.security.*;
+import java.security.cert.*;
 import java.security.interfaces.RSAPrivateKey;
 import java.security.interfaces.RSAPublicKey;
 import java.security.spec.InvalidKeySpecException;
@@ -525,8 +526,6 @@ public abstract class Lang {
         return digest(algorithm, Strings.getBytesUTF8(null == cs ? "" : cs), null, iterations);
     }
 
-
-
     /**
      * 从字节数组计算出数字签名
      *
@@ -665,18 +664,57 @@ public abstract class Lang {
 
     // ---------- 获取*钥
 
-    /** 根据公钥字符串获取 公钥对象 */
-    public static PublicKey publicKey(String key) throws NoSuchAlgorithmException, InvalidKeySpecException {
-        KeyFactory keyFactory = KeyFactory.getInstance(ALGORITHM_RSA);
-        X509EncodedKeySpec keySpec = new X509EncodedKeySpec(Objects.requireNonNull(Base64.decode(key)));
-        return keyFactory.generatePublic(keySpec);
+    /**
+     * 从字符串中加载公钥
+     * @param publicKeyStr      公钥字符串
+     * @return                  公钥
+     * @throws Exception        Exception
+     */
+    public static PublicKey publicKey(String publicKeyStr) throws Exception {
+        try {
+            String publicKey = publicKeyStr
+                    .replace("-----BEGIN CERTIFICATE-----", "")
+                    .replace("-----END CERTIFICATE-----", "")
+                    .replaceAll("\\s+", "");
+
+            byte[] buffer = Base64.decode(publicKey);
+            KeyFactory keyFactory = KeyFactory.getInstance(ALGORITHM_RSA);
+            X509EncodedKeySpec keySpec = new X509EncodedKeySpec(Objects.requireNonNull(buffer));
+            return keyFactory.generatePublic(keySpec);
+        } catch (NoSuchAlgorithmException e) {
+            throw new Exception("No such algorithm");
+        } catch (InvalidKeySpecException e) {
+            throw new Exception("Illegal private key");
+        } catch (NullPointerException e) {
+            throw new Exception("The private key data is empty");
+        }
     }
 
-    /** 根据私钥字符串获取 私钥对象 */
-    public static PrivateKey privateKey(String key) throws NoSuchAlgorithmException, InvalidKeySpecException {
-        KeyFactory keyFactory = KeyFactory.getInstance(ALGORITHM_RSA);
-        PKCS8EncodedKeySpec keySpec = new PKCS8EncodedKeySpec(Objects.requireNonNull(Base64.decode(key)));
-        return keyFactory.generatePrivate(keySpec);
+    /**
+     * 从字符串中加载私钥
+     * @param privateKeyStr     私钥字符串
+     * @return                  私钥
+     * @throws Exception        Exception
+     */
+    public static PrivateKey privateKey(String privateKeyStr) throws Exception {
+        try {
+            String privateKey = privateKeyStr
+                    .replace("-----BEGIN PRIVATE KEY-----", "")
+                    .replace("-----END PRIVATE KEY-----", "")
+                    .replaceAll("\\s+", "");
+
+            byte[] buffer = Base64.decode(privateKey);
+            KeyFactory keyFactory = KeyFactory.getInstance(ALGORITHM_RSA);
+            PKCS8EncodedKeySpec keySpec = new PKCS8EncodedKeySpec(Objects.requireNonNull(buffer));
+            return keyFactory.generatePrivate(keySpec);
+        } catch (NoSuchAlgorithmException e) {
+            throw new Exception("No such algorithm");
+        } catch (InvalidKeySpecException e) {
+            throw new Exception("Illegal private key");
+        } catch (NullPointerException e) {
+            throw new Exception("The private key data is empty");
+        }
+
     }
 
     // ---------- 一些辅助方法
@@ -720,18 +758,28 @@ public abstract class Lang {
     /**
      * 用私钥对信息生成数字签名
      *
-     * @param privateKey 私钥(BASE64编码)
-     * @param data       加密字符串
-     * @param signAlg    [SHA256withRSA / SHA1withDSA / MD2withRSA /MD5withRSA /SHA1withRSA]
-     * @return           数字签名
+     * @param privateKeyStr 私钥字符串(BASE64编码)
+     * @param data          加密字符串
+     * @param signAlg       [SHA256withRSA / SHA1withDSA / MD2withRSA /MD5withRSA /SHA1withRSA]
+     * @return              数字签名
      */
-    public static String sign(String privateKey, String data, String signAlg){
+    public static String sign(String privateKeyStr, String data, String signAlg) throws Exception {
+        return sign(privateKey(privateKeyStr),data, signAlg);
+    }
+
+    /**
+     * 用私钥对信息生成数字签名
+     *
+     * @param privateKey    私钥
+     * @param data          加密字符串
+     * @param signAlg       [SHA256withRSA / SHA1withDSA / MD2withRSA /MD5withRSA /SHA1withRSA]
+     * @return              数字签名
+     */
+    public static String sign(PrivateKey privateKey, String data, String signAlg){
         try {
-            // 通过解码私钥(Base64编码)获取私钥
-            PrivateKey priKey = privateKey(privateKey);
             // 用私钥对信息生成数字签名
             Signature signature = Signature.getInstance(signAlg);
-            signature.initSign(priKey);
+            signature.initSign(privateKey);
             signature.update(data.getBytes(Encoding.CHARSET_UTF8));
             return Base64.encode(signature.sign());
         } catch (Exception  e) {
@@ -747,12 +795,23 @@ public abstract class Lang {
      * @param signAlg   [SHA256withRSA / SHA1withDSA / MD2withRSA /MD5withRSA /SHA1withRSA]
      * @return Boolean  校验成功返回true 失败返回false
      */
-    public static Boolean verifySign(String publicKey, String sign, String data, String signAlg){
+    public static Boolean verifySign(String publicKey, String sign, String data, String signAlg) throws Exception {
+        return verifySign(publicKey(publicKey), sign, data, signAlg);
+    }
+
+    /**
+     * 校验数字签名
+     *
+     * @param publicKey     公钥
+     * @param sign          数字签名
+     * @param data          验签加密内容
+     * @param signAlg       [SHA256withRSA / SHA1withDSA / MD2withRSA /MD5withRSA /SHA1withRSA]
+     * @return              Boolean
+     */
+    public static Boolean verifySign(PublicKey publicKey, String sign, String data, String signAlg){
         try {
-            // 取公钥匙对象
-            PublicKey pubKey = publicKey(publicKey);
             Signature signature = Signature.getInstance(signAlg);
-            signature.initVerify(pubKey);
+            signature.initVerify(publicKey);
             signature.update(data.getBytes(Encoding.CHARSET_UTF8));
             return signature.verify(Base64.decode(sign));
         } catch (Exception e) {
@@ -761,4 +820,40 @@ public abstract class Lang {
     }
 
     // ----------------------- 签名和验证 end -----------------------
+
+    // ----------------------- 获取证书 start -----------------------
+
+    /**
+     * 获取证书序列号
+     *
+     * @param CertPath  证书路径
+     * @return          证书序列号
+     */
+    public static String getCertSerialNo(String CertPath) {
+        X509Certificate certificate = getCertificate(org.nutz.lang.Streams.fileIn(CertPath));
+        return certificate.getSerialNumber().toString(16).toUpperCase();
+    }
+
+    /**
+     * 获取证书
+     *
+     * @param inputStream   输入流
+     * @return              证书信息
+     */
+    public static X509Certificate getCertificate(InputStream inputStream) {
+        try {
+            CertificateFactory cf = CertificateFactory.getInstance("X509");
+            X509Certificate cert = (X509Certificate) cf.generateCertificate(inputStream);
+            cert.checkValidity();
+            return cert;
+        } catch (CertificateExpiredException var3) {
+            throw new RuntimeException("证书已过期", var3);
+        } catch (CertificateNotYetValidException var4) {
+            throw new RuntimeException("证书尚未生效", var4);
+        } catch (CertificateException var5) {
+            throw new RuntimeException("无效的证书", var5);
+        }
+    }
+
+    // ----------------------- 获取证书 end -----------------------
 }
