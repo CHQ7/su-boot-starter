@@ -1,6 +1,7 @@
 package com.yunqi.starter.log.model;
 
 import lombok.Data;
+import lombok.experimental.Accessors;
 import org.nutz.dao.entity.annotation.*;
 
 import java.io.Serializable;
@@ -9,8 +10,9 @@ import java.io.Serializable;
  * 系统日志
  * Created by @author CHQ on 2021/12/19
  */
-@Table("ims_sys_log")
 @Data
+@Table("ims_sys_log")
+@Accessors(chain = true)
 public class SysLog implements Serializable{
 
 	private static final long serialVersionUID = 1L;

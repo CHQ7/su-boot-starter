@@ -31,6 +31,7 @@ public class WxPayAutoConfiguration {
                 .setCertPath(properties.getCertPath())
                 .setKeyPemPath(properties.getKeyPemPath())
                 .setCertPemPath(properties.getCertPemPath())
+                .setPlatformCertPath(properties.getPlatformCertPath())
                 .setExParams(properties.getExParams())
                 .setIsLog(properties.getLog());
     }
