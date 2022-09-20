@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>su-boot-starter-security</artifactId>
+    <artifactId>su-boot-starter-wxpay</artifactId>
 
     <!-- ======================================== -->
     <!-- 项目依赖 -->
@@ -35,11 +35,6 @@
             <groupId>com.yunqi.starter</groupId>
             <artifactId>su-boot-starter-core</artifactId>
             <scope>provided</scope>
-        </dependency>
-        <!-- Sa-Token 权限认证 -->
-        <dependency>
-            <groupId>cn.dev33</groupId>
-            <artifactId>sa-token-spring-boot-starter</artifactId>
         </dependency>
     </dependencies>
 

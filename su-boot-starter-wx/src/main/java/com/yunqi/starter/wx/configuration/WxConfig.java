@@ -1,6 +1,9 @@
 package com.yunqi.starter.wx.configuration;
 
 import lombok.Data;
+import lombok.experimental.Accessors;
+
+import java.io.Serializable;
 
 /**
  * 配置类 Model
@@ -9,7 +12,8 @@ import lombok.Data;
  * Created by @author CHQ on 2022/6/19
  */
 @Data
-public class WxConfig {
+@Accessors(chain = true)
+public class WxConfig implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

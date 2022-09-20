@@ -1,8 +1,5 @@
 package com.yunqi.starter.wx.configuration;
 
-import com.yunqi.starter.wx.provider.WxApi;
-import com.yunqi.starter.wx.provider.impl.WxApiImpl;
-import com.yunqi.starter.wx.spi.Wxs;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -22,14 +19,12 @@ public class WxAutoConfiguration {
     @Bean
     @ConditionalOnMissingBean
     public WxConfig getWxConfig(WxProperties properties) {
-        WxConfig config = new WxConfig();
-        config.setAppkey(properties.getAppkey());
-        config.setAppsecret(properties.getAppsecret());
-        config.setIsLog(properties.getLog());
-        if(config.getIsLog()){
+        if(properties.getLog()){
             log.info("自动装配 -> 微信小程序组件");
         }
-        return config;
+        return new WxConfig()
+                .setAppkey(properties.getAppkey())
+                .setAppsecret(properties.getAppsecret())
+                .setIsLog(properties.getLog());
     }
-
 }

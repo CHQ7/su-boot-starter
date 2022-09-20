@@ -1,4 +1,4 @@
-package com.yunqi.starter.wx.util;
+package com.yunqi.starter.wx;
 
 
 import com.yunqi.starter.wx.spi.Wxs;

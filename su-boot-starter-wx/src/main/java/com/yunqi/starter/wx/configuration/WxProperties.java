@@ -7,8 +7,10 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * Created by @author CHQ on 2022/2/24
  */
 @Data
-@ConfigurationProperties(prefix = "su.wx")
+@ConfigurationProperties(prefix = WxProperties.PREFIX)
 public class WxProperties {
+
+    public static final String PREFIX = "su.wx";
 
     /** 是否开启 */
     boolean enabled = true;
@@ -21,4 +23,5 @@ public class WxProperties {
 
     /** 是否打印操作日志 */
     private Boolean log = false;
+
 }

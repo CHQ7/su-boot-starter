@@ -1,4 +1,4 @@
-package com.yunqi.starter.wx.model;
+package com.yunqi.starter.wxpay.model;
 
 import org.nutz.http.Header;
 

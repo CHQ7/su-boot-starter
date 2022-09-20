@@ -5,7 +5,7 @@ import com.yunqi.starter.common.lang.util.NutMap;
 import com.yunqi.starter.wx.configuration.WxConfig;
 import com.yunqi.starter.wx.provider.WxApi;
 import com.yunqi.starter.wx.provider.impl.WxApiImpl;
-import com.yunqi.starter.wx.util.WxToken;
+import com.yunqi.starter.wx.WxToken;
 import lombok.extern.slf4j.Slf4j;
 
 /**
