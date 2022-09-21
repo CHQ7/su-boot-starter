@@ -8,6 +8,8 @@ import com.yunqi.starter.wxpay.model.WxPayResponse;
  */
 public interface WxPay3Api {
 
+    String getCertificates() throws Exception;
+
     /**
      * 通过V3 API证书和商户号获取平台证书,需要解密
      *

@@ -389,10 +389,22 @@ public class WxPayUtil {
         return null;
     }
 
+    public static String decryptToString(String associatedData,String nonce, String cipherText) throws GeneralSecurityException {
+        // V3API密钥
+        String key = WxPays.config.getApiKey3();
+        // 密文解密
+        return decryptToString(
+                key.getBytes(StandardCharsets.UTF_8),
+                associatedData.getBytes(StandardCharsets.UTF_8),
+                nonce.getBytes(StandardCharsets.UTF_8),
+                cipherText
+        );
+    }
 
     /**
      * 证书和回调报文解密
      *
+     * @param aesKey         V3API密钥
      * @param associatedData associated_data
      * @param nonce          nonce
      * @param cipherText     ciphertext
