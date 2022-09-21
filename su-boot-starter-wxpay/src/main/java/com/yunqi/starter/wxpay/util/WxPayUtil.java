@@ -17,6 +17,8 @@ import javax.crypto.Cipher;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.spec.GCMParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
@@ -444,4 +446,61 @@ public class WxPayUtil {
         return Lang.verifySign(publicKey, signature, buildSignMessage,"SHA256withRSA");
     }
 
+
+    /**
+     * v3 支付异步通知验证签名
+     * @param request   请求参数
+     * @return          异步通知明文
+     */
+    public static NutMap getNotifyBody(HttpServletRequest request) {
+        try {
+            // 从请求头获取验签字段
+            String timestamp = request.getHeader("Wechatpay-Timestamp");
+            String nonce = request.getHeader("Wechatpay-Nonce");
+            String serialNo = request.getHeader("Wechatpay-Serial");
+            String signature = request.getHeader("Wechatpay-Signature");
+
+            // v3 支付异步通知验证签名
+            String body =  verifyNotify(serialNo, Lang.readAll(request.getReader()), signature, nonce, timestamp);
+            return Lang.map(body);
+        }catch (Exception e){
+            throw new RuntimeException("回调参数，解密失败!");
+        }
+    }
+
+    /**
+     * 回调成功通知
+     * @param response      响应请求
+     * @return              返回成功
+     */
+    public static Map<String, String> success(HttpServletResponse response){
+        response.setStatus(200);
+        Map<String, String> map = new HashMap<>(12);
+        map.put("code", "SUCCESS");
+        map.put("message", "SUCCESS");
+        return map;
+    }
+
+    /**
+     * 回调失败通知
+     * @param response      响应请求
+     * @param message       失败内容
+     * @return              返回失败
+     */
+    public static Map<String, String> error(HttpServletResponse response, String message){
+        response.setStatus(500);
+        Map<String, String> map = new HashMap<>(12);
+        map.put("code", "ERROR");
+        map.put("message", Strings.isNotEmpty(message) ? message:  "ERROR");
+        return map;
+    }
+
+    /**
+     * 回调失败通知
+     * @param response      响应请求
+     * @return              返回失败
+     */
+    public static Map<String, String> error(HttpServletResponse response){
+        return  error(response, null);
+    }
 }
