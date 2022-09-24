@@ -33,6 +33,7 @@ import java.util.Map;
 /**
  * Created by @author CHQ on 2022/2/17
  */
+
 @Aspect
 @Component
 public class SLogAspect {
@@ -111,8 +112,13 @@ public class SLogAspect {
 
             // 是否需要保存请求参数Body
             if(slog.param()){
-                // 这里截取5000个字符
-                sysLog.setParam(StrUtil.sub(Json.toJson(joinPoint.getArgs()[0], JsonFormat.compact()), 0, 5000));
+                String param = "{}";
+                // 验证长度是否为空
+                if(joinPoint.getArgs().length != 0){
+                    // 这里截取5000个字符
+                    param = StrUtil.sub(Json.toJson(joinPoint.getArgs()[0], JsonFormat.compact()), 0, 5000);
+                }
+                sysLog.setParam(param);
             }
 
             // 是否需要保存请求结果
