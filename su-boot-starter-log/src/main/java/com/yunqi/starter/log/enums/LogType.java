@@ -9,6 +9,7 @@ public enum LogType {
     INSERT("INSERT","新增"),
     UPDATE("UPDATE", "修改"),
     DELETE("DELETE", "删除"),
+    DEL("DELETE", "批量删除"),
     SORT("SORT", "排序"),
     CLEAN("CLEAN", "清空数据"),
     STATUS("STATUS", "状态"),
