@@ -70,13 +70,13 @@ public class WxPay3ApiImpl implements WxPay3Api {
 
     @Override
     public WxPayResponse order_query_transaction_id(String transaction_id) throws Exception {
-        String url = "/v3/pay/transactions/id/" + transaction_id;
+        String url = "/v3/pay/transactions/id/" + transaction_id + "?mchid=" + WxPays.config.getMchId();
         return WxPayUtil.call("GET", url,null, "");
     }
 
     @Override
     public WxPayResponse order_query_out_trade_no(String out_trade_no) throws Exception {
-        String url = "/v3/pay/transactions/out_trade_no/" + out_trade_no + "?mchid=" + WxPays.config.getMchId();
+        String url = "/v3/pay/transactions/out-trade-no/" + out_trade_no + "?mchid=" + WxPays.config.getMchId();
         return WxPayUtil.call("GET", url,null, "");
     }
 

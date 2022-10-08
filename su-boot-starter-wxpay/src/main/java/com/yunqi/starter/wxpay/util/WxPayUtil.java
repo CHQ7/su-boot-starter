@@ -7,6 +7,7 @@ import com.yunqi.starter.common.lang.util.NutMap;
 import com.yunqi.starter.common.repo.Base64;
 import com.yunqi.starter.wxpay.model.WxPayResponse;
 import com.yunqi.starter.wxpay.spi.WxPays;
+import lombok.extern.slf4j.Slf4j;
 import org.nutz.http.Request;
 import org.nutz.http.Response;
 import org.nutz.http.Sender;
@@ -31,6 +32,7 @@ import java.util.Map;
  * 微信支付V3工具类
  * Created by @author CHQ on 2022/9/17
  */
+@Slf4j
 public class WxPayUtil {
 
     private static final int TAG_LENGTH_BIT = 128;
@@ -96,8 +98,9 @@ public class WxPayUtil {
         req.getHeader().addAll(getHeaders(authorization, serialNumber));
         Sender sender = Sender.create(req);
         Response resp = sender.send();
-        if (!resp.isOK())
-            throw new IllegalStateException("resp code=" + resp.getStatus() + ",msg=" + resp.getContent());
+        if (!resp.isOK()){
+            throw new IllegalStateException("resp code=" + resp.getStatus());
+        }
         WxPayResponse wxPayResponse = new WxPayResponse();
         wxPayResponse.setBody(resp.getContent("UTF-8"));
         wxPayResponse.setHeader(resp.getHeader());
@@ -120,8 +123,9 @@ public class WxPayUtil {
         req.getHeader().addAll(getHeaders(authorization, serialNumber));
         Sender sender = Sender.create(req);
         Response resp = sender.send();
-        if (!resp.isOK())
-            throw new IllegalStateException("resp code=" + resp.getStatus() + ",msg=" + resp.getContent());
+        if (!resp.isOK()){
+            throw new IllegalStateException("resp code=" + resp.getStatus());
+        }
         WxPayResponse wxPayResponse = new WxPayResponse();
         wxPayResponse.setBody(resp.getContent("UTF-8"));
         wxPayResponse.setHeader(resp.getHeader());
