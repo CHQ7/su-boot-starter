@@ -45,7 +45,7 @@
         <jasypt-spring-boot-starter.version>3.0.4</jasypt-spring-boot-starter.version>
         <sa-token-spring-boot-starter.version>1.30.0</sa-token-spring-boot-starter.version>
 
-        <jackson-bom.version>2.13.3</jackson-bom.version>
+        <jackson-bom.version>2.13.4</jackson-bom.version>
 
         <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
         <maven-jar-plugin.version>3.2.2</maven-jar-plugin.version>
