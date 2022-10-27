@@ -26,4 +26,15 @@ public class GlobalConstant {
      */
     public static final String DEFAULT_SYSTEM_PARAM = "App";
 
+    /**
+     * 默认本地上传路径
+     */
+    public static final String DEFAULT_SYSTEM_UPLOAD_PATH= "/attachment";
+
+    /**
+     * 项目路径
+     */
+    public static String DEFAULT_SYSTEM_ROOT;
+
+
 }
