@@ -7,7 +7,6 @@
     <groupId>com.yunqi.starter</groupId>
     <artifactId>su-boot-starter-parent</artifactId>
     <version>1.1.2</version>
-    <!--<version>1.0.25-SNAPSHOT</version>-->
 
     <description>Parent pom providing dependency and plugin management for applications built with Maven</description>
 
@@ -38,14 +37,14 @@
         <!-- 修订版本 -->
         <suboot.version>1.0.33</suboot.version>
 
-        <spring-boot.version>2.6.10</spring-boot.version>
-        <hutool-all.version>5.8.5</hutool-all.version>
+        <spring-boot.version>2.6.13</spring-boot.version>
+        <hutool-all.version>5.8.9</hutool-all.version>
         <nutz.version>1.r.69.v20220703</nutz.version>
-        <druid-spring-boot-starter.version>1.2.11</druid-spring-boot-starter.version>
+        <druid-spring-boot-starter.version>1.2.15</druid-spring-boot-starter.version>
         <jasypt-spring-boot-starter.version>3.0.4</jasypt-spring-boot-starter.version>
         <sa-token-spring-boot-starter.version>1.30.0</sa-token-spring-boot-starter.version>
 
-        <jackson-bom.version>2.13.3</jackson-bom.version>
+        <jackson-bom.version>2.13.4</jackson-bom.version>
 
         <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
         <maven-jar-plugin.version>3.2.2</maven-jar-plugin.version>
