@@ -29,4 +29,19 @@ public interface WxApi {
      * @return      手机号
      */
     String getPhoneNumber(String code);
+
+
+    // ---------- 模板消息 ------------------------
+
+    /**
+     * 发送订阅通知
+     *
+     * @param touser      接收者（用户）的 openid
+     * @param mp_template_msg 所需下发的订阅模板id
+     * @param miniprogram 跳转小程序时填写，格式如{ "appid": "pagepath": { "value": any } }
+     * @param data        模板内容，格式形如 { "key1": { "value": any }, "key2": { "value": any } }
+     * @return
+     */
+    NutMap template_send(String touser, NutMap mp_template_msg,  NutMap miniprogram, NutMap data);
+
 }

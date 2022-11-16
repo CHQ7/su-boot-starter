@@ -2,6 +2,7 @@ package com.yunqi.starter.wx.provider.impl;
 
 import com.yunqi.starter.common.json.Json;
 import com.yunqi.starter.common.lang.Lang;
+import com.yunqi.starter.common.lang.Strings;
 import com.yunqi.starter.common.lang.util.NutMap;
 import com.yunqi.starter.wx.provider.WxApi;
 import com.yunqi.starter.wx.spi.Wxs;
@@ -40,6 +41,17 @@ public class WxApiImpl implements WxApi {
         data.put("code", code);
         NutMap res = WxUtil.post("/wxa/business/getuserphonenumber" + WxUtil.buildToken(), data);
         return Lang.map(res.getString("phone_info")).getString("purePhoneNumber");
+    }
+
+    @Override
+    public NutMap template_send(String touser, NutMap mp_template_msg,  NutMap miniprogram, NutMap data) {
+        NutMap body = NutMap.NEW();
+        body.addv("touser", touser);
+        if (Lang.isNotEmpty(mp_template_msg)) {
+            body.addv("mp_template_msg", mp_template_msg);
+        }
+        body.addv("data", data);
+        return postJson("/message/subscribe/bizsend", body);
     }
 
 }
