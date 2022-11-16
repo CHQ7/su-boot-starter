@@ -1,4 +1,4 @@
-package com.yunqi.starter.dingtalk.util;
+package com.yunqi.starter.dingtalk;
 
 import com.yunqi.starter.dingtalk.spi.Dingtalks;
 
