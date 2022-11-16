@@ -2,6 +2,7 @@ package com.yunqi.starter.wx.provider;
 
 
 import com.yunqi.starter.common.lang.util.NutMap;
+import com.yunqi.starter.wx.model.WxUniformMessage;
 
 /**
  * Created by @author CHQ on 2022/2/28
@@ -33,15 +34,30 @@ public interface WxApi {
 
     // ---------- 模板消息 ------------------------
 
+
     /**
-     * 发送订阅通知
+     * 下发统一消息
+     * <pre>
+     * WxUniformMessage msg = new WxUniformMessage("公众号或者小程序OPENID",
+     *                 WxUniformMessage.MpTemplateMsg.builder()
+     *                 .appid("公众号APPID")
+     *                 .template_id("公众号模板消息ID")
+     *                 .miniprogram(new WxUniformMessage.MiniProgram("小程序APPID","pages/index/index"))
+     *                 .build()
+     *                 .addData("first", "提示")
+     *                 .addData("keyword1", "关键词1")
+     *                 .addData("keyword2", "关键词1")
+     *                 .addData("keyword3", "关键词1")
+     *                 .addData("keyword4", "关键词1")
+     *                 .addData("keyword5", "关键词1")
+     *                 .addData("remark", "备注")
+     *         );
+     * </pre>
      *
-     * @param touser      接收者（用户）的 openid
-     * @param mp_template_msg 所需下发的订阅模板id
-     * @param miniprogram 跳转小程序时填写，格式如{ "appid": "pagepath": { "value": any } }
-     * @param data        模板内容，格式形如 { "key1": { "value": any }, "key2": { "value": any } }
-     * @return
+     * @param msg   模板消息
      */
-    NutMap template_send(String touser, NutMap mp_template_msg,  NutMap miniprogram, NutMap data);
+    void templateUniformSend(WxUniformMessage msg);
+
+
 
 }

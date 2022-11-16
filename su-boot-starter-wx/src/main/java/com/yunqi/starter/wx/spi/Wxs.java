@@ -29,7 +29,7 @@ public class Wxs {
     /**
      * 底层的 WxApi 对象
      */
-    public static WxApi wxApi = new WxApiImpl();
+    public static WxApi api = new WxApiImpl();
 
     // =================== 获取Api 相关 ===================
 
@@ -46,7 +46,7 @@ public class Wxs {
      * @return 请求数据
      */
     public static NutMap getTicket(){
-        return wxApi.getTicket();
+        return api.getTicket();
     }
 
 
@@ -56,7 +56,7 @@ public class Wxs {
      * @return     请求数据
      */
     public static NutMap jscode2session(String code){
-        return wxApi.jscode2session(code);
+        return api.jscode2session(code);
     }
 
 
@@ -66,7 +66,7 @@ public class Wxs {
      * @return      手机号
      */
     public static String getPhoneNumber(String code){
-        return wxApi.getPhoneNumber(code);
+        return api.getPhoneNumber(code);
     }
 
 

@@ -28,7 +28,7 @@ public class WxToken {
     /**
      * 普通懒汉式
      * 静态工厂方法
-     * @return
+     * @return  accessToken
      */
     public static WxToken getInstance() {
         if (single == null) {

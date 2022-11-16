@@ -3,8 +3,8 @@ package com.yunqi.starter.wx.model;
 import lombok.*;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 模板消息
@@ -70,13 +70,15 @@ public class WxUniformMessage implements Serializable {
         /**
          * 小程序模板数据.
          */
-        private List<WxTemplateData> data;
+        private Map<String, Object> data;
 
-        public MpTemplateMsg addData(WxTemplateData datum) {
+        public MpTemplateMsg addData(String name, String value) {
             if (this.data == null) {
-                this.data = new ArrayList<>();
+                this.data = new HashMap<>();
             }
-            this.data.add(datum);
+            Map<String, String> map = new HashMap<>();
+            map.put("value", value);
+            this.data.put(name, map);
             return this;
         }
 

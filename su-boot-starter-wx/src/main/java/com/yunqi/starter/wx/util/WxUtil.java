@@ -17,6 +17,27 @@ import org.nutz.http.Sender;
 @Slf4j
 public class WxUtil {
 
+
+    /**
+     * GET请求
+     * @param url 请求地址
+     * @return NutMap
+     */
+    public static NutMap get(String url){
+        // 发起网络请求
+        Request req = Request.create(Wxs.config.getDomain() + url, Request.METHOD.GET);
+        if(Wxs.config.getIsLog()){
+            log.info("打印[请求URL] ->\n{}", req.getUrl());
+        }
+        // 获取请求数据
+        Response resp = Sender.create(req).send();
+        NutMap res = Lang.map(resp.getContent());
+        if(Wxs.config.getIsLog()){
+            log.info("打印[请求结果] ->\n{}", Json.toJson(res));
+        }
+        return res;
+    }
+
     /**
      * POST请求
      * @param url    请求地址
@@ -62,7 +83,21 @@ public class WxUtil {
         return res;
     }
 
+    /**
+     * 构建令牌
+     * @return  构建令牌字符串
+     */
     public static String buildToken(){
         return String.format("?access_token=%s", Wxs.getToken());
     }
+
+
+    /**
+     * 构建应用密钥
+     * @return  构建应用密钥字符串
+     */
+    public static String buildAppKey(){
+        return String.format("appid=%s&secret=%s", Wxs.config.getAppkey(), Wxs.config.getAppsecret());
+    }
+
 }
