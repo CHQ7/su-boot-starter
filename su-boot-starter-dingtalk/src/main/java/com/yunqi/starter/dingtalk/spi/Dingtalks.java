@@ -56,6 +56,10 @@ public class Dingtalks {
      */
     public static IDingtalkBadgeCodesApi badgeCodes = new DingtalkBadgeCodesApiImpl();
 
+    /**
+     * 消息通知API
+     */
+    public static IDingtalkMessageApi message = new DingtalkMessageApiImpl();
 
 
     // =================== 获取Api 相关 ===================
