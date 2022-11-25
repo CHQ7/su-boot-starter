@@ -43,7 +43,7 @@ public class GlobalException {
     @ExceptionHandler(BizException.class)
     public Result handleBizException(BizException e) {
         //log.error("请求地址'{}',发生业务异常.", Mvcs.getReq().getRequestURI(), e);
-        return Result.error(ResultCode.FAILURE, e.getMessage());
+        return Result.error(e.getCode(), e.getMessage());
     }
 
     /**
