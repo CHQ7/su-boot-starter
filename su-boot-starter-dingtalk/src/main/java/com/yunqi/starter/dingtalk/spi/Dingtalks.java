@@ -61,6 +61,11 @@ public class Dingtalks {
      */
     public static IDingtalkMessageApi message = new DingtalkMessageApiImpl();
 
+    /**
+     * OA审批API
+     */
+    public static IDingtalkOaApi oa = new DingtalkOaApiImpl();
+
 
     // =================== 获取Api 相关 ===================
 
