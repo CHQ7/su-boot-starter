@@ -35,6 +35,23 @@ public class DingtalkUtil {
     }
 
     /**
+     * GET2请求
+     * @param url 请求地址
+     * @return NutMap
+     */
+    public static NutMap get2(String url){
+        // 发起网络请求
+        Request req = Request.create(Dingtalks.config.getDomain2() + url, Request.METHOD.GET);
+        // 设置Json请求格式
+        req.getHeader().set("Content-Type", "application/json");
+        req.getHeader().set("x-acs-dingtalk-access-token", Dingtalks.getToken());
+        if(Dingtalks.config.getIsLog()){
+            log.info("打印[请求URL] ->\n{}", req.getUrl());
+        }
+        return call(req);
+    }
+
+    /**
      * POST请求
      * @param url    请求地址
      * @param data   请求数据
