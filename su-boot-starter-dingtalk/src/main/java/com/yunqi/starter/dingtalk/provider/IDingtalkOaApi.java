@@ -8,10 +8,20 @@ import com.yunqi.starter.common.lang.util.NutMap;
  */
 public interface IDingtalkOaApi {
 
-    // ===================  发起OA审批 ===================
+    /**
+     * 创建OA审批实例
+     *
+     * @param data
+     * @return
+     */
     String workflowForms(NutMap data);
 
-    // =================== 获取表单流程节点信息 ===================
+     /**
+     * 获取审批实例信息
+     *
+     * @param processInstanceId
+     * @return
+     */
     NutMap workflowProcesses(String processInstanceId);
 
 }
