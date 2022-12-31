@@ -673,8 +673,8 @@ public abstract class Lang {
     public static PublicKey publicKey(String publicKeyStr) throws Exception {
         try {
             String publicKey = publicKeyStr
-                    .replace("-----BEGIN CERTIFICATE-----", "")
-                    .replace("-----END CERTIFICATE-----", "")
+                    .replace("-----BEGIN PUBLIC KEY-----", "")
+                    .replace("-----END PUBLIC KEY-----", "")
                     .replaceAll("\\s+", "");
 
             byte[] buffer = Base64.decode(publicKey);
@@ -815,7 +815,7 @@ public abstract class Lang {
             signature.update(data.getBytes(Encoding.CHARSET_UTF8));
             return signature.verify(Base64.decode(sign));
         } catch (Exception e) {
-            throw new RuntimeException("校验数字签名异常");
+            return false;
         }
     }
 
