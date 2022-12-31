@@ -856,4 +856,33 @@ public abstract class Lang {
     }
 
     // ----------------------- 获取证书 end -----------------------
+
+    // ----------------------- 排序 start -----------------------
+
+    /**
+     * ASCII排序(字母升序排序)
+     * <br>
+     * 剔除值为空的参数
+     * @param params    参数
+     * @return          ASCII排序字符串
+     */
+    public static String ACCSIISort(Map<String, Object> params){
+        StringBuilder sb = new StringBuilder();
+
+        for (Map.Entry<String, Object> entry : params.entrySet()) {
+            if (entry.getValue() != null && ((String) entry.getValue()).length() > 0) {
+                sb.append(entry.getKey()).append("=").append((String) entry.getValue()).append("&");
+            }
+        }
+
+        if (sb.length() > 0) {
+            sb.deleteCharAt(sb.length() - 1);
+        }
+
+        return sb.toString();
+    }
+
+    // ----------------------- 排序 end -----------------------
+
+
 }
