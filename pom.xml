@@ -6,7 +6,7 @@
     <!-- GVA -->
     <groupId>com.yunqi.starter</groupId>
     <artifactId>su-boot-starter-parent</artifactId>
-    <version>1.1.5</version>
+    <version>1.1.6</version>
 
     <description>Parent pom providing dependency and plugin management for applications built with Maven</description>
 
@@ -37,14 +37,14 @@
         <!-- 修订版本 -->
         <suboot.version>1.0.33</suboot.version>
 
-        <spring-boot.version>2.6.13</spring-boot.version>
-        <hutool-all.version>5.8.9</hutool-all.version>
+        <spring-boot.version>2.6.14</spring-boot.version>
+        <hutool-all.version>5.8.11</hutool-all.version>
         <nutz.version>1.r.69.v20220703</nutz.version>
         <druid-spring-boot-starter.version>1.2.15</druid-spring-boot-starter.version>
-        <jasypt-spring-boot-starter.version>3.0.4</jasypt-spring-boot-starter.version>
+        <jasypt-spring-boot-starter.version>3.0.5</jasypt-spring-boot-starter.version>
         <sa-token-spring-boot-starter.version>1.30.0</sa-token-spring-boot-starter.version>
 
-        <jackson-bom.version>2.13.4</jackson-bom.version>
+        <jackson-bom.version>2.14.1</jackson-bom.version>
 
         <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
         <maven-jar-plugin.version>3.2.2</maven-jar-plugin.version>
@@ -116,91 +116,91 @@
             <dependency>
                 <groupId>com.yunqi.starter</groupId>
                 <artifactId>su-boot-starter-core</artifactId>
-                <version>1.1.5</version>
+                <version>1.1.6</version>
             </dependency>
             <!-- jasypt -->
             <dependency>
                 <groupId>com.yunqi.starter</groupId>
                 <artifactId>su-boot-starter-jasypt</artifactId>
-                <version>1.1.5</version>
+                <version>1.1.6</version>
             </dependency>
             <!-- mail -->
             <dependency>
                 <groupId>com.yunqi.starter</groupId>
                 <artifactId>su-boot-starter-mail</artifactId>
-                <version>1.1.5</version>
+                <version>1.1.6</version>
             </dependency>
             <!-- jdbc -->
             <dependency>
                 <groupId>com.yunqi.starter</groupId>
                 <artifactId>su-boot-starter-jdbc</artifactId>
-                <version>1.1.5</version>
+                <version>1.1.6</version>
             </dependency>
             <!-- database -->
             <dependency>
                 <groupId>com.yunqi.starter</groupId>
                 <artifactId>su-boot-starter-database</artifactId>
-                <version>1.1.5</version>
+                <version>1.1.6</version>
             </dependency>
             <!-- security -->
             <dependency>
                 <groupId>com.yunqi.starter</groupId>
                 <artifactId>su-boot-starter-security</artifactId>
-                <version>1.1.5</version>
+                <version>1.1.6</version>
             </dependency>
             <!-- log -->
             <dependency>
                 <groupId>com.yunqi.starter</groupId>
                 <artifactId>su-boot-starter-log</artifactId>
-                <version>1.1.5</version>
+                <version>1.1.6</version>
             </dependency>
             <!-- quartz -->
             <dependency>
                 <groupId>com.yunqi.starter</groupId>
                 <artifactId>su-boot-starter-quartz</artifactId>
-                <version>1.1.5</version>
+                <version>1.1.6</version>
             </dependency>
             <!-- redis -->
             <dependency>
                 <groupId>com.yunqi.starter</groupId>
                 <artifactId>su-boot-starter-redis</artifactId>
-                <version>1.1.5</version>
+                <version>1.1.6</version>
             </dependency>
             <!-- rabbitmq -->
             <dependency>
                 <groupId>com.yunqi.starter</groupId>
                 <artifactId>su-boot-starter-rabbitmq</artifactId>
-                <version>1.1.5</version>
+                <version>1.1.6</version>
             </dependency>
             <!-- web -->
             <dependency>
                 <groupId>com.yunqi.starter</groupId>
                 <artifactId>su-boot-starter-web</artifactId>
-                <version>1.1.5</version>
+                <version>1.1.6</version>
             </dependency>
             <!-- weixin -->
             <dependency>
                 <groupId>com.yunqi.starter</groupId>
                 <artifactId>su-boot-starter-weixin</artifactId>
-                <version>1.1.5</version>
+                <version>1.1.6</version>
             </dependency>
             <!-- wx -->
             <dependency>
                 <groupId>com.yunqi.starter</groupId>
                 <artifactId>su-boot-starter-wx</artifactId>
-                <version>1.1.5</version>
+                <version>1.1.6</version>
             </dependency>
             <!-- wxpay -->
             <dependency>
                 <groupId>com.yunqi.starter</groupId>
                 <artifactId>su-boot-starter-wxpay</artifactId>
-                <version>1.1.5</version>
+                <version>1.1.6</version>
             </dependency>
             <!-- dingtalk -->
             <dependency>
                 <groupId>com.yunqi.starter</groupId>
                 <artifactId>su-boot-starter-dingtalk</artifactId>
-                <version>1.1.5</version>
+                <version>1.1.6</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
