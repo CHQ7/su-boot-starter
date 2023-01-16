@@ -20,4 +20,10 @@ public class DingtalkOaApiImpl implements IDingtalkOaApi {
         NutMap res = DingtalkUtil.get2("/v1.0/workflow/processInstances?processInstanceId="+processInstanceId);
         return Lang.map(res.getString("result"));
     }
+
+    @Override
+    public Boolean terminateProcesse(NutMap data) {
+        NutMap res = DingtalkUtil.post2("/v1.0/workflow/processInstances/terminate" + DingtalkUtil.buildToken(), data);
+        return res.getBoolean("result");
+    }
 }
