@@ -5,7 +5,7 @@
     <parent>
         <artifactId>su-boot-starter-parent</artifactId>
         <groupId>com.yunqi.starter</groupId>
-        <version>1.1.7</version>
+        <version>1.1.8</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -47,11 +47,10 @@
             <groupId>com.yunqi.starter</groupId>
             <artifactId>su-boot-starter-jdbc</artifactId>
         </dependency>
-        <!-- Sa-Token 权限认证 -->
+        <!-- security -->
         <dependency>
-            <groupId>cn.dev33</groupId>
-            <artifactId>sa-token-spring-boot-starter</artifactId>
-            <scope>provided</scope>
+            <groupId>com.yunqi.starter</groupId>
+            <artifactId>su-boot-starter-security</artifactId>
         </dependency>
     </dependencies>
 

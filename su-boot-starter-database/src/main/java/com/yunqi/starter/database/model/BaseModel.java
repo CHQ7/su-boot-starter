@@ -1,9 +1,9 @@
 package com.yunqi.starter.database.model;
 
-import cn.dev33.satoken.stp.StpUtil;
 import com.yunqi.starter.common.json.Json;
 import com.yunqi.starter.common.json.JsonFormat;
 import com.yunqi.starter.common.lang.Strings;
+import com.yunqi.starter.security.spi.StpUtil;
 import lombok.Data;
 import org.nutz.dao.entity.annotation.*;
 import org.nutz.dao.interceptor.annotation.PrevInsert;

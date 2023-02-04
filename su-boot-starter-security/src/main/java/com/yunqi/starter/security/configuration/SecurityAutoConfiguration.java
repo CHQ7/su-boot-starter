@@ -1,7 +1,7 @@
 package com.yunqi.starter.security.configuration;
 
 import cn.dev33.satoken.config.SaTokenConfig;
-import cn.dev33.satoken.interceptor.SaAnnotationInterceptor;
+import cn.dev33.satoken.interceptor.SaInterceptor;
 import cn.dev33.satoken.spring.SaBeanRegister;
 import cn.dev33.satoken.strategy.SaStrategy;
 import lombok.extern.slf4j.Slf4j;
@@ -39,12 +39,16 @@ public class SecurityAutoConfiguration implements WebMvcConfigurer {
         config.setTimeout(properties.getTimeout());
         // token临时有效期 (指定时间内无操作就视为token过期) 单位: 秒
         config.setActivityTimeout(properties.getActivityTimeout());
+        // 是否打开自动续签
+        config.setAutoRenew(properties.getAutoRenew());
         // 是否允许同一账号并发登录 (为true时允许一起登录, 为false时新登录挤掉旧登录)
         config.setIsConcurrent(properties.getIsConcurrent());
         // 在多人登录同一账号时，是否共用一个token (为true时所有登录共用一个token, 为false时每次登录新建一个token)
         config.setIsShare(properties.getIsShare());
         // token风格
         config.setTokenStyle(properties.getTokenStyle());
+        // token前缀
+        config.setTokenPrefix(properties.getTokenPrefix());
         // 是否输出操作日志
         config.setIsLog(properties.getIsLog());
         // 是否在初始化配置时打印版本字符画
@@ -55,8 +59,8 @@ public class SecurityAutoConfiguration implements WebMvcConfigurer {
     /** 注册Sa-Token的注解拦截器，打开注解式鉴权功能 */
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        // 注册注解拦截器，并排除不需要注解鉴权的接口地址 (与登录拦截器无关)
-        registry.addInterceptor(new SaAnnotationInterceptor()).addPathPatterns("/**");
+        // 注册 Sa-Token 拦截器，打开注解式鉴权功能
+        registry.addInterceptor(new SaInterceptor()).addPathPatterns("/**");
     }
 
     /** 重写Sa-Token的注解处理器，增加注解合并功能 */

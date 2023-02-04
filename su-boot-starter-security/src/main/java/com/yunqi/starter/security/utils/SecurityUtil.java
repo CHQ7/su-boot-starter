@@ -1,8 +1,8 @@
 package com.yunqi.starter.security.utils;
 
 import cn.dev33.satoken.session.SaSession;
-import cn.dev33.satoken.stp.StpUtil;
 import com.yunqi.starter.common.lang.Strings;
+import com.yunqi.starter.security.spi.StpUtil;
 
 /**
  * 安全认证工具类
