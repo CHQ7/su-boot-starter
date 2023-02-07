@@ -17,7 +17,7 @@ public class IPUtil {
     /**
      * 太平洋网络IP归属地接口
      */
-    public static final String IP_WHOIS_URL =  "http://whois.pconline.com.cn/ipJson.jsp?ip=%s&json=true";
+    public static final String IP_WHOIS_URL = "https://whois.pconline.com.cn/ipJson.jsp?ip=%s&json=true";
 
     public static String getIPAddress(String ip){
         return getString(ip);
@@ -31,7 +31,7 @@ public class IPUtil {
     private static String getString(String ip) {
         Response resp = Http.get(String.format(IP_WHOIS_URL, ip));
         if (!resp.isOK()) {
-            throw new IllegalStateException("postPay with SSL, resp code=" + resp.getStatus());
+            throw new IllegalStateException("postPay with SSL, resp code=" + resp.getStatus() + ",ip=" + ip) ;
         }
         NutMap map= Json.fromJson(NutMap.class, resp.getContent(Encoding.GBK));
         return map.getString("addr");
