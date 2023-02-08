@@ -860,26 +860,30 @@ public abstract class Lang {
     // ----------------------- 排序 start -----------------------
 
     /**
-     * ASCII排序(字母升序排序)
+     * 按照 Key 值对参数字符串进行排序(ASCII字母升序排序)
      * <br>
      * 剔除值为空的参数
      * @param params    参数
      * @return          ASCII排序字符串
      */
-    public static String ACCSIISort(Map<String, Object> params){
-        StringBuilder sb = new StringBuilder();
+    public static String sortByAsciiValue(Map<String, Object> params){
+        // 该 Map 对 Key 进行了字典序排序（ASCII 排序）。这里使用了 TreeMap 这个实现了 SortedMap。
+        SortedMap<String, Object> sortedParams = new TreeMap<>(params);
 
-        for (Map.Entry<String, Object> entry : params.entrySet()) {
-            if (entry.getValue() != null && ((String) entry.getValue()).length() > 0) {
-                sb.append(entry.getKey()).append("=").append((String) entry.getValue()).append("&");
+        StringBuilder result = new StringBuilder();
+        for (Map.Entry<String, Object> entry : sortedParams.entrySet()) {
+            Object value = entry.getValue();
+            if (value != null && value.toString().length() > 0) {
+                result.append(entry.getKey()).append("=").append(value.toString()).append("&");
             }
         }
 
-        if (sb.length() > 0) {
-            sb.deleteCharAt(sb.length() - 1);
+        // 删除最后一个 "&" 字符
+        if (result.length() > 0) {
+            result.deleteCharAt(result.length() - 1);
         }
 
-        return sb.toString();
+        return result.toString();
     }
 
     // ----------------------- 排序 end -----------------------
