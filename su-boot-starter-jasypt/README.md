@@ -1,69 +1,78 @@
 # su-boot-starter-jasypt
 
-- Jasypt安全框架加密组件
+- `su-boot-starter-jasypt` 是一个基于 Jasypt 和 Spring Boot 开发的加密解密组件。它能够帮助开发者快速的在 Spring Boot 项目中进行数据加密解密操作。
 
-## 配置说明
+# 使用方法
+## 1.在项目依赖中引入`su-boot-starter-jasypt`：
+
+```xml
+<dependency>
+  <groupId>com.yunqi</groupId>
+  <artifactId>su-boot-starter-jasypt</artifactId>
+  <version>1.0.0</version>
+</dependency>
+```
+
+## 2. 配置jasypt加密解密密钥
+
+- 在项目的配置文件中，添加 Jasypt 的配置：
+
 
 | 名称 | 默认值              | 备注 |
 | --- |------------------| --- |
 | enabled | true             | 是否开启组件 |
-| password | egsnhm           | 加密盐值,默认值:egsnhm 可自定义 |
-| algorithm | PBEWithMD5AndDES | 置加密算法的值,默认算法:PBEWithMD5AndDES |
-| keyObtentionIterations | 1000             | 设置用于获取加密密钥的散列迭代次数,默认值:1000 |
-| poolSize | 1                | 设置要创建的加密器池的大小,默认值:1 |
-| saltGeneratorClassName | org.jasypt.salt.RandomSaltGenerator              | 设置盐生成器,默认值:org.jasypt.salt.RandomSaltGenerator |
-| stringOutputType | base64           | 置字符串输出将被编码的形式,默认值:base64 |
+| password | jasypt           | 加密密钥 |
+| algorithm | PBEWITHHMACSHA512ANDAES_256 | 加密算法 |
+| keyObtentionIterations | 1000             | 密钥获取次数 |
+| poolSize | 1                | 密钥池大小 |
+| providerName | SunJCE                | 加密提供者名称 |
+| saltGeneratorClassName | org.jasypt.salt.RandomSaltGenerator              | Salt生成器类名 |
+| ivGeneratorClassName | org.jasypt.iv.RandomIvGenerator           | IV生成器类名 |
+| stringOutputType | base64           | 加密字符串输出类型 |
 
-## 使用方式
+- 下面是`application.yml`
 
--  方式一：通过工具类调用
+```yml
+su:
+  jasypt:
+    enabled: true
+    password: jasypt
+    algorithm: PBEWITHHMACSHA512ANDAES_256
+    key-obtention-iterations: 1000
+    pool-size: 1
+    provider-name: SunJCE
+    salt-generator-class-name: org.jasypt.salt.RandomSaltGenerator
+    iv-generator-class-name: org.jasypt.iv.RandomIvGenerator
+    string-output-type: base64
 ```
-// 待加密字符串
-String txt = "abcd";
-// 加密
-String ciphertext = Jasypts.encrypt(txt);
-// 解密
-String decrypttext = Jasypts.decrypt(ciphertext);
-// 打印
-System.out.printf("原文:%s%n密文:%s%n解密:%s%n", txt, ciphertext, decrypttext);
-```
 
-- 方式二：服务调用
-```java
-public class test {
-    
+## 3.在代码中使用jasypt加密解密
+
+- 在需要使用jasypt的地方，可以通过如下代码调用：
+
+```
+public class JasyptTest {
+
     @Autowired
     StringEncryptor stringEncryptor;
 
-    public void a() {
-        // 待加密字符串
-        String txt = "abcd";
-        // 加密 
-        String ciphertext = stringEncryptor.encrypt(txt);
-        // 解密
-        String decrypttext = stringEncryptor.decrypt(ciphertext);
-        // 打印
-        System.out.printf("原文:%s%n密文:%s%n解密:%s%n", txt, ciphertext, decrypttext);
+    @Test
+    public void testEncrypt() {
+        // 明文
+        String message = "Hello World";
+        // 密文
+        String encryptedMessage = stringEncryptor.encrypt(message);
     }
 }
 ```
 
-## 配置文件使用加密
+# 注意事项
 
-- 首先通过上面方式加密的字符串，添加到配置文件中，那么我们程序Jasypt在启动的时候会自动解析出明文
-application.yml
-```yaml
-##############################################
-# spring
-##############################################
-spring:
-  # 数据源配置
-  datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/test?serverTimezone=GMT%2B8&useSSL=false&useUnicode=true&characterEncoding=UTF-8&allowPublicKeyRetrieval=true
-    # 在使用的时候，您要使用ENC限定符字眼，告诉jasypt需要解析他
-    username: ENC(x0jY0g478sC7qMnAMOmvgA==)
-    password: ENC(5YfhKmsp4Ugsq70ookGQfw==)
-```
+在使用 `su-boot-starter-jasypt` 组件时，需要注意以下几点：
+
+- 配置的加密密钥，要妥善保存。
+- 在加密解密过程中，请注意数据的安全性。
+- 在使用 `su-boot-starter-jasypt` 组件时，请务必遵循 Jasypt 的相关使用规则。
+- 如果需要更改加密解密密钥，请修改配置文件中的密钥并重新启动项目。
 
 

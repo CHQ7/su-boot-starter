@@ -24,17 +24,21 @@ public class JasyptAutoConfiguration {
     public StringEncryptor stringEncryptor(JasyptProperties properties) {
         PooledPBEStringEncryptor encryptor = new PooledPBEStringEncryptor();
         SimpleStringPBEConfig config = new SimpleStringPBEConfig();
-        // 加密盐值
+        // Jasypt 加密密钥
         config.setPassword(properties.getPassword());
-        // 设置加密算法的值
+        // Jasypt 加密算法
         config.setAlgorithm(properties.getAlgorithm());
-        // 设置用于获取加密密钥的散列迭代次数
+        // Jasypt 密钥获取次数
         config.setKeyObtentionIterations(properties.getKeyObtentionIterations());
-        // 设置要创建的加密器池的大小
+        // Jasypt 密钥池大小
         config.setPoolSize(properties.getPoolSize());
-        // 设置盐生成器
+        // Jasypt 加密提供者名称
+        config.setProviderName(properties.getProviderName());
+        // Jasypt Salt生成器类名
         config.setSaltGeneratorClassName(properties.getSaltGeneratorClassName());
-        // 设置字符串输出将被编码的形式
+        // Jasypt IV生成器类名
+        config.setIvGeneratorClassName(properties.getIvGeneratorClassName());
+        // Jasypt 加密字符串输出类型
         config.setStringOutputType(properties.getStringOutputType());
         encryptor.setConfig(config);
         return encryptor;
