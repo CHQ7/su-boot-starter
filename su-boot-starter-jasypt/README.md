@@ -2,8 +2,8 @@
 
 - `su-boot-starter-jasypt` 是一个基于 Jasypt 和 Spring Boot 开发的加密解密组件。它能够帮助开发者快速的在 Spring Boot 项目中进行数据加密解密操作。
 
-# 使用方法
-## 1.在项目依赖中引入`su-boot-starter-jasypt`：
+# 安装
+- 通过Maven仓库安装，在pom.xml文件中加入以下内容：
 
 ```xml
 <dependency>
@@ -13,24 +13,9 @@
 </dependency>
 ```
 
-## 2. 配置jasypt加密解密密钥
+# 使用
 
-- 在项目的配置文件中，添加 Jasypt 的配置：
-
-
-| 名称 | 默认值              | 备注 |
-| --- |------------------| --- |
-| enabled | true             | 是否开启组件 |
-| password | jasypt           | 加密密钥 |
-| algorithm | PBEWITHHMACSHA512ANDAES_256 | 加密算法 |
-| keyObtentionIterations | 1000             | 密钥获取次数 |
-| poolSize | 1                | 密钥池大小 |
-| providerName | SunJCE                | 加密提供者名称 |
-| saltGeneratorClassName | org.jasypt.salt.RandomSaltGenerator              | Salt生成器类名 |
-| ivGeneratorClassName | org.jasypt.iv.RandomIvGenerator           | IV生成器类名 |
-| stringOutputType | base64           | 加密字符串输出类型 |
-
-- 下面是`application.yml`
+- 1.在`application.yml`配置文件中，添加 Jasypt 的配置：
 
 ```yml
 su:
@@ -46,9 +31,7 @@ su:
     string-output-type: base64
 ```
 
-## 3.在代码中使用jasypt加密解密
-
-- 在需要使用jasypt的地方，可以通过如下代码调用：
+- 2.在代码中调用，在需要使用jasypt的地方，可以通过如下代码调用：
 
 ```
 public class JasyptTest {
@@ -65,6 +48,20 @@ public class JasyptTest {
     }
 }
 ```
+
+# 配置说明
+
+| 名称 | 默认值              | 备注 |
+| --- |------------------| --- |
+| enabled | true             | 是否开启组件 |
+| password | jasypt           | 加密密钥 |
+| algorithm | PBEWITHHMACSHA512ANDAES_256 | 加密算法 |
+| keyObtentionIterations | 1000             | 密钥获取次数 |
+| poolSize | 1                | 密钥池大小 |
+| providerName | SunJCE                | 加密提供者名称 |
+| saltGeneratorClassName | org.jasypt.salt.RandomSaltGenerator              | Salt生成器类名 |
+| ivGeneratorClassName | org.jasypt.iv.RandomIvGenerator           | IV生成器类名 |
+| stringOutputType | base64           | 加密字符串输出类型 |
 
 # 注意事项
 
