@@ -8,7 +8,7 @@
 |--------------------------|----------|--------|---------------------|-----|
 | su-boot-starter-core     | 核心组件     | 所有项目 | 详见 [README](https://github.com/JsckChin/su-boot-starter/blob/master/su-boot-starter-core/README.md) | 生产  |
 | su-boot-starter-database | 数据库组件    | 服务层 | 详见 [README](https://github.com/JsckChin/su-boot-starter/blob/master/su-boot-starter-database/README.md) | 生产  |
-|  **su-boot-starter-jasypt**    | 安全框架加密组件 | 所有项目 |详见 [README](https://github.com/JsckChin/su-boot-starter/blob/master/su-boot-starter-jasypt/README.md)    | 生产  |
+|  **su-boot-starter-jasypt**    | 安全框架加密组件 | 所有项目 |详见 [README](su-boot-starter-jasypt/README.md)    | 生产  |
 | su-boot-starter-jdbc     | 数据库连接组件  | 服务层 | 详见 [README](https://github.com/JsckChin/su-boot-starter/blob/master/su-boot-starter-jdbc/README.md)    | 生产  | 
 | su-boot-starter-mail     | 邮件发送组件   | 服务层 | 详见 [README](https://github.com/JsckChin/su-boot-starter/blob/master/su-boot-starter-mail/README.md)     | 生产  |
 | su-boot-starter-quartz   | 任务组件     | 服务层 | 详见 [README](https://github.com/JsckChin/su-boot-starter/blob/master/su-boot-starter-quartz/README.md)   | 生产  | 
