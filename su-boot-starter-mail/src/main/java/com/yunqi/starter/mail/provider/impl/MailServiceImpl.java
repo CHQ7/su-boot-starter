@@ -2,8 +2,7 @@ package com.yunqi.starter.mail.provider.impl;
 
 import com.yunqi.starter.common.lang.Strings;
 import com.yunqi.starter.mail.configuration.MailProperties;
-import com.yunqi.starter.mail.configuration.MailSenderFactory;
-import com.yunqi.starter.mail.model.Email;
+import com.yunqi.starter.mail.entity.Email;
 import com.yunqi.starter.mail.provider.IMailProvider;
 import lombok.extern.slf4j.Slf4j;
 import org.nutz.lang.Lang;
@@ -15,6 +14,7 @@ import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import java.io.File;
 import java.io.UnsupportedEncodingException;
+import java.util.Properties;
 
 /**
  * Created by @author CHQ on 2022/1/29
@@ -22,43 +22,51 @@ import java.io.UnsupportedEncodingException;
 @Slf4j
 public class MailServiceImpl implements IMailProvider {
 
-    private final MailProperties properties;
-    private final MailSenderFactory mailSenderFactory;
+    private MailProperties properties;
 
     public MailServiceImpl(MailProperties properties){
         this.properties = properties;
-        this.mailSenderFactory = new MailSenderFactory(properties);
     }
 
     @Override
-    public void sendText(Email email) {
-        sendEmail(email, false);
+    public void send(Email email) {
+        JavaMailSenderImpl javaMailSender = new JavaMailSenderImpl();
+        javaMailSender.setHost(properties.getHostName());
+        javaMailSender.setPort(Integer.parseInt(properties.getSmtpPort()));
+        javaMailSender.setUsername(properties.getUserName());
+        javaMailSender.setPassword(properties.getPassword());
+        javaMailSender.setDefaultEncoding(properties.getCharset());
+        if(properties.isSsl()){
+            Properties prop = new Properties();
+            prop.put("mail.smtp.ssl.enable", properties.isSsl());
+            prop.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+            javaMailSender.setJavaMailProperties(prop);
+        }
+        MimeMessage message = javaMailSender.createMimeMessage();
+        buildEmail(message, email, false);
+        javaMailSender.send(message);
     }
 
     @Override
     public void sendHtml(Email email) {
-        sendEmail(email, true);
-    }
-
-    /**
-     * 发送邮件
-     * @param email 邮件信息
-     * @param html  是否支持HTML邮件
-     */
-    private void sendEmail(Email email, boolean html){
-        JavaMailSenderImpl javaMailSender = mailSenderFactory.createJavaMailSender();
+        JavaMailSenderImpl javaMailSender = new JavaMailSenderImpl();
+        javaMailSender.setHost(properties.getHostName());
+        javaMailSender.setPort(Integer.parseInt(properties.getSmtpPort()));
+        javaMailSender.setUsername(properties.getUserName());
+        javaMailSender.setPassword(properties.getPassword());
+        javaMailSender.setDefaultEncoding(properties.getCharset());
+        if(properties.isSsl()){
+            Properties prop = new Properties();
+            prop.put("mail.smtp.ssl.enable", properties.isSsl());
+            prop.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+            javaMailSender.setJavaMailProperties(prop);
+        }
         MimeMessage message = javaMailSender.createMimeMessage();
-        prepareMimeMessage(message, email, html);
+        buildEmail(message, email, true);
         javaMailSender.send(message);
     }
 
-    /**
-     * 准备消息
-     * @param mimeMessage   电子邮件消息
-     * @param email         邮件信息
-     * @param html          是否支持HTML邮件
-     */
-    private void prepareMimeMessage(MimeMessage mimeMessage, Email email, boolean html) {
+    private void buildEmail(MimeMessage mimeMessage, Email email, boolean html) {
         try {
             MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true);
             helper.setFrom(properties.getUserName());

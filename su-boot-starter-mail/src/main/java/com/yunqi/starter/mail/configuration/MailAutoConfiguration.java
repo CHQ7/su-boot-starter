@@ -15,7 +15,7 @@ import org.springframework.context.annotation.Configuration;
 @ConditionalOnClass({MailServiceImpl.class})
 @ConditionalOnExpression("${su.mail.enabled:true}")
 @EnableConfigurationProperties(MailProperties.class)
-public class MailAutoConfiguration  {
+public class MailAutoConfiguration {
 
     @Bean
     public IMailProvider iMailService(MailProperties properties){

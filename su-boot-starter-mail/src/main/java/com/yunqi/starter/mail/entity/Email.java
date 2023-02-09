@@ -1,16 +1,13 @@
-package com.yunqi.starter.mail.model;
+package com.yunqi.starter.mail.entity;
 
 import lombok.Data;
-import lombok.experimental.Accessors;
 
 import java.io.Serializable;
 
 /**
- * 邮件信息
  * Created by @author CHQ on 2022/1/29
  */
 @Data
-@Accessors(chain = true)
 public class Email implements Serializable {
 
     private static final long serialVersionUID = 1L;

@@ -1,18 +1,14 @@
 package com.yunqi.starter.mail.configuration;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
  * Created by @author CHQ on 2022/1/29
  */
-@Getter
-@Setter
-@ConfigurationProperties(prefix = MailProperties.PREFIX)
+@Data
+@ConfigurationProperties(prefix = "su.mail")
 public class MailProperties {
-
-    public static final String PREFIX = "su.mail";
 
     /** 是否开启 */
     boolean enabled = true;
