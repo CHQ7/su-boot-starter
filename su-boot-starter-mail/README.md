@@ -1,16 +1,11 @@
 # su-boot-starter-mail
 
-- `su-boot-starter-mail` su-boot-starter-mail 是一个快速搭建邮件发送功能的工具包，其使用简单、高效，符合spring-boot风格。
-
-# 特性
-
-- 基于spring-boot邮件发送
-- 支持文本邮件发送，HTML邮件发送，支持附件
-- 支持邮件服务配置，如：主机地址、端口、用户名、密码、是否开启ssl等
+- `su-boot-starter-mail` 是一个简单易用的邮件发送模块，基于Spring Boot和JavaMail实现，能够快速的构建发送文本邮件、HTML邮件以及带附件的邮件。。
 
 
 # 安装
-## 通过Maven仓库安装，在pom.xml文件中加入以下内容：
+
+- 通过Maven仓库安装，在pom.xml文件中加入以下内容：
 
 ```xml
 <dependency>
@@ -24,60 +19,52 @@
 
 - 1.在`application.yml`配置文件中，配置邮件服务相关属性：
 
-
-| 名称 | 默认值              | 备注 |
-| --- |------------------| --- |
-| enabled | true             | 是否开启组件 |
-| password | jasypt           | 加密密钥 |
-| algorithm | PBEWITHHMACSHA512ANDAES_256 | 加密算法 |
-| keyObtentionIterations | 1000             | 密钥获取次数 |
-| poolSize | 1                | 密钥池大小 |
-| providerName | SunJCE                | 加密提供者名称 |
-| saltGeneratorClassName | org.jasypt.salt.RandomSaltGenerator              | Salt生成器类名 |
-| ivGeneratorClassName | org.jasypt.iv.RandomIvGenerator           | IV生成器类名 |
-| stringOutputType | base64           | 加密字符串输出类型 |
-
-- 下面是`application.yml`
-
 ```yml
 su:
-  jasypt:
+  mail:
     enabled: true
-    password: jasypt
-    algorithm: PBEWITHHMACSHA512ANDAES_256
-    key-obtention-iterations: 1000
-    pool-size: 1
-    provider-name: SunJCE
-    salt-generator-class-name: org.jasypt.salt.RandomSaltGenerator
-    iv-generator-class-name: org.jasypt.iv.RandomIvGenerator
-    string-output-type: base64
+    host-name: 邮件服务器地址
+    smtp-port: 邮件服务器端口
+    user-name: 邮件发送账号
+    password:  邮件发送密码
+    from:    邮件发送用户名    
+    ssl: true
+    charset: UTF-8
 ```
 
 
-- 2.在代码中调用IMailProvider接口，调用其中的sendText()方法发送文本邮件，sendHtml()方法发送HTML邮件：
-
-- 在需要使用jasypt的地方，可以通过如下代码调用：
+- 2.使用IMailProvider接口发送邮件，调用其中的sendText()方法发送文本邮件，sendHtml()方法发送HTML邮件：
 
 ```
 @Autowired
 private IMailProvider mailProvider;
 
-Email email = new Email();
-email.setTo("test@qq.com");
-email.setSubject("邮件主题");
-email.setContent("邮件内容");
-mailProvider.sendText(email);
+public void sendTextMail(){
+    Email email = new Email();
+    email.setSubject("Test Text Mail");
+    email.setTo("receiver@qq.com");
+    email.setContent("This is a test text mail");
+    mailProvider.sendText(email);
+}
+
+public void sendHtmlMail(){
+    Email email = new Email();
+    email.setSubject("Test HTML Mail");
+    email.setTo("receiver@qq.com");
+    email.setContent("<h1>This is a test HTML mail</h1>");
+    mailProvider.sendHtml(email);
+}
 ```
 
-
+# 配置说明
 
 | 名称        | 默认值             | 备注 |
 |-----------|-----------------| --- |
 | enabled   | true            | 是否开启组件 |
-| host-name |           |  |
-| smtp-port |  |  |
-| user-name |             |  |
-| password  |                |  |
-| ssl       |           |  |
-| from      |            | |
-| charset   | UTF-8          |  |
+| host-name |           | 邮件服务器地址 |
+| smtp-port |  | 邮件服务器端口 |
+| user-name |             | 邮箱账号 |
+| password  |                | 邮箱密码 |
+| ssl       |           | 邮件服务器是否HTTPS |
+| from      |            | 邮箱用户名 |
+| charset   | UTF-8          | 邮箱编码 |
