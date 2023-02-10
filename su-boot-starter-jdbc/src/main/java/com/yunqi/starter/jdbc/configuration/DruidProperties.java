@@ -125,7 +125,8 @@ public class DruidProperties {
         /** 是否开启 */
         boolean enabled = true;
 
-        private String urlPattern;
+        /** Druid 的管理界面的访问路径 */
+        private String urlPattern = "/druid/*";
 
         /** IP白名单 (没有配置或者为空，则允许所有访问) 127.0.0.1 只允许本机访问  */
         private String allow = "127.0.0.1";

@@ -32,7 +32,7 @@ public class DruidWebStatServletConfiguration {
      */
     @Bean
     public ServletRegistrationBean<StatViewServlet> statViewServlet(DruidProperties properties){
-        ServletRegistrationBean<StatViewServlet> bean = new ServletRegistrationBean<>(new StatViewServlet(), "/druid/*");
+        ServletRegistrationBean<StatViewServlet> bean = new ServletRegistrationBean<>(new StatViewServlet(), properties.getStatViewServlet().getUrlPattern());
 
         Map<String, String> initParameters  = new HashMap<>();
         // IP黑名单 (存在共同时，deny优先于allow)
