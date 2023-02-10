@@ -2,7 +2,6 @@ package com.yunqi.starter.jdbc.configuration;
 
 import com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceAutoConfigure;
 import com.alibaba.druid.support.http.WebStatFilter;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
@@ -16,7 +15,6 @@ import java.util.Collections;
  * Druid Web 网络统计及健康
  * Created by @author CHQ on 2022/2/1
  */
-@Slf4j
 @Configuration
 @ConditionalOnWebApplication
 @ConditionalOnExpression("${su.druid.web-stat-filter.enabled:true}")
@@ -29,7 +27,7 @@ public class DruidWebStatFilterConfiguration {
      */
     @Bean
     public FilterRegistrationBean<WebStatFilter> webStatFilter(){
-        FilterRegistrationBean<WebStatFilter> bean = new FilterRegistrationBean<WebStatFilter>();
+        FilterRegistrationBean<WebStatFilter> bean = new FilterRegistrationBean<>();
         // 设置Druid过滤器
         bean.setFilter(new WebStatFilter());
         // 添加过滤规则

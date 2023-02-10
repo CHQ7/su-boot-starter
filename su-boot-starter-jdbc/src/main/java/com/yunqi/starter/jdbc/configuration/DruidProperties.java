@@ -1,14 +1,20 @@
 package com.yunqi.starter.jdbc.configuration;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
+ * Druid 配置
  * Created by @author CHQ on 2022/2/1
  */
-@Data
-@ConfigurationProperties(prefix = "su.druid")
-public class DruidDataSourceProperties {
+@Getter
+@Setter
+@ConfigurationProperties(prefix = DruidProperties.PREFIX)
+public class DruidProperties {
+
+    public static final String PREFIX = "su.druid";
 
     /** 是否开启 */
     boolean enabled = true;

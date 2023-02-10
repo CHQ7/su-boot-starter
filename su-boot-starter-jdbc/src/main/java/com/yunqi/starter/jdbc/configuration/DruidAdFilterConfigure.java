@@ -34,14 +34,17 @@ public class DruidAdFilterConfigure {
     @Bean
     public FilterRegistrationBean<RemoveAdFilter> druidAdFilter(DruidStatProperties properties) throws IOException {
         // 获取web监控页面的参数
-        DruidStatProperties.StatViewServlet config = properties.getStatViewServlet();
+        String pattern = properties.getStatViewServlet().getUrlPattern() != null ?
+                properties.getStatViewServlet().getUrlPattern() : "/druid/*";
         // 提取common.js的配置路径
-        String pattern = config.getUrlPattern() != null ? config.getUrlPattern() : "/druid/*";
-        String commonJsPattern = pattern.replaceAll("\\*", "js/common.js");
+        String commonJsPattern = pattern.replace("*", "js/common.js");
+
         // 获取common.js 查找带有广告的common.js全路径
         String text = Utils.readFromResource("support/http/resources/js/common.js");
+
         // 屏蔽 this.buildFooter(); 不构建广告
         final String newJs = text.replace("this.buildFooter();", "//this.buildFooter();");
+
         FilterRegistrationBean<RemoveAdFilter> bean = new FilterRegistrationBean<>();
         bean.setFilter(new RemoveAdFilter(newJs));
         bean.addUrlPatterns(commonJsPattern);

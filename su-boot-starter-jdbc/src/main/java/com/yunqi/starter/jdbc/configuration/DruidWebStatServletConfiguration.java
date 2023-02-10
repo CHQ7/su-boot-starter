@@ -15,41 +15,42 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * DruidWebStatServlet配置类，用于配置druid的状态监控页面。
  * Created by @author CHQ on 2022/2/1
  */
 @Configuration
 @ConditionalOnWebApplication
 @ConditionalOnExpression("${su.druid.stat-view-servlet.enabled:true}")
 @AutoConfigureAfter(DruidDataSourceAutoConfigure.class)
-@EnableConfigurationProperties(DruidDataSourceProperties.class)
+@EnableConfigurationProperties(DruidProperties.class)
 public class DruidWebStatServletConfiguration {
 
     /**
      * 配置druid监控
-     * @return  statViewServlet
+     * @param properties druid配置参数
+     * @return  ServletRegistrationBean
      */
     @Bean
-    public ServletRegistrationBean<StatViewServlet> statViewServlet(DruidDataSourceProperties properties){
+    public ServletRegistrationBean<StatViewServlet> statViewServlet(DruidProperties properties){
         ServletRegistrationBean<StatViewServlet> bean = new ServletRegistrationBean<>(new StatViewServlet(), "/druid/*");
 
-        Map<String, String> map = new HashMap<>();
+        Map<String, String> initParameters  = new HashMap<>();
         // IP黑名单 (存在共同时，deny优先于allow)
         if(!StringUtils.isEmpty(properties.getStatViewServlet().getDeny())){
-            map.put("deny", properties.getStatViewServlet().getDeny());
+            initParameters .put("deny", properties.getStatViewServlet().getDeny());
         }
         // IP白名单 (没有配置或者为空，则允许所有访问) 127.0.0.1 只允许本机访问
         if(!StringUtils.isEmpty(properties.getStatViewServlet().getAllow())){
-            map.put("allow", properties.getStatViewServlet().getAllow());
+            initParameters .put("allow", properties.getStatViewServlet().getAllow());
         }
 
-        //设置控制台登录的用户名和密码
-        map.put("loginUsername", properties.getStatViewServlet().getLoginUsername());
-        map.put("loginPassword", properties.getStatViewServlet().getLoginPassword());
+        // 设置控制台登录的用户名和密码
+        // 是否能够重置数据
+        initParameters .put("loginUsername", properties.getStatViewServlet().getLoginUsername());
+        initParameters .put("loginPassword", properties.getStatViewServlet().getLoginPassword());
+        initParameters .put("resetEnable", properties.getStatViewServlet().getResetEnable());
 
-        //是否能够重置数据
-        map.put("resetEnable", properties.getStatViewServlet().getResetEnable());
-
-        bean.setInitParameters(map);
+        bean.setInitParameters(initParameters);
         return bean;
     }
 }
