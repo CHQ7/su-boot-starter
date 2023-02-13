@@ -4,14 +4,11 @@ import cn.dev33.satoken.config.SaTokenConfig;
 import cn.dev33.satoken.interceptor.SaInterceptor;
 import cn.dev33.satoken.spring.SaBeanRegister;
 import cn.dev33.satoken.strategy.SaStrategy;
-import com.yunqi.starter.security.provider.IAuthProvider;
-import com.yunqi.starter.security.provider.impl.IAuthProviderDefaultImpl;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -49,12 +46,6 @@ public class SecurityAutoConfiguration implements WebMvcConfigurer {
         SaTokenConfig config = new SaTokenConfig();
         BeanUtils.copyProperties(properties, config);
         return config;
-    }
-
-    @Bean
-    @ConditionalOnMissingBean(IAuthProvider.class)
-    public IAuthProvider iAuthProvider() {
-        return new IAuthProviderDefaultImpl();
     }
 
     /** 注册Sa-Token的注解拦截器，打开注解式鉴权功能 */
