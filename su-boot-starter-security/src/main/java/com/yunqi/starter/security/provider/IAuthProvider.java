@@ -1,6 +1,6 @@
 package com.yunqi.starter.security.provider;
 
-import java.util.ArrayList;
+
 import java.util.List;
 
 /**
@@ -15,9 +15,7 @@ public interface IAuthProvider {
      * @param loginId  账号id
      * @return 该账号id具有的权限码集合
      */
-    default List<String> getPermissionList(String loginId) {
-        return new ArrayList<>();
-    }
+    List<String> getPermissionList(String loginId);
 
     /**
      * 返回指定账号id所拥有的角色标识集合
@@ -25,7 +23,6 @@ public interface IAuthProvider {
      * @param loginId  账号id
      * @return 该账号id具有的角色标识集合
      */
-    default List<String> getRoleList(String loginId){
-        return new ArrayList<>();
-    }
+    List<String> getRoleList(String loginId);
+
 }
