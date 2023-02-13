@@ -1,51 +1,35 @@
 package com.yunqi.starter.security.spi;
 
 import cn.dev33.satoken.SaManager;
-import cn.dev33.satoken.config.SaTokenConfig;
 import cn.dev33.satoken.fun.SaFunction;
 import cn.dev33.satoken.listener.SaTokenEventCenter;
 import cn.dev33.satoken.session.SaSession;
 import cn.dev33.satoken.stp.SaLoginModel;
 import cn.dev33.satoken.stp.SaTokenInfo;
 import cn.dev33.satoken.stp.StpLogic;
-import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 /**
- * 前端权限认证工具类
- * Created by @author CHQ on @date 2022/1/5
+ * 账号认证工具类 [ ADMIN ]
+ *
+ *
+ * Created by @author CHQ on 2022/2/27
  */
-@Component
-public class Tokens {
+public class SecurityUtil {
 
-    private Tokens() {}
+
+    private SecurityUtil() {}
 
     /**
      * 账号类型标识
      */
-    public static final String TYPE = "user";
+    public static final String TYPE = "login";
 
     /**
      * 底层的 StpLogic 对象
      */
-    public static StpLogic stpLogic = new StpLogic(TYPE) {
-        // 首先自定义一个 Config 对象
-        SaTokenConfig config = new SaTokenConfig()
-                .setTokenName("token")             // token名称 (同时也是cookie名称)
-                .setTimeout(90 * 24 * 60 * 60)     // token有效期，单位s 默认90天
-                .setActivityTimeout(-1)            // token临时有效期 (指定时间内无操作就视为token过期) 单位: 秒
-                .setIsConcurrent(true)            // 是否允许同一账号并发登录 (为true时允许一起登录, 为false时新登录挤掉旧登录)
-                .setIsShare(true)                  // 在多人登录同一账号时，是否共用一个token (为true时所有登录共用一个token, 为false时每次登录新建一个token)
-                .setTokenStyle("uuid")             // token风格
-                .setIsLog(false)                   // 是否输出操作日志
-                .setIsPrint(false);                // 是否在初始化配置时打印版本字符画
-
-        @Override
-        public SaTokenConfig     getConfig() {
-            return config;
-        }
-    };
+    public static StpLogic stpLogic = new StpLogic(TYPE);
 
     /**
      * 获取当前 StpLogic 的账号类型
@@ -1111,5 +1095,6 @@ public class Tokens {
     public static void closeSafe(String service) {
         stpLogic.closeSafe(service);
     }
-
 }
+
+

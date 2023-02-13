@@ -4,8 +4,10 @@ import cn.dev33.satoken.config.SaTokenConfig;
 import cn.dev33.satoken.interceptor.SaInterceptor;
 import cn.dev33.satoken.spring.SaBeanRegister;
 import cn.dev33.satoken.strategy.SaStrategy;
+import com.yunqi.starter.security.spi.UserSecurityUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
@@ -24,15 +26,13 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 @ConditionalOnClass(SaTokenConfig.class)
 @ConditionalOnExpression("${su.security.enabled:true}")
-@EnableConfigurationProperties(SecurityProperties.class)
+@EnableConfigurationProperties(UserSecurityProperties.class)
 @AutoConfigureAfter({SaBeanRegister.class})
-public class SecurityAutoConfiguration implements WebMvcConfigurer {
+public class UserSecurityAutoConfiguration implements WebMvcConfigurer {
 
     // 安全属性对象
-    private final SecurityProperties properties;
-
-
-    public SecurityAutoConfiguration(SecurityProperties properties) {
+    private final UserSecurityProperties properties;
+    public UserSecurityAutoConfiguration(UserSecurityProperties properties) {
         this.properties = properties;
     }
 
@@ -41,24 +41,11 @@ public class SecurityAutoConfiguration implements WebMvcConfigurer {
      * @return SaTokenConfig Bean
      */
     @Bean
-    @Primary
-    public SaTokenConfig saTokenConfig() {
+    @Qualifier("userTokenConfig")
+    public UserSecurityUtil userSecurityUtil() {
         SaTokenConfig config = new SaTokenConfig();
         BeanUtils.copyProperties(properties, config);
-        return config;
-    }
-
-    /** 注册Sa-Token的注解拦截器，打开注解式鉴权功能 */
-    @Override
-    public void addInterceptors(InterceptorRegistry registry) {
-        // 注册 Sa-Token 拦截器，打开注解式鉴权功能
-        registry.addInterceptor(new SaInterceptor()).addPathPatterns("/**");
-    }
-
-    /** 重写Sa-Token的注解处理器，增加注解合并功能 */
-    @Autowired
-    public void rewriteSaStrategy() {
-        SaStrategy.me.getAnnotation = AnnotatedElementUtils::getMergedAnnotation;
+        return new UserSecurityUtil(config);
     }
 
 }

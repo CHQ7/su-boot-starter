@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 /**
  * 局部权限异常处理器
+ *
+ * Ordered.HIGHEST_PRECEDENCE 定义的是最高优先级的值，该异常处理器的优先级将比其他异常处理器的优先级要高
  * Created by @author CHQ on 2022/2/17
  */
 @RestControllerAdvice
@@ -32,26 +34,28 @@ public class SecurityException {
      */
     @ExceptionHandler(NotLoginException.class)
     public Result handlerNotLoginException(NotLoginException e) {
+
         // 判断场景值，定制化异常信息
         IResultCode resultCode;
-
-        if(e.getType().equals(NotLoginException.NOT_TOKEN)) {
-            resultCode = ResultCode.USER_NOT_LOGIN;
-        }
-        else if(e.getType().equals(NotLoginException.INVALID_TOKEN)) {
-            resultCode = ResultCode.USER_LOGIN_INVALID;
-        }
-        else if(e.getType().equals(NotLoginException.TOKEN_TIMEOUT)) {
-            resultCode = ResultCode.USER_LOGIN_INVALID;
-        }
-        else if(e.getType().equals(NotLoginException.BE_REPLACED)) {
-            resultCode = ResultCode.USER_LOGIN_BE_REPLACED;
-        }
-        else if(e.getType().equals(NotLoginException.KICK_OUT)) {
-            resultCode = ResultCode.USER_LOGIN_BE_REPLACED;
-        }
-        else {
-            resultCode = ResultCode.USER_NOT_LOGIN;
+        switch (e.getType()) {
+            case NotLoginException.NOT_TOKEN:
+                resultCode = ResultCode.USER_NOT_LOGIN;
+                break;
+            case NotLoginException.INVALID_TOKEN:
+                resultCode = ResultCode.USER_LOGIN_INVALID;
+                break;
+            case NotLoginException.TOKEN_TIMEOUT:
+                resultCode = ResultCode.USER_LOGIN_INVALID;
+                break;
+            case NotLoginException.BE_REPLACED:
+                resultCode = ResultCode.USER_LOGIN_BE_REPLACED;
+                break;
+            case NotLoginException.KICK_OUT:
+                resultCode = ResultCode.USER_LOGIN_BE_REPLACED;
+                break;
+            default:
+                resultCode = ResultCode.USER_NOT_LOGIN;
+                break;
         }
 
         // 返回给前端

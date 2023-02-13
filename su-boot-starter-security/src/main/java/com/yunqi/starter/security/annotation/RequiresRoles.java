@@ -3,7 +3,7 @@ package com.yunqi.starter.security.annotation;
 
 import cn.dev33.satoken.annotation.SaCheckRole;
 import cn.dev33.satoken.annotation.SaMode;
-import com.yunqi.starter.security.spi.StpUtil;
+import com.yunqi.starter.security.spi.SecurityUtil;
 import org.springframework.core.annotation.AliasFor;
 
 import java.lang.annotation.ElementType;
@@ -16,7 +16,7 @@ import java.lang.annotation.Target;
  * <p> 可标注在函数、类上（效果等同于标注在此类的所有方法上）
  * Created by @author CHQ on 2022/2/27
  */
-@SaCheckRole(type = StpUtil.TYPE)
+@SaCheckRole(type = SecurityUtil.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ ElementType.METHOD, ElementType.TYPE})
 public @interface RequiresRoles {

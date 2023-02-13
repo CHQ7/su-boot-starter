@@ -2,20 +2,20 @@ package com.yunqi.starter.security.utils;
 
 import cn.dev33.satoken.session.SaSession;
 import com.yunqi.starter.common.lang.Strings;
-import com.yunqi.starter.security.spi.StpUtil;
+import com.yunqi.starter.security.spi.SecurityUtil;
 
 /**
  * 安全认证工具类
  * Created by @author CHQ on 2022/2/16
  */
-public class SecurityUtil {
+public class AuthUtil {
 
     /**
      * 获取当前会话账号id, 如果未登录，则抛出异常
      * @return 账号id
      */
     public static String getUserId() {
-        return Strings.sNull(StpUtil.getLoginId());
+        return Strings.sNull(SecurityUtil.getLoginId());
     }
 
     /**
@@ -23,7 +23,7 @@ public class SecurityUtil {
      * @return Session对象
      */
     public static SaSession getSession() {
-        return StpUtil.getSession(true);
+        return SecurityUtil.getSession(true);
     }
 
     /**

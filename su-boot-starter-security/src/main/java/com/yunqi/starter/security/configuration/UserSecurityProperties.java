@@ -9,16 +9,16 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  */
 @Getter
 @Setter
-@ConfigurationProperties(prefix = SecurityProperties.PREFIX)
-public class SecurityProperties {
+@ConfigurationProperties(prefix = UserSecurityProperties.PREFIX)
+public class UserSecurityProperties {
 
-    public static final String PREFIX = "su.security";
+    public static final String PREFIX = "su.security.user";
 
     /** 是否开启 */
     boolean enabled = true;
 
     /** token名称 (同时也是cookie名称) */
-    private String tokenName = "x-token";
+    private String tokenName = "authentication";
 
     /** token的长久有效期(单位:秒) 默认30天, -1代表永久 */
     private long timeout = 60 * 60 * 24 * 30;

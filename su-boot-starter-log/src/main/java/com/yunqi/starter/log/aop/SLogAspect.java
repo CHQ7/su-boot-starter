@@ -13,7 +13,7 @@ import com.yunqi.starter.log.configuration.LogProperties;
 import com.yunqi.starter.log.model.SysLog;
 import com.yunqi.starter.log.provider.ISysLogProvider;
 import com.yunqi.starter.log.provider.impl.SysLogProviderDefaultImpl;
-import com.yunqi.starter.security.utils.SecurityUtil;
+import com.yunqi.starter.security.utils.AuthUtil;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.AfterReturning;
@@ -191,10 +191,10 @@ public class SLogAspect {
         sysLog.setCreatedAt(System.currentTimeMillis());
         sysLog.setUpdatedAt(System.currentTimeMillis());
         // 设置操作人
-        sysLog.setCreatedById(SecurityUtil.getUserId());
-        sysLog.setCreatedBy(SecurityUtil.getUserNickname());
-        sysLog.setUpdatedById(SecurityUtil.getUserId());
-        sysLog.setUpdatedBy(SecurityUtil.getUserNickname());
+        sysLog.setCreatedById(AuthUtil.getUserId());
+        sysLog.setCreatedBy(AuthUtil.getUserNickname());
+        sysLog.setUpdatedById(AuthUtil.getUserId());
+        sysLog.setUpdatedBy(AuthUtil.getUserNickname());
         String ip = Lang.getIP(req);
         // 获取操作地址
         sysLog.setIp(ip);

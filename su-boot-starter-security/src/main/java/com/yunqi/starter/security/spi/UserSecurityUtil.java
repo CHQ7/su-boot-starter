@@ -1,33 +1,49 @@
 package com.yunqi.starter.security.spi;
 
 import cn.dev33.satoken.SaManager;
+import cn.dev33.satoken.config.SaTokenConfig;
 import cn.dev33.satoken.fun.SaFunction;
 import cn.dev33.satoken.listener.SaTokenEventCenter;
 import cn.dev33.satoken.session.SaSession;
 import cn.dev33.satoken.stp.SaLoginModel;
 import cn.dev33.satoken.stp.SaTokenInfo;
 import cn.dev33.satoken.stp.StpLogic;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 /**
- * Sa-Token 权限认证工具类
- * Created by @author CHQ on 2022/2/27
+ * 账号认证工具类 [ USER ]
+ * Created by @author CHQ on @date 2022/1/5
  */
-public class StpUtil {
+@Component
+public class UserSecurityUtil {
 
+    public  static SaTokenConfig userTokenConfig;
 
-    private StpUtil() {}
+    public  UserSecurityUtil(SaTokenConfig userTokenConfig) {
+        UserSecurityUtil.userTokenConfig = userTokenConfig;
+    }
+
+    private UserSecurityUtil() {}
 
     /**
      * 账号类型标识
      */
-    public static final String TYPE = "login";
+    public static final String TYPE = "user";
 
     /**
      * 底层的 StpLogic 对象
      */
-    public static StpLogic stpLogic = new StpLogic(TYPE);
+    public static StpLogic stpLogic = new StpLogic(TYPE) {
+
+        @Override
+        public SaTokenConfig  getConfig() {
+            return userTokenConfig;
+        }
+    };
 
     /**
      * 获取当前 StpLogic 的账号类型
@@ -1093,6 +1109,5 @@ public class StpUtil {
     public static void closeSafe(String service) {
         stpLogic.closeSafe(service);
     }
+
 }
-
-
