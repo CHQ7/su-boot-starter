@@ -11,7 +11,7 @@
 - PS: 注意 `su-boot-starter-security` 版本，请到仓库查看最新版本
 ```
 <dependency>
-  <groupId>com.yunqi</groupId>
+  <groupId>com.yunqi.starter</groupId>
   <artifactId>su-boot-starter-security</artifactId>
   <version>1.0.0</version>
 </dependency>
