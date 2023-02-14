@@ -7,7 +7,7 @@
 
 ```xml
 <dependency>
-  <groupId>com.yunqi</groupId>
+  <groupId>com.yunqi.starter</groupId>
   <artifactId>su-boot-starter-jasypt</artifactId>
   <version>1.0.0</version>
 </dependency>
@@ -43,8 +43,14 @@ public class JasyptTest {
     public void testEncrypt() {
         // 明文
         String message = "Hello World";
-        // 密文
+        // 加密
         String encryptedMessage = stringEncryptor.encrypt(message);
+        // 解密
+        String decryptMessage = stringEncryptor.decrypt(encryptedMessage);
+        
+        // 打印
+        log.info(encryptedMessage);
+        log.info(decryptMessage);
     }
 }
 ```
