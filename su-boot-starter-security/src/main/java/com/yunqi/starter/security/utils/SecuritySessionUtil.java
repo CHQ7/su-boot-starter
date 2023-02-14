@@ -8,7 +8,7 @@ import com.yunqi.starter.security.spi.SecurityUtil;
  * 安全认证工具类
  * Created by @author CHQ on 2022/2/16
  */
-public class AuthUtil {
+public class SecuritySessionUtil {
 
     /**
      * 获取当前会话账号id, 如果未登录，则抛出异常

@@ -60,9 +60,8 @@ SecuritySessionUtil.setUserNickname(String nickname)
 /**
  * 自定义权限验证接口扩展
  */
-@Primary      // 默认优先选择
 @Component    // 保证此类被SpringBoot扫描，完成Sa-Token的自定义权限验证扩展 
-public class AuthProviderImpl implements IAuthProvider {
+public class CustomProviderImpl implements IAuthProvider {
 
     /**
      * 返回一个账号所拥有的权限码集合 

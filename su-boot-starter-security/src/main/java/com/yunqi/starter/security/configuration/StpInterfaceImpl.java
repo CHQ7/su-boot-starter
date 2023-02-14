@@ -2,6 +2,7 @@ package com.yunqi.starter.security.configuration;
 
 import cn.dev33.satoken.stp.StpInterface;
 import com.yunqi.starter.security.provider.IAuthProvider;
+import lombok.extern.slf4j.Slf4j;
 import org.nutz.lang.Strings;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.context.annotation.Configuration;
@@ -15,12 +16,14 @@ import java.util.List;
  * 用于提供用户的权限信息（permissionList 和 roleList）。
  * Created by @author CHQ on 2022/2/16
  */
+@Slf4j
 @Configuration
 @ConditionalOnClass(StpInterface.class) // 当 StpInterface 类存在时，才会创建该配置类的实例
 public class StpInterfaceImpl implements StpInterface {
 
     @Resource
     private IAuthProvider iAuthProvider;
+
 
     /**
      * 返回指定账号id所拥有的权限码集合
