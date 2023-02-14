@@ -11,7 +11,7 @@
 
 ```xml
 <dependency>
-  <groupId>com.yunqi</groupId>
+  <groupId>com.yunqi.starter</groupId>
   <artifactId>su-boot-starter-security</artifactId>
   <version>1.0.0</version>
 </dependency>
@@ -120,7 +120,7 @@ public class LoginController {
         return Result.error("登录失败");
     }
 
-    // 查询登录状态  ---- http://localhost:8081/acc/isLogin
+    // 查询登录状态  ---- http://localhost:8081/admin/isLogin
     @RequestMapping("isLogin")
     public Result isLogin() {
         return Result.ok("是否登录：" + SecurityUtil.isLogin());
@@ -132,7 +132,7 @@ public class LoginController {
         return Result.data(SecurityUtil.getTokenInfo());
     }
 
-    // 测试注销  ---- http://localhost:8081/acc/logout
+    // 测试注销  ---- http://localhost:8081/admin/logout
     @RequestMapping("logout")
     public Result logout() {
         SecurityUtil.logout();
