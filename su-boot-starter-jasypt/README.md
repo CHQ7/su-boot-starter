@@ -15,7 +15,7 @@
 
 # 使用
 
-- 1.在`application.yml`配置文件中，添加 Jasypt 的配置：
+- 1.你可以零配置启动项目 ，但同时你也可以在`application.yml`配置文件中，添加 Jasypt 的配置：
 
 ```yml
 su:
