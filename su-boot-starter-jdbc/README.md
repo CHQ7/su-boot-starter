@@ -7,7 +7,7 @@
 
 ```xml
 <dependency>
-  <groupId>com.yunqi</groupId>
+  <groupId>com.yunqi.starter</groupId>
   <artifactId>su-boot-starter-jdbc</artifactId>
   <version>1.0.0</version>
 </dependency>
