@@ -9,7 +9,7 @@
 
 ```xml
 <dependency>
-  <groupId>com.yunqi</groupId>
+  <groupId>com.yunqi.starter</groupId>
   <artifactId>su-boot-starter-mail</artifactId>
   <version>1.0.0</version>
 </dependency>
@@ -39,6 +39,7 @@ su:
 @Autowired
 private IMailProvider mailProvider;
 
+// 发送文本邮件
 public void sendTextMail(){
     Email email = new Email();
     email.setSubject("Test Text Mail");
@@ -47,6 +48,7 @@ public void sendTextMail(){
     mailProvider.sendText(email);
 }
 
+// 发送HTML邮件
 public void sendHtmlMail(){
     Email email = new Email();
     email.setSubject("Test HTML Mail");
