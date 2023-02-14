@@ -17,60 +17,132 @@
 </dependency>
 ```
 
-# 使用
+# 注解鉴权
 
-- 使用 `su-boot-starter-jdbc` 非常简单，只需要在配置文件中配置数据库信息即可：
+注解鉴权 —— 优雅的将鉴权与业务代码分离！
 
-```yml
-spring:
-  datasource:
-    url: jdbc:mysql://localhost:3306/test
-    username: root
-    password: 123456
-```
+- @RequiresAuthentication: 登录校验 —— 只有登录之后才能进入该方法。
+- @RequiresRoles("admin"): 角色校验 —— 必须具有指定角色标识才能进入该方法。
+- @RequiresPermissions("user:add"): 权限校验 —— 必须具有指定权限才能进入该方法。
 
-- 然后就可以通过以下代码获取数据源：
+# Session会话
 
-```
-@Autowired
-private DataSource dataSource;
-```
-
-- 最后，使用 jdbcTemplate 进行数据库操作：
+- **Session是什么？**
+- Session是会话中专业的数据缓存组件，通过 Session 我们可以很方便的缓存一些高频读写数据，提高程序性能，例如：
 
 ```
-JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-List<Map<String, Object>> list = jdbcTemplate.queryForList("select * from user");
+// 获取当前会话账号id, 如果未登录，则抛出异常
+SecuritySessionUtil.getUserId()
+
+// 获取当前会话的Session
+SecuritySessionUtil.getSession()
+
+// 获取当前会话账号
+SecuritySessionUtil.getUserName()
+
+// 设置当前会话账号
+SecuritySessionUtil.setUserName(String username)
+
+// 获取当前会话昵称
+SecuritySessionUtil.getUserNickname()
+
+// 设置当前会话昵称
+SecuritySessionUtil.setUserNickname(String nickname)
 ```
 
-#  Druid 监控
+# 配置权限认证提供者
 
-- 启动您的应用程序，并通过浏览器访问 http://localhost:8080/druid/ 即可查看 Druid 监控页面
+> 因为每个项目的需求不同，其权限设计也千变万化，因此 [ 获取当前账号权限码集合 ] 这一操作不可能内置到框架中， 所以 `su-boot-starter-security` 将此操作以接口的方式暴露给你，以方便你根据自己的业务逻辑进行重写。
+
+- 你需要做的就是新建一个类，实现 `IAuthProvider ` 接口，并使用 @Component 注解注册为Spring Bean。例如以下代码：
+
+```
+/**
+ * 自定义权限验证接口扩展
+ */
+@Primary      // 默认优先选择
+@Component    // 保证此类被SpringBoot扫描，完成Sa-Token的自定义权限验证扩展 
+public class AuthProviderImpl implements IAuthProvider {
+
+    /**
+     * 返回一个账号所拥有的权限码集合 
+     *
+     * @param loginId  账号id
+     * @return 该账号id具有的权限码集合
+     */
+    @Override
+    public List<String> getPermissionList(String userId) {
+       // 本list仅做模拟，实际项目中要根据具体业务逻辑来查询权限
+        List<String> list = new ArrayList<String>();    
+        list.add("101");
+        list.add("user.add");
+        list.add("user.update");
+        list.add("user.get");
+        // list.add("user.delete");
+        list.add("art.*");
+        return list;
+    }
+
+    /**
+     * 返回一个账号所拥有的角色标识集合 (权限与角色可分开校验)
+     *
+     * @param loginId  账号id
+     * @return 该账号id具有的角色标识集合
+     */
+    @Override
+    public List<String> getRoleList(String userId) {
+        return sysUserService.getRoleList(userId);
+    }
+
+}
+
+```
+
+# 登录认证
+
+- 来个小测试，加深一下理解：
+
+```
+/**
+ * 登录测试 
+ */
+@RestController
+@RequestMapping("/admin/")
+public class LoginController {
+
+    // 测试登录  ---- http://localhost:8081/admin/doLogin?name=zhang&pwd=123456
+    @RequestMapping("doLogin")
+    public Result doLogin(String name, String pwd) {
+        // 此处仅作模拟示例，真实项目需要从数据库中查询数据进行比对 
+        if("zhang".equals(name) && "123456".equals(pwd)) {
+            SecurityUtil.login(10001);
+            return Result.ok("登录成功");
+        }
+        return Result.error("登录失败");
+    }
+
+    // 查询登录状态  ---- http://localhost:8081/acc/isLogin
+    @RequestMapping("isLogin")
+    public Result isLogin() {
+        return Result.ok("是否登录：" + SecurityUtil.isLogin());
+    }
+
+    // 查询 Token 信息  ---- http://localhost:8081/admin/tokenInfo
+    @RequestMapping("tokenInfo")
+    public Result tokenInfo() {
+        return Result.data(SecurityUtil.getTokenInfo());
+    }
+
+    // 测试注销  ---- http://localhost:8081/acc/logout
+    @RequestMapping("logout")
+    public Result logout() {
+        SecurityUtil.logout();
+        return Result.ok();
+    }
+
+}
+```
 
 
-# 配置说明
 
-| 名称 | 默认值              | 备注 |
-| --- |------------------| --- |
-| enabled | true             | 是否开启组件 |
-| initialSize | 5 | 初始化时建立物理连接的个数 |
-| minIdle | 10| 最小连接池数量 |
-| maxActive | 50 | 最大连接池数量 |
-| maxWait | 6000 | 获取连接时最大等待时间，单位毫秒。配置了maxWait之后，缺省启用公平锁，并发效率会有所下降 |
-| timeBetweenEvictionRunsMillis | 60000 | 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 |
-| minEvictableIdleTimeMillis| 300000 | 配置一个连接在池中最小生存的时间，单位是毫秒 |
-| maxEvictableIdleTimeMillis | 900000 | 配置一个连接在池中最大生存的时间，单位是毫秒 |
-| validationQuery | SELECT 1 | 用来检测连接是否有效的sql |
-| testWhileIdle | true | 申请连接的时候检测，如果空闲时间大于timeBetweenEvictionRunsMillis，执行validationQuery检测连接是否有效 |
-| testOnBorrow | false| 申请连接时执行validationQuery检测连接是否有效，做了这个配置会降低性能 |
-| testOnReturn | false | 归还连接时执行validationQuery检测连接是否有效，做了这个配置会降低性能 |
-| poolPreparedStatements | false | 是否缓存preparedStatement，也就是PSCache。PSCache对支持游标的数据库性能提升巨大，比如说oracle。在mysql下建议关闭 |
-| maxPoolPreparedStatementPerConnectionSize | -1 | 要启用PSCache，必须配置大于0，当大于0时，poolPreparedStatements自动触发修改为true |
-| connectionProperties | druid.stat.mergeSql=true;druid.stat.slowSqlMillis=2000 | 通过connectProperties属性来打开mergeSql功能；慢SQL记录 |
-| webStatFilter.enabled | true | 是否开启 Druid Web 网络统计及健康 |
-| statViewServlet.urlPattern | /druid/* | Druid 的管理界面的访问路径 |
-| statViewServlet.allow| 127.0.0.1 | IP白名单 (没有配置或者为空，则允许所有访问) 127.0.0.1 只允许本机访问  |
-| statViewServlet.deny| | IP黑名单 (存在共同时，deny优先于allow) |
-| statViewServlet.loginUsername | root | 设置控制台登录的用户名 |
-| statViewServlet.loginPassword| root | 设置控制台登录的密码 |
-| statViewServlet.resetEnable| false| 是否能够重置数据 |
+
