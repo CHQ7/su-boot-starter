@@ -67,6 +67,6 @@ public void sendHtmlMail(){
 | smtp-port |  | 邮件服务器端口 |
 | user-name |             | 邮箱账号 |
 | password  |                | 邮箱密码 |
-| ssl       |           | 邮件服务器是否HTTPS |
 | from      |            | 邮箱用户名 |
+| ssl       | true | 邮件服务器是否HTTPS |
 | charset   | UTF-8          | 邮箱编码 |
