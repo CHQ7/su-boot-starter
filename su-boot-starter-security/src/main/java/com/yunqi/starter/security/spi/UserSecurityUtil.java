@@ -1,16 +1,12 @@
 package com.yunqi.starter.security.spi;
 
 import cn.dev33.satoken.SaManager;
-import cn.dev33.satoken.config.SaTokenConfig;
 import cn.dev33.satoken.fun.SaFunction;
 import cn.dev33.satoken.listener.SaTokenEventCenter;
 import cn.dev33.satoken.session.SaSession;
 import cn.dev33.satoken.stp.SaLoginModel;
 import cn.dev33.satoken.stp.SaTokenInfo;
 import cn.dev33.satoken.stp.StpLogic;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Component;
 
 import java.util.List;
 
@@ -18,14 +14,7 @@ import java.util.List;
  * 账号认证工具类 [ USER ]
  * Created by @author CHQ on @date 2022/1/5
  */
-@Component
 public class UserSecurityUtil {
-
-    public  static SaTokenConfig userTokenConfig;
-
-    public  UserSecurityUtil(SaTokenConfig userTokenConfig) {
-        UserSecurityUtil.userTokenConfig = userTokenConfig;
-    }
 
     private UserSecurityUtil() {}
 
@@ -37,13 +26,7 @@ public class UserSecurityUtil {
     /**
      * 底层的 StpLogic 对象
      */
-    public static StpLogic stpLogic = new StpLogic(TYPE) {
-
-        @Override
-        public SaTokenConfig  getConfig() {
-            return userTokenConfig;
-        }
-    };
+    public static StpLogic stpLogic = new StpLogic(TYPE);
 
     /**
      * 获取当前 StpLogic 的账号类型

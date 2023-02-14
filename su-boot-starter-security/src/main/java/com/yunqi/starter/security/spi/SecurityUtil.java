@@ -13,7 +13,6 @@ import java.util.List;
 /**
  * 账号认证工具类 [ ADMIN ]
  *
- *
  * Created by @author CHQ on 2022/2/27
  */
 public class SecurityUtil {

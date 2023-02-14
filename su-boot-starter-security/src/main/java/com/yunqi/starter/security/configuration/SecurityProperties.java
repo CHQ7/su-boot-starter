@@ -18,7 +18,7 @@ public class SecurityProperties {
     boolean enabled = true;
 
     /** token名称 (同时也是cookie名称) */
-    private String tokenName = "x-token";
+    private String tokenName = "authorizer_token";
 
     /** token的长久有效期(单位:秒) 默认30天, -1代表永久 */
     private long timeout = 60 * 60 * 24 * 30;

@@ -4,8 +4,10 @@ import cn.dev33.satoken.config.SaTokenConfig;
 import cn.dev33.satoken.interceptor.SaInterceptor;
 import cn.dev33.satoken.spring.SaBeanRegister;
 import cn.dev33.satoken.strategy.SaStrategy;
+import com.yunqi.starter.common.json.Json;
 import com.yunqi.starter.security.provider.IAuthProvider;
 import com.yunqi.starter.security.provider.impl.IAuthProviderDefaultImpl;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
@@ -24,6 +26,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 /**
  * Created by @author CHQ on 2022/2/16
  */
+@Slf4j
 @Configuration
 @ConditionalOnClass(SaTokenConfig.class)
 @ConditionalOnExpression("${su.security.enabled:true}")
@@ -48,6 +51,10 @@ public class SecurityAutoConfiguration implements WebMvcConfigurer {
     public SaTokenConfig saTokenConfig() {
         SaTokenConfig config = new SaTokenConfig();
         BeanUtils.copyProperties(properties, config);
+        if(config.getIsLog()){
+            log.info("自动装配 -> 权限组件");
+            log.info("打印 -> su.security 配置:\n{}", Json.toJson(config));
+        }
         return config;
     }
 
@@ -58,6 +65,9 @@ public class SecurityAutoConfiguration implements WebMvcConfigurer {
     @Bean
     @ConditionalOnMissingBean(IAuthProvider.class)
     public IAuthProvider iAuthProvider() {
+        if(properties.getIsLog()){
+            log.info("打印 -> 开发者未实现 IAuthProvider 接口，则使用此默认接口");
+        }
         return new IAuthProviderDefaultImpl();
     }
 
