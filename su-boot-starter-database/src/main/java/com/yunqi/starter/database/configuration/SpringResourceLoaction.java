@@ -60,7 +60,7 @@ public class SpringResourceLoaction extends ResourceLocation implements Applicat
     }
 
 
-    public class SpringResource extends NutResource {
+    public static class SpringResource extends NutResource {
 
         protected Resource resource;
 
