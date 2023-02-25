@@ -14,6 +14,7 @@ import javax.annotation.Resource;
 import java.util.Arrays;
 
 /**
+ * 初始化Nutz
  * Created by @author CHQ on 2022/2/1
  */
 @Configuration
@@ -44,7 +45,8 @@ public class DatabaseInitializer {
         Daos.DEFAULT_VARCHAR_WIDTH = properties.getGlobal().getDefaultVarcharWidth();
         boolean create = properties.getRuntime().isCreate();
         boolean migration = properties.getRuntime().isMigration();
-        Arrays.stream(properties.getRuntime().getBasepackage()).forEach(pkg -> {
+        // 考虑使用并行流（parallel stream）来提高性能
+        Arrays.stream(properties.getRuntime().getBasepackage()).parallel().forEach(pkg -> {
             if (create) {
                 Daos.createTablesInPackage(dao, pkg, properties.getRuntime().isFoceCreate());
             }

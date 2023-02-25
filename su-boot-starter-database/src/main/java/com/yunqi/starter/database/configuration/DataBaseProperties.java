@@ -1,43 +1,52 @@
 package com.yunqi.starter.database.configuration;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
  * Created by @author CHQ on 2022/1/29
  */
-@Data
-@ConfigurationProperties(prefix = "su.database")
+@Getter
+@Setter
+@ConfigurationProperties(prefix = DataBaseProperties.PREFIX)
 public class DataBaseProperties {
+
+    public static final String PREFIX = "su.database";
 
     /** 是否开启 */
     boolean enabled = true;
+
+    /** 是否打印操作日志 */
+    private Boolean log = false;
+
     /**
      * 运行期配置
      */
-    Runtime runtime = new Runtime();
+    private Runtime runtime = new Runtime();
 
     /**
      * sql管理器配置
      */
-    SqlManager sqlManager = new SqlManager();
+    private SqlManager sqlManager = new SqlManager();
 
     /**
      * sql 模板处理插件配置
      */
-    SqlTemplate sqlTemplate = new SqlTemplate();
+    private SqlTemplate sqlTemplate = new SqlTemplate();
 
     /**
      * Interceptor
      */
-    Interceptor interceptor = new Interceptor();
+    private Interceptor interceptor = new Interceptor();
 
     /**
      * dao的全局设置
      */
-    Global global = new Global();
+    private Global global = new Global();
 
-    @Data
+    @Getter
+    @Setter
     public static class Global {
         /** 是否检查字段为数据库的关键字 */
         private boolean checkColumnNameKeyword = false;
@@ -54,42 +63,35 @@ public class DataBaseProperties {
         private int defaultVarcharWidth = 128;
     }
 
-    @Data
+    @Getter
+    @Setter
     public static class SqlTemplate {
+
+        /** 是否启用标识 */
+        boolean enable = false;
+
+        /** 模版引擎类型 */
+        Type type = Type.BEETL;
+
         public enum Type {
             BEETL, FREEMARKER, JETBRICK, VELOCITY
         }
-
-        /**
-         * 模版引擎类型
-         */
-        Type type = Type.BEETL;
-
-        /**
-         * 是否启用标识
-         */
-        boolean enable = false;
-
     }
 
-    @Data
+    @Getter
+    @Setter
     public static class Interceptor {
-        /**
-         * sql 记时
-         */
+        /**  sql 记时 */
         boolean time = true;
     }
 
-    @Data
+    @Getter
+    @Setter
     public static class SqlManager {
-        /**
-         * 模式
-         */
+        /** 模式 */
         private Mode mode;
 
-        /**
-         * 路径列表
-         */
+        /**  路径列表 */
         private String[] paths;
 
         public enum Mode {
@@ -97,41 +99,28 @@ public class DataBaseProperties {
         }
     }
 
-    @Data
-    public class Runtime {
-        /**
-         * 自动建表
-         */
+    @Getter
+    @Setter
+    public static class Runtime {
+        /** 自动建表 */
         private boolean create = true;
 
-        /**
-         * 自动变更
-         */
+        /** 自动变更 */
         private boolean migration = true;
 
-        /**
-         * 实体包名
-         */
+        /** 实体包名 */
         private String[] basepackage;
 
-        /**
-         * 强制创建<删表重建>
-         */
+        /** 强制创建<删表重建> */
         private boolean foceCreate = false;
 
-        /**
-         * 是否增加列
-         */
+        /** 是否增加列  */
         private boolean addColumn = true;
 
-        /**
-         * 是否删除列
-         */
+        /** 是否删除列 */
         private boolean deleteColumn = false;
 
-        /**
-         * 检查索引
-         */
+        /** 检查索引 */
         private boolean checkIndex = false;
     }
 }

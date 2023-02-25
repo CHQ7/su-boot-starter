@@ -11,7 +11,7 @@
 | **su-boot-starter-jdbc**     | 数据库连接组件  | 服务层  | 详见 [README](su-boot-starter-jdbc/README.md)     | 生产  | 
 | **su-boot-starter-mail**     | 邮件组件     | 服务层  | 详见 [README](su-boot-starter-mail/README.md)     | 生产  |
 | **su-boot-starter-security** | 权限组件     | 控制层  | 详见 [README](su-boot-starter-security/README.md) | 生产  |
-| su-boot-starter-database     | 数据库组件    | 服务层  | 详见 [README](su-boot-starter-database/README.md) | 生产  |
+| **su-boot-starter-database** | 数据库组件    | 服务层  | 详见 [README](su-boot-starter-database/README.md) | 生产  |
 | su-boot-starter-log          | 日志组件     | 控制层  | 详见 [README](su-boot-starter-log/README.md)      | 生产  |
 | su-boot-starter-web          | web组件    | 所有项目 | 详见 [README](su-boot-starter-web/README.md)      | 生产  |
 | su-boot-starter-wx           | 微信小程序组件  | 所有项目 | 详见 [README](su-boot-starter-wx/README.md)       | 生产  |

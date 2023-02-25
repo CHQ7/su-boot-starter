@@ -1,5 +1,6 @@
 package com.yunqi.starter.database.configuration;
 
+import com.yunqi.starter.common.json.Json;
 import com.yunqi.starter.jdbc.configuration.DruidDataSourceAutoConfigure;
 import lombok.extern.slf4j.Slf4j;
 import org.nutz.dao.Dao;
@@ -24,6 +25,7 @@ import java.util.Map;
 
 
 /**
+ * 集成Nutz
  * Created by @author CHQ on 2022/1/29
  */
 @Slf4j
@@ -48,6 +50,11 @@ public class DataBaseAutoConfiguration {
     @ConditionalOnMissingBean
     public Dao dao(DataSource dataSource, SpringDaoRunner daoRunner, ApplicationContext context,
                    DataBaseProperties properties){
+        if(properties.getLog()){
+            log.info("自动装配 -> 数据库组件");
+            log.info("配置如下 -> \n{}", Json.toJson(properties));
+        }
+
         // 初始化Nutz
         NutDao dao = new NutDao(dataSource);
         dao.setRunner(daoRunner);
@@ -91,7 +98,5 @@ public class DataBaseAutoConfiguration {
         // 使用相对路径 临时文件最大个数为 1000 个
         return new NutFilePool(".temp", 0);
     }
-
-
 
 }

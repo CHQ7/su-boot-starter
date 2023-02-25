@@ -1,9 +1,7 @@
 package com.yunqi.starter.database.model;
 
-import com.yunqi.starter.common.json.Json;
-import com.yunqi.starter.common.json.JsonFormat;
 import com.yunqi.starter.common.lang.Strings;
-import com.yunqi.starter.security.spi.SecurityUtil;
+import com.yunqi.starter.security.utils.SecuritySessionUtil;
 import lombok.Data;
 import org.nutz.dao.entity.annotation.*;
 import org.nutz.dao.interceptor.annotation.PrevInsert;
@@ -65,7 +63,7 @@ public abstract class BaseModel implements Serializable {
 
     @Override
     public String toString() {
-        return Json.toJson(this, JsonFormat.compact());
+        return this.toString();
     }
 
     public Boolean flag() {
@@ -108,10 +106,10 @@ public abstract class BaseModel implements Serializable {
      */
     private String getUidString(String uid) {
         // 获取Session中的用户ID
-        try {
-            return Strings.sNull(SecurityUtil.getLoginId());
-        } catch (Exception ignored) {
+        if (Strings.isNotBlank(SecuritySessionUtil.getUserId())) {
+            return SecuritySessionUtil.getUserId();
         }
+
         // 如果Session中的用户ID不存在,则验证记录是否存在用户ID
         if (Strings.isNotBlank(uid)) {
             return uid;
@@ -126,10 +124,10 @@ public abstract class BaseModel implements Serializable {
      */
     private String getUserNickname(String nickname) {
         // 获取Session中的用户名
-        try {
-            return Strings.sNull(SecurityUtil.getSession(true).get("nickname"));
-        } catch (Exception ignored) {
+        if (Strings.isNotBlank(SecuritySessionUtil.getUserNickname())) {
+            return SecuritySessionUtil.getUserNickname();
         }
+
         // 如果Session中的用户名不存在,则验证记录是否存在用户名
         if (Strings.isNotBlank(nickname)) {
             return nickname;

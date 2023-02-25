@@ -44,13 +44,13 @@ public class SpringResourceLoaction extends ResourceLocation implements Applicat
                 if (resource.getFilename() == null || !pattern.matcher(resource.getFilename()).find())
                     continue;
                 SpringResource sr = new SpringResource();
-                sr.resource = resource;
+                sr.springResource = resource;
                 sr.setName(resource.getFilename());
                 sr.setSource("spring");
                 list.add(sr);
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException("扫描资源时发生了 IO 异常", e);
         }
     }
 
@@ -62,11 +62,11 @@ public class SpringResourceLoaction extends ResourceLocation implements Applicat
 
     public static class SpringResource extends NutResource {
 
-        protected Resource resource;
+        protected Resource springResource;
 
         @Override
         public InputStream getInputStream() throws IOException {
-            return resource.getInputStream();
+            return springResource.getInputStream();
         }
 
         /* (non-Javadoc)

@@ -1,6 +1,5 @@
 package com.yunqi.starter.jdbc.configuration;
 
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -111,7 +110,8 @@ public class DruidProperties {
     statViewServlet statViewServlet = new statViewServlet();
 
 
-    @Data
+    @Getter
+    @Setter
     public static class webStatFilter {
 
         /** 是否开启 */
@@ -119,7 +119,8 @@ public class DruidProperties {
 
     }
 
-    @Data
+    @Getter
+    @Setter
     public static class statViewServlet {
 
         /** 是否开启 */

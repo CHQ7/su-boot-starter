@@ -5,7 +5,7 @@
     <parent>
         <artifactId>su-boot-starter-parent</artifactId>
         <groupId>com.yunqi.starter</groupId>
-        <version>1.1.15</version>
+        <version>1.1.16</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -51,6 +51,7 @@
         <dependency>
             <groupId>com.yunqi.starter</groupId>
             <artifactId>su-boot-starter-security</artifactId>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 
