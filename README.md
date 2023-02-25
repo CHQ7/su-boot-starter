@@ -21,7 +21,7 @@
 
 ## 如何贡献
 
-非常欢迎你的加入！[提一个 Issue](https://github.com/JsckChin/su-boot-starter/issues) 或者提交一个 Pull Request。
+非常欢迎你的加入！[提一个 Issue](https://github.com/CHQ7/su-boot-starter/issues) 或者提交一个 Pull Request。
 
 **Pull Request:**
 
