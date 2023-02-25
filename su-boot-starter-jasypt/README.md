@@ -57,17 +57,17 @@ public class JasyptTest {
 
 # 配置说明
 
-| 名称 | 默认值              | 备注 |
-| --- |------------------| --- |
-| enabled | true             | 是否开启组件 |
-| password | jasypt           | 加密密钥 |
-| algorithm | PBEWITHHMACSHA512ANDAES_256 | 加密算法 |
-| keyObtentionIterations | 1000             | 密钥获取次数 |
-| poolSize | 1                | 密钥池大小 |
-| providerName | SunJCE                | 加密提供者名称 |
-| saltGeneratorClassName | org.jasypt.salt.RandomSaltGenerator              | Salt生成器类名 |
-| ivGeneratorClassName | org.jasypt.iv.RandomIvGenerator           | IV生成器类名 |
-| stringOutputType | base64           | 加密字符串输出类型 |
+| 名称                     | 默认值                                 | 备注        |
+|------------------------|-------------------------------------|-----------|
+| enabled                | true                                | 是否开启组件    |
+| password               | jasypt                              | 加密密钥      |
+| algorithm              | PBEWITHHMACSHA512ANDAES_256         | 加密算法      |
+| keyObtentionIterations | 1000                                | 密钥获取次数    |
+| poolSize               | 1                                   | 密钥池大小     |
+| providerName           | SunJCE                              | 加密提供者名称   |
+| saltGeneratorClassName | org.jasypt.salt.RandomSaltGenerator | Salt生成器类名 |
+| ivGeneratorClassName   | org.jasypt.iv.RandomIvGenerator     | IV生成器类名   |
+| stringOutputType       | base64                              | 加密字符串输出类型 |
 
 # 注意事项
 

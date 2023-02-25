@@ -60,13 +60,13 @@ public void sendHtmlMail(){
 
 # 配置说明
 
-| 名称        | 默认值             | 备注 |
-|-----------|-----------------| --- |
-| enabled   | true            | 是否开启组件 |
-| host-name |           | 邮件服务器地址 |
-| smtp-port |  | 邮件服务器端口 |
-| user-name |             | 邮箱账号 |
-| password  |                | 邮箱密码 |
-| from      |            | 邮箱用户名 |
-| ssl       | true | 邮件服务器是否HTTPS |
-| charset   | UTF-8          | 邮箱编码 |
+| 名称        | 默认值   | 备注           |
+|-----------|-------|--------------|
+| enabled   | true  | 是否开启组件       |
+| host-name |       | 邮件服务器地址      |
+| smtp-port |       | 邮件服务器端口      |
+| user-name |       | 邮箱账号         |
+| password  |       | 邮箱密码         |
+| from      |       | 邮箱用户名        |
+| ssl       | true  | 邮件服务器是否HTTPS |
+| charset   | UTF-8 | 邮箱编码         |

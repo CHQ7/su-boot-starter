@@ -142,6 +142,27 @@ public class LoginController {
 }
 ```
 
+# 配置说明
+
+| 名称                     | 默认值               | 备注                                                                 |
+|------------------------|-------------------|--------------------------------------------------------------------|
+| enabled                | true              | 是否开启组件                                                             |
+| tokenName              | authorizer_token  | token名称 (同时也是cookie名称)                                             |
+| timeout                | 60 * 60 * 24 * 30 | token的长久有效期(单位:秒) 默认30天, -1代表永久                                    |
+| activityTimeout        | -1                | token临时有效期 [指定时间内无操作就视为token过期] (单位: 秒), 默认-1 代表不限制                |
+| isConcurrent           | false             | 是否允许同一账号并发登录 (为true时允许一起登录, 为false时新登录挤掉旧登录)                       |
+| isShare                | true              | 在多人登录同一账号时，是否共用一个token (为true时所有登录共用一个token, 为false时每次登录新建一个token) |
+| isReadBody             | true              | 是否尝试从请求体里读取token                                                   |
+| isReadHead             | true              | 是否尝试从header里读取token                                                |
+| isReadCookie           | true              | 是否尝试从cookie里读取token                                                |
+| tokenStyle             | uuid              | token风格(默认可取值：uuid、simple-uuid、random-32、random-64、random-128、tik) |
+| dataRefreshPeriod      | 30                | 默认dao层实现类中，每次清理过期数据间隔的时间 (单位: 秒) ，默认值30秒，设置为-1代表不启动定时清理            |
+| tokenSessionCheckLogin | true              | 获取[token专属session]时是否必须登录 (如果配置为true，会在每次获取[token-session]时校验是否登录) |
+| autoRenew              | true              | 是否打开自动续签 (如果此值为true, 框架会在每次直接或间接调用getLoginId()时进行一次过期检查与续签操作)      |
+| tokenPrefix            |                   | token前缀, 格式样例(satoken: Bearer xxxx-xxxx-xxxx-xxxx)                 |
+| isLog                  | false             | 是否打印操作日志                                                           |
+
+
 
 
 
