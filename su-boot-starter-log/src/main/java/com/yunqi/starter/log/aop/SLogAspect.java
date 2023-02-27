@@ -8,6 +8,7 @@ import com.yunqi.starter.common.lang.Lang;
 import com.yunqi.starter.common.lang.Strings;
 import com.yunqi.starter.common.lang.mvc.Mvcs;
 import com.yunqi.starter.common.utils.IPUtil;
+import com.yunqi.starter.log.annotation.SLog;
 import com.yunqi.starter.log.configuration.LogProperties;
 import com.yunqi.starter.log.model.SLogRecord;
 import com.yunqi.starter.log.provider.ILogRecordProvider;
@@ -88,11 +89,11 @@ public class SLogAspect {
             return;
         }
 
-        // 是否开启
+        // 组件是否开启
         if (properties != null && properties.isEnabled()) {
 
             // 获取注解
-            com.yunqi.starter.log.annotation.SLog slog = getAnnotationLog(joinPoint);
+            SLog slog = getAnnotationLog(joinPoint);
             if(slog == null){
                 return;
             }
@@ -106,14 +107,14 @@ public class SLogAspect {
             // >> 获取请求方法
             // >> 设置请求状态
             // *=========================*
-            SLogRecord sysLog = new SLogRecord();
-            sysLog.setTag(slog.tag());
-            sysLog.setMsg(Strings.isNotEmpty(slog.value())? slog.value() : slog.type().getLabel());
-            sysLog.setSrc(joinPoint.getSignature().getDeclaringTypeName() + "#" + joinPoint.getSignature().getName());
-            sysLog.setSuccess(true);
+            SLogRecord logRecord = new SLogRecord();
+            logRecord.setTag(slog.tag());
+            logRecord.setMsg(Strings.isNotEmpty(slog.value())? slog.value() : slog.type().getLabel());
+            logRecord.setSrc(joinPoint.getSignature().getDeclaringTypeName() + "#" + joinPoint.getSignature().getName());
+            logRecord.setSuccess(true);
 
             // 获取请求终端信息
-            terminal(sysLog);
+            terminal(logRecord);
 
             // 是否需要保存请求参数Body
             if(slog.param()){
@@ -123,27 +124,27 @@ public class SLogAspect {
                     // 这里截取5000个字符
                     param = StrUtil.sub(Json.toJson(joinPoint.getArgs()[0], JsonFormat.compact()), 0, 5000);
                 }
-                sysLog.setParam(param);
+                logRecord.setParam(param);
             }
 
             // 是否需要保存请求结果
             if(slog.result()){
-                sysLog.setResult(Json.toJson(res));
+                logRecord.setResult(Json.toJson(res));
             }
 
             // 记录异常消息
             if(ex != null){
-                sysLog.setSuccess(false);
-                sysLog.setResult( StrUtil.sub(ex.getMessage(),0, 2000));
+                logRecord.setSuccess(false);
+                logRecord.setResult( StrUtil.sub(ex.getMessage(),0, 2000));
             }
 
             // 处理耗时(毫秒)
-            sysLog.setExecuteTime(System.currentTimeMillis() - beginTime);
+            logRecord.setExecuteTime(System.currentTimeMillis() - beginTime);
 
             // ========================================== 结束请求日志 ==========================================
 
             // 记录日志
-            logRecordProvider.record(sysLog);
+            logRecordProvider.record(logRecord);
         }
     }
 
@@ -164,44 +165,42 @@ public class SLogAspect {
      * @param joinPoint 切入点
      * @return          Slog
      */
-    private com.yunqi.starter.log.annotation.SLog getAnnotationLog(JoinPoint joinPoint) {
+    private SLog getAnnotationLog(JoinPoint joinPoint) {
         Signature signature = joinPoint.getSignature();
         MethodSignature methodSignature = (MethodSignature) signature;
         Method method = methodSignature.getMethod();
 
         if (method != null) {
-            return method.getAnnotation(com.yunqi.starter.log.annotation.SLog.class);
+            return method.getAnnotation(SLog.class);
         }
         return null;
     }
 
     /**
      * 获取请求终端信息
-     * @param sysLog  系统日志
+     * @param logRecord  系统日志
      */
-    private void terminal(SLogRecord sysLog){
+    private void terminal(SLogRecord logRecord){
         // 获取请求
         HttpServletRequest req  = Mvcs.getReq();
         // 获取终端信息
         final UserAgent ua = UserAgentUtil.parse(req.getHeader("User-Agent"));
 
-        sysLog.setUrl(req.getRequestURI()); // 获取请求地址
-        sysLog.setMethod(req.getMethod());  // 获取请求方式
-        sysLog.setBrowser(ua.getBrowser().getName() + "_" + ua.getVersion()); // 设置终端信息
-        sysLog.setOs(ua.getPlatform().getName() + "_"  + ua.getOsVersion());
+        // 获取请求地址
+        logRecord.setUrl(req.getRequestURI());
+        // 获取请求方式
+        logRecord.setMethod(req.getMethod());
+        // 设置终端信息
+        logRecord.setBrowser(ua.getBrowser().getName() + "_" + ua.getVersion());
+        logRecord.setOs(ua.getPlatform().getName() + "_"  + ua.getOsVersion());
 
-        // 设置创建时间
-        sysLog.setCreatedAt(System.currentTimeMillis());
-        sysLog.setUpdatedAt(System.currentTimeMillis());
         // 设置操作人
-        sysLog.setCreatedById(SecuritySessionUtil.getUserId());
-        sysLog.setCreatedBy(SecuritySessionUtil.getUserNickname());
-        sysLog.setUpdatedById(SecuritySessionUtil.getUserId());
-        sysLog.setUpdatedBy(SecuritySessionUtil.getUserNickname());
-        String ip = Lang.getIP(req);
+        logRecord.setOperateUserId(SecuritySessionUtil.getUserId());
+        logRecord.setOperateUserName(SecuritySessionUtil.getUserNickname());
+
         // 获取操作地址
-        sysLog.setIp(ip);
+        logRecord.setIp(Lang.getIP(req));
         // 获取操作地点
-        sysLog.setLocation(IPUtil.getIPAddress(ip));
+        logRecord.setLocation(IPUtil.getIPAddress(logRecord.getIp()));
     }
 }

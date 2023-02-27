@@ -106,8 +106,10 @@ public abstract class BaseModel implements Serializable {
      */
     private String getUidString(String uid) {
         // 获取Session中的用户ID
-        if (Strings.isNotBlank(SecuritySessionUtil.getUserId())) {
+        try {
+            // fix: 防止在非Web上下文无法获取Request
             return SecuritySessionUtil.getUserId();
+        } catch (Exception ignored) {
         }
 
         // 如果Session中的用户ID不存在,则验证记录是否存在用户ID
@@ -124,8 +126,9 @@ public abstract class BaseModel implements Serializable {
      */
     private String getUserNickname(String nickname) {
         // 获取Session中的用户名
-        if (Strings.isNotBlank(SecuritySessionUtil.getUserNickname())) {
+        try {
             return SecuritySessionUtil.getUserNickname();
+        } catch (Exception ignored) {
         }
 
         // 如果Session中的用户名不存在,则验证记录是否存在用户名

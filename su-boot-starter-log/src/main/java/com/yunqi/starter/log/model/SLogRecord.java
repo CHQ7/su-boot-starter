@@ -44,31 +44,16 @@ public class SLogRecord {
     /** 执行结果 */
     private String result;
 
-    /** 是否调用成功 */
-    private  Boolean success;
-
     /** 处理耗时,单位：ms */
     private Long executeTime;
 
-    /** 创建人ID */
-    private String createdById;
+    /** 是否调用成功 */
+    private Boolean success;
 
-    /** 创建人 */
-    private String createdBy;
+    /** 操作人ID */
+    private String operateUserId;
 
-    /** 创建时间 */
-    private Long  createdAt;
-
-    /** 修改人ID */
-    protected String updatedById;
-
-    /** 修改人 */
-    protected String updatedBy;
-
-    /** 修改时间 */
-    private Long updatedAt;
-
-    /** 删除标记 */
-    private Boolean delFlag;
+    /** 操作人 */
+    private String operateUserName;
 
 }

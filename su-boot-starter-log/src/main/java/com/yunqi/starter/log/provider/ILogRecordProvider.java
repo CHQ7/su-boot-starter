@@ -9,7 +9,7 @@ import com.yunqi.starter.log.model.SLogRecord;
 public  interface ILogRecordProvider {
 
     /**
-     * 保存日志
+     * 保存日志(请异步保存)
      * @param sysLog 日志实体
      */
     void record(SLogRecord sysLog);
