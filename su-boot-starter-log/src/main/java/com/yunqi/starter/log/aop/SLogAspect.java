@@ -8,11 +8,10 @@ import com.yunqi.starter.common.lang.Lang;
 import com.yunqi.starter.common.lang.Strings;
 import com.yunqi.starter.common.lang.mvc.Mvcs;
 import com.yunqi.starter.common.utils.IPUtil;
-import com.yunqi.starter.log.annotation.SLog;
 import com.yunqi.starter.log.configuration.LogProperties;
-import com.yunqi.starter.log.model.SysLog;
-import com.yunqi.starter.log.provider.ISysLogProvider;
-import com.yunqi.starter.log.provider.impl.SysLogProviderDefaultImpl;
+import com.yunqi.starter.log.model.SLogRecord;
+import com.yunqi.starter.log.provider.ILogRecordProvider;
+import com.yunqi.starter.log.provider.impl.DefaultLogRecordProviderImpl;
 import com.yunqi.starter.security.utils.SecuritySessionUtil;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.Signature;
@@ -27,8 +26,8 @@ import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.Method;
-import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * Created by @author CHQ on 2022/2/17
@@ -41,7 +40,7 @@ public class SLogAspect {
     private final LogProperties properties;
 
     @Autowired(required = false)
-    private ISysLogProvider iSysLogProvider;
+    private ILogRecordProvider logRecordProvider;
 
     public SLogAspect(LogProperties properties) {
         this.properties = properties;
@@ -62,7 +61,7 @@ public class SLogAspect {
      */
     @AfterReturning(pointcut = "pointcut()", returning = "res")
     public void  doAroundReturning(JoinPoint joinPoint, Object res) {
-        handleLog(joinPoint, null, res);
+        execute(joinPoint, null, res);
     }
 
 
@@ -73,13 +72,19 @@ public class SLogAspect {
      */
     @AfterThrowing(pointcut = "pointcut()", throwing = "ex")
     public void doAfterThrowing(JoinPoint joinPoint, Exception ex) {
-        handleLog(joinPoint, ex, null);
+        execute(joinPoint, ex, null);
     }
 
-    protected void handleLog(final JoinPoint joinPoint, final Exception ex, Object res){
+    /**
+     * 处理日志
+     * @param joinPoint
+     * @param ex
+     * @param res
+     */
+    protected void execute(final JoinPoint joinPoint, final Exception ex, Object res){
 
         // 如果为空或者默认实现，则不进行任何操作
-        if(iSysLogProvider == null  || iSysLogProvider instanceof SysLogProviderDefaultImpl){
+        if(logRecordProvider == null  || logRecordProvider instanceof DefaultLogRecordProviderImpl){
             return;
         }
 
@@ -87,7 +92,7 @@ public class SLogAspect {
         if (properties != null && properties.isEnabled()) {
 
             // 获取注解
-            SLog slog = getAnnotationLog(joinPoint);
+            com.yunqi.starter.log.annotation.SLog slog = getAnnotationLog(joinPoint);
             if(slog == null){
                 return;
             }
@@ -101,11 +106,11 @@ public class SLogAspect {
             // >> 获取请求方法
             // >> 设置请求状态
             // *=========================*
-            SysLog sysLog = new SysLog();
+            SLogRecord sysLog = new SLogRecord();
             sysLog.setTag(slog.tag());
             sysLog.setMsg(Strings.isNotEmpty(slog.value())? slog.value() : slog.type().getLabel());
             sysLog.setSrc(joinPoint.getSignature().getDeclaringTypeName() + "#" + joinPoint.getSignature().getName());
-            sysLog.setStatus(0);
+            sysLog.setSuccess(true);
 
             // 获取请求终端信息
             terminal(sysLog);
@@ -128,7 +133,7 @@ public class SLogAspect {
 
             // 记录异常消息
             if(ex != null){
-                sysLog.setStatus(1);
+                sysLog.setSuccess(false);
                 sysLog.setResult( StrUtil.sub(ex.getMessage(),0, 2000));
             }
 
@@ -138,7 +143,7 @@ public class SLogAspect {
             // ========================================== 结束请求日志 ==========================================
 
             // 记录日志
-            iSysLogProvider.saveLog(sysLog);
+            logRecordProvider.record(sysLog);
         }
     }
 
@@ -148,10 +153,8 @@ public class SLogAspect {
      * @return          请求参数字符串
      */
     private String convertMap(Map<String, String[]> paramMap) {
-        Map<String, String> param = new HashMap<>();
-        for (String key : paramMap.keySet()) {
-            param.put(key, paramMap.get(key)[0]);
-        }
+        Map<String, String> param = paramMap.entrySet().stream()
+                .collect(Collectors.toMap(Map.Entry::getKey, e -> e.getValue()[0]));
         return Json.toJson(param);
     }
 
@@ -161,13 +164,13 @@ public class SLogAspect {
      * @param joinPoint 切入点
      * @return          Slog
      */
-    private SLog getAnnotationLog(JoinPoint joinPoint) {
+    private com.yunqi.starter.log.annotation.SLog getAnnotationLog(JoinPoint joinPoint) {
         Signature signature = joinPoint.getSignature();
         MethodSignature methodSignature = (MethodSignature) signature;
         Method method = methodSignature.getMethod();
 
         if (method != null) {
-            return method.getAnnotation(SLog.class);
+            return method.getAnnotation(com.yunqi.starter.log.annotation.SLog.class);
         }
         return null;
     }
@@ -176,7 +179,7 @@ public class SLogAspect {
      * 获取请求终端信息
      * @param sysLog  系统日志
      */
-    private void terminal(SysLog sysLog){
+    private void terminal(SLogRecord sysLog){
         // 获取请求
         HttpServletRequest req  = Mvcs.getReq();
         // 获取终端信息

@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
+ * 注解日志自动配置类
  * Created by @author CHQ on 2022/2/17
  */
 @Configuration
@@ -15,13 +16,9 @@ import org.springframework.context.annotation.Configuration;
 @EnableConfigurationProperties(LogProperties.class)
 public class LogAutoConfiguration {
 
-
     @Bean
     @ConditionalOnMissingBean
     public SLogAspect sLogAspect(LogProperties properties) {
         return new SLogAspect(properties);
     }
-
-
-
 }

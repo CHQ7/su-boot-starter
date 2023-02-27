@@ -13,11 +13,12 @@ import java.lang.annotation.*;
 @Documented
 public @interface SLog {
 
+
+    /** 日志标签或者操作模块 */
+    String tag() default "";
+
     /** 日志类型 */
     LogType type() default LogType.OTHER;
-
-    /** 日志标签 */
-    String tag() default "";
 
     /** 日志内容 */
     String value() default "";
