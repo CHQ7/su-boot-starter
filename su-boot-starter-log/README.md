@@ -1,4 +1,4 @@
-# su-boot-starter-log
+### su-boot-starter-log
 
 `su-boot-starter-log` 是一个基于 Spring Boot 开发的日志组件，旨在简化日志配置和操作，并提供注解优雅地记录项目中的操作日志，对业务代码无侵入。
 
@@ -8,8 +8,9 @@
     3.发送至RocketMQ
     4.发送至SpringCloud Stream
 
-# 安装
-- 通过Maven仓库安装，在pom.xml文件中加入以下内容：
+### 安装
+
+通过Maven仓库安装，在pom.xml文件中加入以下内容：
 
 ```xml
 <dependency>
@@ -19,7 +20,7 @@
 </dependency>
 ```
 
-# 注解鉴权
+### 注解鉴权
 
 注解鉴权 —— 优雅的将鉴权与业务代码分离！
 
@@ -41,9 +42,9 @@ public String test(UserDto userDto) {
 | param  | true          | 是否记录传递参数 |
 | result | true          | 是否记录执行结果 |
 
-# 使用
+### 使用
 
-- 1.你可以零配置启动项目，但同时你也可以在`application.yml`配置文件中，添加配置：
+1.你可以零配置启动项目，但同时你也可以在`application.yml`配置文件中，添加配置：
 
 ```yml
 su:
@@ -52,7 +53,7 @@ su:
     log: true
 ```
 
-- 2.接收操作日志：
+2.接收操作日志：
 
 > 我们接收到操作日志后，可根据实际情况来选择如何处理，是存储到数据库还是发送到MQ都可以。 实现 ILogRecordProvider 接口，并交给Spring管理。
 
@@ -68,7 +69,7 @@ public class ISysLogService implements ILogRecordProvider {
 }
 ```
 
-# 配置说明
+### 配置说明
 
 | 名称      | 默认值   | 备注       |
 |---------|-------|----------|
