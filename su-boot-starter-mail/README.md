@@ -1,11 +1,11 @@
-# su-boot-starter-mail
+### su-boot-starter-mail
 
-- `su-boot-starter-mail` 是一个简单易用的邮件发送模块，基于Spring Boot和JavaMail实现，能够快速的构建发送文本邮件、HTML邮件以及带附件的邮件。。
+`su-boot-starter-mail` 是一个简单易用的邮件发送模块，基于Spring Boot和JavaMail实现，能够快速的构建发送文本邮件、HTML邮件以及带附件的邮件。
 
 
-# 安装
+### 安装
 
-- 通过Maven仓库安装，在pom.xml文件中加入以下内容：
+通过Maven仓库安装，在pom.xml文件中加入以下内容：
 
 ```xml
 <dependency>
@@ -15,9 +15,9 @@
 </dependency>
 ```
 
-# 使用
+### 使用
 
-- 1.在`application.yml`配置文件中，配置邮件服务相关属性：
+1.在`application.yml`配置文件中，配置邮件服务相关属性：
 
 ```yml
 su:
@@ -33,7 +33,7 @@ su:
 ```
 
 
-- 2.使用IMailProvider接口发送邮件，调用其中的sendText()方法发送文本邮件，sendHtml()方法发送HTML邮件：
+2.使用IMailProvider接口发送邮件，调用其中的sendText()方法发送文本邮件，sendHtml()方法发送HTML邮件：
 
 ```
 @Autowired
@@ -58,7 +58,7 @@ public void sendHtmlMail(){
 }
 ```
 
-# 配置说明
+### 配置说明
 
 | 名称        | 默认值   | 备注           |
 |-----------|-------|--------------|
