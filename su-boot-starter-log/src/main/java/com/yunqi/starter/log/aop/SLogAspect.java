@@ -12,7 +12,6 @@ import com.yunqi.starter.log.annotation.SLog;
 import com.yunqi.starter.log.configuration.LogProperties;
 import com.yunqi.starter.log.model.SLogRecord;
 import com.yunqi.starter.log.provider.ILogRecordProvider;
-import com.yunqi.starter.log.provider.impl.DefaultLogRecordProviderImpl;
 import com.yunqi.starter.security.utils.SecuritySessionUtil;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.Signature;
@@ -22,9 +21,8 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.nutz.json.JsonFormat;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.Method;
 import java.util.Map;
@@ -33,19 +31,15 @@ import java.util.stream.Collectors;
 /**
  * Created by @author CHQ on 2022/2/17
  */
-
 @Aspect
-@Component
 public class SLogAspect {
 
-    private final LogProperties properties;
+    @Resource
+    private LogProperties properties;
 
-    @Autowired(required = false)
+    @Resource
     private ILogRecordProvider logRecordProvider;
 
-    public SLogAspect(LogProperties properties) {
-        this.properties = properties;
-    }
 
     /** 定义AOP签名 (切入所有使用SLog鉴权注解的方法) */
     public static final String POINTCUT_SIGN = "@annotation(com.yunqi.starter.log.annotation.SLog)";
@@ -83,14 +77,8 @@ public class SLogAspect {
      * @param res
      */
     protected void execute(final JoinPoint joinPoint, final Exception ex, Object res){
-
-        // 如果为空或者默认实现，则不进行任何操作
-        if(logRecordProvider == null  || logRecordProvider instanceof DefaultLogRecordProviderImpl){
-            return;
-        }
-
         // 组件是否开启
-        if (properties != null && properties.isEnabled()) {
+        if (properties.isEnabled()) {
 
             // 获取注解
             SLog slog = getAnnotationLog(joinPoint);

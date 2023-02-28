@@ -17,4 +17,8 @@ public class LogProperties {
 
     /** 是否开启 */
     boolean enabled = true;
+
+
+    /** 是否打印操作日志 */
+    private Boolean log = false;
 }
