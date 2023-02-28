@@ -1,9 +1,10 @@
-# su-boot-starter-jdbc
+### su-boot-starter-jdbc
 
-- `su-boot-starter-jdbc` 是一个基于 Spring Boot 的 Druid 动态数据源配置组件。该组件可以帮助您快速启用 Druid 动态数据源，并可以通过配置文件设置相关参数。
+`su-boot-starter-jdbc` 是一个基于 Spring Boot 的 Druid 动态数据源配置组件。该组件可以帮助您快速启用 Druid 动态数据源，并可以通过配置文件设置相关参数。
 
 # 安装
-- 通过Maven仓库安装，在pom.xml文件中加入以下内容：
+
+通过Maven仓库安装，在pom.xml文件中加入以下内容：
 
 ```xml
 <dependency>
@@ -15,7 +16,7 @@
 
 # 使用
 
-- 使用 `su-boot-starter-jdbc` 非常简单，只需要在配置文件中配置数据库信息即可：
+使用 `su-boot-starter-jdbc` 非常简单，只需要在配置文件中配置数据库信息即可：
 
 ```yml
 spring:
@@ -25,26 +26,26 @@ spring:
     password: 123456
 ```
 
-- 然后就可以通过以下代码获取数据源：
+然后就可以通过以下代码获取数据源：
 
 ```
 @Autowired
 private DataSource dataSource;
 ```
 
-- 最后，使用 jdbcTemplate 进行数据库操作：
+最后，使用 jdbcTemplate 进行数据库操作：
 
 ```
 JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 List<Map<String, Object>> list = jdbcTemplate.queryForList("select * from user");
 ```
 
-#  Druid 监控
+### Druid 监控
 
-- 启动您的应用程序，并通过浏览器访问 http://localhost:8080/druid/ 即可查看 Druid 监控页面
+启动您的应用程序，并通过浏览器访问 http://localhost:8080/druid/ 即可查看 Druid 监控页面
 
 
-# 配置说明
+### 配置说明
 
 | 名称                                        | 默认值                                                    | 备注                                                                            |
 |-------------------------------------------|--------------------------------------------------------|-------------------------------------------------------------------------------|
