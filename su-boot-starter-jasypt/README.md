@@ -1,9 +1,11 @@
-# su-boot-starter-jasypt
+### su-boot-starter-jasypt
 
-- `su-boot-starter-jasypt` 是一个基于 Jasypt 和 Spring Boot 开发的加密解密组件。它能够帮助开发者快速的在 Spring Boot 项目中进行数据加密解密操作。
+`su-boot-starter-jasypt` 是一个基于 Jasypt 和 Spring Boot 开发的加密解密组件。它能够帮助开发者快速的在 Spring Boot 项目中进行数据加密解密操作。
 
-# 安装
-- 通过Maven仓库安装，在pom.xml文件中加入以下内容：
+
+### 安装
+
+通过Maven仓库安装，在pom.xml文件中加入以下内容：
 
 ```xml
 <dependency>
@@ -13,9 +15,10 @@
 </dependency>
 ```
 
-# 使用
 
-- 1.你可以零配置启动项目 ，但同时你也可以在`application.yml`配置文件中，添加 Jasypt 的配置：
+### 使用
+
+1.你可以零配置启动项目 ，但同时你也可以在`application.yml`配置文件中，添加 Jasypt 的配置：
 
 ```yml
 su:
@@ -31,7 +34,7 @@ su:
     string-output-type: base64
 ```
 
-- 2.在代码中调用，在需要使用jasypt的地方，可以通过如下代码调用：
+2.在代码中调用，在需要使用jasypt的地方，可以通过如下代码调用：
 
 ```
 public class JasyptTest {
@@ -55,7 +58,7 @@ public class JasyptTest {
 }
 ```
 
-# 配置说明
+### 配置说明
 
 | 名称                     | 默认值                                 | 备注        |
 |------------------------|-------------------------------------|-----------|
@@ -69,7 +72,7 @@ public class JasyptTest {
 | ivGeneratorClassName   | org.jasypt.iv.RandomIvGenerator     | IV生成器类名   |
 | stringOutputType       | base64                              | 加密字符串输出类型 |
 
-# 注意事项
+### 注意事项
 
 在使用 `su-boot-starter-jasypt` 组件时，需要注意以下几点：
 
