@@ -1,13 +1,14 @@
-# su-boot-starter-security
+### su-boot-starter-security
 
-- `su-boot-starter-security` 是一个基于Spring Boot的安全解决方案，它为应用提供了一系列的安全特性，比如认证和授权。此组件的目的是简化安全配置，使开发人员可以专注于业务逻辑的开发，而不用担心安全问题。
+`su-boot-starter-security` 是一个基于Spring Boot的安全解决方案，它为应用提供了一系列的安全特性，比如认证和授权。此组件的目的是简化安全配置，使开发人员可以专注于业务逻辑的开发，而不用担心安全问题。
 
-# 快速入门
+### 快速
 
-- [传送门](demo.md)
+[快速传送门](DEMO.md)
 
-# 安装
-- 通过Maven仓库安装，在pom.xml文件中加入以下内容：
+### 安装
+
+通过Maven仓库安装，在pom.xml文件中加入以下内容：
 
 ```xml
 <dependency>
@@ -17,18 +18,19 @@
 </dependency>
 ```
 
-# 注解鉴权
+### 注解鉴权
 
-注解鉴权 —— 优雅的将鉴权与业务代码分离！
+| 注解                     |名称               | 备注                                                                 |
+|------------------------|-------------------|--------------------------------------------------------------------|
+| @RequiresAuthentication|  登录校验| 只有登录之后才能进入该方法。                                                       |
+| @RequiresRoles("admin")|  角色校验| 必须具有指定角色标识才能进入该方法。                                                     |
+| @RequiresPermissions("user:add")|  权限校验| 必须具有指定权限才能进入该方法。                                                   |
 
-- @RequiresAuthentication: 登录校验 —— 只有登录之后才能进入该方法。
-- @RequiresRoles("admin"): 角色校验 —— 必须具有指定角色标识才能进入该方法。
-- @RequiresPermissions("user:add"): 权限校验 —— 必须具有指定权限才能进入该方法。
+### Session会话
 
-# Session会话
+**Session是什么？**
 
-- **Session是什么？**
-- Session是会话中专业的数据缓存组件，通过 Session 我们可以很方便的缓存一些高频读写数据，提高程序性能，例如：
+Session是会话中专业的数据缓存组件，通过 Session 我们可以很方便的缓存一些高频读写数据，提高程序性能，例如：
 
 ```
 // 获取当前会话账号id, 如果未登录，则抛出异常
@@ -50,11 +52,13 @@ SecuritySessionUtil.getUserNickname()
 SecuritySessionUtil.setUserNickname(String nickname)
 ```
 
-# 配置权限认证提供者
+### 配置权限认证提供者
 
 > 因为每个项目的需求不同，其权限设计也千变万化，因此 [ 获取当前账号权限码集合 ] 这一操作不可能内置到框架中， 所以 `su-boot-starter-security` 将此操作以接口的方式暴露给你，以方便你根据自己的业务逻辑进行重写。
 
-- 你需要做的就是新建一个类，实现 `IAuthProvider ` 接口，并使用 @Component 注解注册为Spring Bean。例如以下代码：
+你需要做的就是新建一个类，实现 `IAuthProvider ` 接口，并使用 @Component 注解注册为Spring Bean。
+
+例如以下代码：
 
 ```
 /**
@@ -97,9 +101,9 @@ public class CustomProviderImpl implements IAuthProvider {
 
 ```
 
-# 登录认证
+### 登录认证
 
-- 来个小测试，加深一下理解：
+来个小测试，加深一下理解：
 
 ```
 /**
@@ -142,7 +146,7 @@ public class LoginController {
 }
 ```
 
-# 配置说明
+### 配置说明
 
 | 名称                     | 默认值               | 备注                                                                 |
 |------------------------|-------------------|--------------------------------------------------------------------|
