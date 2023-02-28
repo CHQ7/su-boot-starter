@@ -1,9 +1,10 @@
-# su-boot-starter-database
+### su-boot-starter-database
 
-- `su-boot-starter-database` 提供了基于 Nutz 的数据库访问功能，支持 CRUD 操作和 SQL 查询操作。用户可以通过继承 su-boot-starter-database 提供的基础 DAO 类，或者通过注入 Nutz 提供的 DAO 实现类，快速实现数据库访问操作。
+`su-boot-starter-database` 提供了基于 Nutz 的数据库访问功能，支持 CRUD 操作和 SQL 查询操作。用户可以通过继承 `su-boot-starter-database` 提供的基础 DAO 类，或者通过注入 Nutz 提供的 DAO 实现类，快速实现数据库访问操作。
 
-# 安装
-- 通过Maven仓库安装，在pom.xml文件中加入以下内容：
+### 安装
+
+通过Maven仓库安装，在pom.xml文件中加入以下内容：
 
 ```xml
 <dependency>
@@ -13,9 +14,9 @@
 </dependency>
 ```
 
-# 使用
+### 使用
 
-- 1.在`application.yml`配置文件中，添加 数据库 的配置：
+1.在`application.yml`配置文件中，添加`数据库`的配置：
 
 ```yml
 spring:
@@ -31,7 +32,7 @@ su:
       basepackage: 实体包名
 ```
 
-- 2.创建实体类自动在数据库中创建表：
+2.创建实体类自动在数据库中创建表：
 
 ```java
 import com.yunqi.starter.database.model.BaseModel;
@@ -67,8 +68,9 @@ public class User extends BaseModel implements Serializable {
 }
 ```
 
-- 3.在服务类中调用，在需要使用`数据源`的地方，可以通过如下代码调用：
-- 创建 UserServiceImpl 类
+3.在服务类中调用，在需要使用`数据源`的地方，可以通过如下代码调用：
+
+创建 UserServiceImpl 类:
 
 ```java
 import com.yunqi.starter.database.service.BaseServiceImpl;
@@ -153,16 +155,16 @@ public class UserServiceImpl extends BaseServiceImpl<User> {
     }
 }
 ```
-其中 UserServiceImpl 是一个继承了 `su-boot-starter-database` 提供的基础CRUD 操作和 SQL 查询操作，实现了对 User 数据库表的操作，增删改查操作。
+其中 `UserServiceImpl ` 是一个继承了 `su-boot-starter-database` 提供的基础CRUD 操作和 SQL 查询操作，实现了对 User 数据库表的操作，增删改查操作。
 
-# 配置说明
+### 配置说明
 
 | 名称                             | 默认值   | 备注             |
 |--------------------------------|-------|----------------|
 | enabled                        | true  | 是否开启组件         |
 | log                            | false | 是否打印操作日志       |
 
-# 全局配置说明
+### 全局配置说明
 | 名称                             | 默认值   | 备注                  |
 |--------------------------------|-------|---------------------|
 | global.checkColumnNameKeyword	 | false | 是否检查字段为数据库的关键字      |
@@ -171,7 +173,7 @@ public class UserServiceImpl extends BaseServiceImpl<User> {
 | global.forceHumpColumnName	    | false |                     |
 | global.defaultVarcharWidth     | 128   | varchar 字段的默认字段长度   |
 
-# 运行配置说明
+### 运行配置说明
 | 名称                   | 默认值   | 备注                 |
 |----------------------|-------|--------------------|
 | runtime.create       | true  | 自动建表               |
@@ -182,25 +184,25 @@ public class UserServiceImpl extends BaseServiceImpl<User> {
 | runtime.deleteColumn | false | 是否删除列              |
 | runtime.checkIndex   | false | 检查索引               |
 
-# SQL模版配置说明
+### SQL模版配置说明
 | 名称                 | 默认值   | 备注                            |
 |--------------------|-------|-------------------------------|
 | sqlTemplate.enable | false | 是否启用`SqlTemplate`             |
 | sqlTemplate.type   | BEETL | 模版引擎类型,选项枚举`SqlTemplate.Type` |
 
-# SQL管理器配置说明
+### SQL管理器配置说明
 | 名称               | 默认值 | 备注                       |
 |------------------|-----|--------------------------|
 | sqlManager.mode  |     | 模式,选项枚举`SqlManager.Mode` |
 | sqlManager.paths |     | 路径列表                     |
 
-# 拦截器配置说明
+### 拦截器配置说明
 | 名称               | 默认值  | 备注     |
 |------------------|------|--------|
 | interceptor.time | true | sql 记时 |
 
 
-# 注意事项
+### 注意事项
 
 在使用 `su-boot-starter-database` 组件时，需要注意以下几点：
 
