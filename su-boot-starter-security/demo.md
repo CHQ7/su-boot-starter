@@ -1,15 +1,16 @@
-# 在 SpringBoot 环境集成
+### 在 SpringBoot 环境集成
 
-- 本篇带你从零开始集成 `su-boot-starter-security`，从而快速熟悉框架的使用姿势。
+本篇带你从零开始集成 `su-boot-starter-security`，从而快速熟悉框架的使用姿势。
 
-## 1、创建项目
+### 1、创建项目
 
-- 在 IDE 中新建一个 SpringBoot 项目，例如：demo-springboot（不会的同学请自行百度）
+在 IDE 中新建一个 SpringBoot 项目，例如：demo-springboot（不会的同学请自行百度）
 
-## 2、添加依赖
+### 2、添加依赖
 
 - PS: 注意 `su-boot-starter-security` 版本，请到仓库查看最新版本
-```
+
+```xml
 <dependency>
   <groupId>com.yunqi.starter</groupId>
   <artifactId>su-boot-starter-security</artifactId>
@@ -17,9 +18,9 @@
 </dependency>
 ```
 
-## 3、设置配置文件
+### 3、设置配置文件
 
-- 你可以零配置启动项目 ，但同时你也可以在 `application.yml` 中增加如下配置，定制性使用框架：
+你可以零配置启动项目 ，但同时你也可以在 `application.yml` 中增加如下配置，定制性使用框架：
 ```
 server:
   # 端口
@@ -44,9 +45,9 @@ su:
 
 ```
 
-## 4、创建启动类
+### 4、创建启动类
 
-- 在项目中新建包 `com.yunqi` ，在此包内新建主类 `DemoApplication.java`，复制以下代码：
+在项目中新建包 `com.yunqi` ，在此包内新建主类 `DemoApplication.java`，复制以下代码：
 
 ```
 @SpringBootApplication
@@ -58,7 +59,7 @@ public class DemoApplication{
 }
 ```
 
-## 5、创建测试Controller
+### 5、创建测试Controller
 
 ```
 @RestController
@@ -85,18 +86,21 @@ public class UserController {
 }
 ```
 
-## 6、运行
+### 6、运行
 
-- 启动代码，从浏览器依次访问上述测试接口：
+启动代码，从浏览器依次访问上述测试接口：
+
 ```
-// 测试登录，浏览器访问： http://localhost:8081/user/doLogin?username=zhang&password=123456
+// 测试登录，浏览器访问： 
+// http://localhost:8081/user/doLogin?username=zhang&password=123456
 // -> 登录成功
 
-// 测试登录，浏览器访问： http://localhost:8081/user/isLogin
+// 测试登录，浏览器访问：
+// http://localhost:8081/user/isLogin
 // -> 当前会话是否登录：true
 
 ```
 
-## 详细了解
+### 详细了解
 
-- 通过这个示例，你已经对 `su-boot-starter-security` 有了初步的了解
+通过这个示例，你已经对 `su-boot-starter-security` 有了初步的了解
