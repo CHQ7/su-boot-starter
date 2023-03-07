@@ -29,11 +29,12 @@ public class IPUtil {
     }
 
     private static String getString(String ip) {
+        // 第三方IP地址库有可能不稳定造成异常, 返回空值
         Response resp = Http.get(String.format(IP_WHOIS_URL, ip));
-        if (!resp.isOK()) {
-            throw new IllegalStateException("postPay with SSL, resp code=" + resp.getStatus() + ",ip=" + ip) ;
+        if (resp.isOK()) {
+            NutMap map= Json.fromJson(NutMap.class, resp.getContent(Encoding.GBK));
+            return map.getString("addr");
         }
-        NutMap map= Json.fromJson(NutMap.class, resp.getContent(Encoding.GBK));
-        return map.getString("addr");
+        return "";
     }
 }
