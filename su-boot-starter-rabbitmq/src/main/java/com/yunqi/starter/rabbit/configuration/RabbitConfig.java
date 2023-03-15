@@ -8,12 +8,10 @@ package com.yunqi.starter.rabbit.configuration;
 public class RabbitConfig {
 
     /** 队列名称 */
-    public static final String QUEUE_NAME = "DirectQueue";
+    public static final String QUEUE_NAME = "subscribe_queue";
 
     /** 交换器名称 */
-    public static final String EXCHANGE  = "DirectExchange";
+    public static final String EXCHANGE  = "publish_subscribe_exchange";
 
-    /** 路由键名称 */
-    public static final String ROUTEKEY  = "DirectRoutekey";
 
 }
