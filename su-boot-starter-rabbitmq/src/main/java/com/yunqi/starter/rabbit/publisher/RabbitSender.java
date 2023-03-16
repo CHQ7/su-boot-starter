@@ -20,11 +20,20 @@ public class RabbitSender {
 
     /**
      *  发送消息给订阅队列
-     * @param msg
+     * @param message 消息
      */
-    public void send(NutMap msg) {
-        rabbitTemplate.convertAndSend(RabbitConfig.EXCHANGE, "", msg);
+    public void send(NutMap message) {
+        rabbitTemplate.convertAndSend(RabbitConfig.EXCHANGE, "", message);
     }
 
+
+    /**
+     *
+     * @param exchange  交换器名称
+     * @param message   消息
+     */
+    public void send(String exchange, NutMap message) {
+        rabbitTemplate.convertAndSend(exchange, "", message);
+    }
 
 }

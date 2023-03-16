@@ -8,10 +8,9 @@ package com.yunqi.starter.rabbit.configuration;
 public class RabbitConfig {
 
     /** 队列名称 */
-    public static final String QUEUE_NAME = "subscribe_queue";
+    public static final String QUEUE_NAME = "SUBSCRIBE_QUEUE";
 
     /** 交换器名称 */
-    public static final String EXCHANGE  = "publish_subscribe_exchange";
-
+    public static final String EXCHANGE  = "SUBSCRIBE_EXCHANGE";
 
 }
