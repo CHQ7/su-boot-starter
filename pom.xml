@@ -295,7 +295,7 @@
         <!-- 制品仓库 -->
         <repository>
             <id>ssc-repos</id>
-            <url>https://maven.wchin.cn/artifactory/ssc-release</url>
+            <url>https://maven.fir7.com/artifactory/ssc-release</url>
         </repository>
     </repositories>
 
