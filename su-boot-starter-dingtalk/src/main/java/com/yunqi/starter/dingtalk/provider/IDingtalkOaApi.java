@@ -34,4 +34,11 @@ public interface IDingtalkOaApi {
      */
     Boolean terminateProcesse(NutMap data);
 
+    /**
+     * 发起宜搭表单实例
+     *
+     * @param data
+     * @return
+     */
+    String insertYiDaForm(NutMap data);
 }
