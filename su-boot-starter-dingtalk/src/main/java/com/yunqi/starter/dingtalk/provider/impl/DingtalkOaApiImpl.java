@@ -26,4 +26,10 @@ public class DingtalkOaApiImpl implements IDingtalkOaApi {
         NutMap res = DingtalkUtil.post2("/v1.0/workflow/processInstances/terminate" + DingtalkUtil.buildToken(), data);
         return res.getBoolean("result");
     }
+
+    @Override
+    public String insertYiDaForm(NutMap data){
+        NutMap res = DingtalkUtil.post2("/v1.0/yida/forms/instances" + DingtalkUtil.buildToken(), data);
+        return res.getString("result");
+    }
 }
