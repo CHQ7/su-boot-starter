@@ -1,6 +1,7 @@
 package com.yunqi.starter.web.configuration;
 
 import com.yunqi.starter.common.constant.GlobalConstant;
+import com.yunqi.starter.web.filter.TraceIdRequestLoggingFilter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -26,6 +27,13 @@ public class WebAutoConfiguration {
 
         GlobalConstant.DEFAULT_SYSTEM_ROOT = properties.getRoot();
         return new WebMvcConfig();
+    }
+
+
+    @Bean
+    public TraceIdRequestLoggingFilter traceIdRequestLoggingFilter() {
+        log.info("自动装配 -> 日志链路拦截器");
+        return new TraceIdRequestLoggingFilter();
     }
 
 }
