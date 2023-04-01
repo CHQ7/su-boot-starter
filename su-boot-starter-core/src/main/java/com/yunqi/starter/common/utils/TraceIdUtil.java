@@ -2,6 +2,7 @@ package com.yunqi.starter.common.utils;
 
 import org.slf4j.MDC;
 
+import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -10,7 +11,7 @@ import java.util.UUID;
  */
 public class TraceIdUtil {
 
-    public static final String TRACE_ID = "traceId";
+    public static final String TRACE_ID = "Trace-Id";
 
     public static String getTraceId() {
         String traceId = MDC.get(TRACE_ID);
@@ -34,7 +35,15 @@ public class TraceIdUtil {
     }
 
     public static String generateTraceId() {
-        return UUID.randomUUID().toString().replace("-", "");
+        return UUID.randomUUID().toString() + "_" + System.currentTimeMillis();
     }
 
+
+    public static Map<String, String> getCopyOfContextMap() {
+        return MDC.getCopyOfContextMap();
+    }
+
+    public static void setContextMap(Map<String, String> contextMap) {
+        MDC.setContextMap(contextMap);
+    }
 }
