@@ -35,7 +35,7 @@ public class TraceIdUtil {
     }
 
     public static String generateTraceId() {
-        return UUID.randomUUID().toString() + "_" + System.currentTimeMillis();
+        return UUID.randomUUID().toString();
     }
 
 
